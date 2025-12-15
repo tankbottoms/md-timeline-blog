@@ -20,7 +20,7 @@ Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
 
-<div class="media-blocked">
+<div class="media-center">
 <svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
   <text x="300" y="25" text-anchor="middle" font-size="16" font-weight="bold">B-Tree Index Structure</text>
 
@@ -76,42 +76,131 @@ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium dolor
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 <div class="media-center">
-<svg width="450" height="250" viewBox="0 0 450 250" xmlns="http://www.w3.org/2000/svg">
-  <text x="225" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--color-text, #333)">Cache Hit Rate Over Time</text>
-
-  <!-- Axes -->
-  <line x1="50" y1="200" x2="400" y2="200" stroke="var(--color-text, #333)" stroke-width="2"/>
-  <line x1="50" y1="50" x2="50" y2="200" stroke="var(--color-text, #333)" stroke-width="2"/>
-
-  <!-- Grid lines -->
-  <line x1="50" y1="150" x2="400" y2="150" stroke="var(--color-border, #ddd)" stroke-width="1" stroke-dasharray="5,5"/>
-  <line x1="50" y1="100" x2="400" y2="100" stroke="var(--color-border, #ddd)" stroke-width="1" stroke-dasharray="5,5"/>
-
-  <!-- Cache hit rate curve -->
-  <path d="M 50 190 Q 100 160 150 120 Q 200 90 250 70 Q 300 60 350 55 L 400 53"
-        fill="none" stroke="#2ecc71" stroke-width="3"/>
-
-  <!-- Area under curve -->
-  <path d="M 50 190 Q 100 160 150 120 Q 200 90 250 70 Q 300 60 350 55 L 400 53 L 400 200 L 50 200 Z"
-        fill="#2ecc71" opacity="0.2"/>
-
-  <!-- Labels -->
-  <text x="225" y="230" text-anchor="middle" font-size="12" fill="var(--color-text, #333)">Time (hours)</text>
-  <text x="20" y="125" text-anchor="middle" font-size="12" fill="var(--color-text, #333)" transform="rotate(-90, 20, 125)">Hit Rate %</text>
-
-  <!-- Y-axis labels -->
-  <text x="40" y="205" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">0%</text>
-  <text x="40" y="155" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">50%</text>
-  <text x="40" y="105" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">80%</text>
-  <text x="40" y="55" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">95%</text>
-
-  <!-- X-axis labels -->
-  <text x="50" y="220" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">0</text>
-  <text x="150" y="220" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">6</text>
-  <text x="250" y="220" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">12</text>
-  <text x="350" y="220" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">18</text>
-</svg>
+  <div id="pong-game" style="max-width: 600px; margin: 0 auto;"></div>
+  <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--color-text-muted);">
+    Interactive Pong Game - Click to start. Use W/S or ↑/↓ keys to control paddles.
+  </p>
 </div>
+
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    function initPong() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initPong, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 400;
+      const PADDLE_HEIGHT = 80;
+      const PADDLE_WIDTH = 10;
+      const BALL_SIZE = 10;
+      const PADDLE_SPEED = 5;
+      const BALL_SPEED = 3;
+
+      const draw = SVG().addTo('#pong-game').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#e5e5e5');
+
+      for (let i = 0; i < HEIGHT; i += 20) {
+        draw.rect(2, 10).fill('#999').move(WIDTH/2 - 1, i);
+      }
+
+      const scoreLeft = draw.text('0').font({ size: 48, family: 'monospace' }).fill('#333').move(WIDTH/4, 30);
+      const scoreRight = draw.text('0').font({ size: 48, family: 'monospace' }).fill('#333').move(3*WIDTH/4 - 30, 30);
+
+      const paddleLeft = draw.rect(PADDLE_WIDTH, PADDLE_HEIGHT).fill('#2ecc71').move(20, HEIGHT/2 - PADDLE_HEIGHT/2);
+      const paddleRight = draw.rect(PADDLE_WIDTH, PADDLE_HEIGHT).fill('#3498db').move(WIDTH - 30, HEIGHT/2 - PADDLE_HEIGHT/2);
+
+      const ball = draw.circle(BALL_SIZE).fill('#333').move(WIDTH/2 - BALL_SIZE/2, HEIGHT/2 - BALL_SIZE/2);
+
+      let ballVelocity = { x: BALL_SPEED, y: BALL_SPEED };
+      let scores = { left: 0, right: 0 };
+      let keys = {};
+      let gameStarted = false;
+      let animationId = null;
+
+      const handleKeyDown = (e) => {
+        keys[e.key] = true;
+        if (gameStarted && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+          e.preventDefault();
+        }
+      };
+      const handleKeyUp = (e) => {
+        keys[e.key] = false;
+        if (gameStarted && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener('keyup', handleKeyUp);
+
+      draw.click(() => {
+        if (!gameStarted) {
+          gameStarted = true;
+          gameLoop();
+        }
+      });
+
+      function resetBall() {
+        ball.move(WIDTH/2 - BALL_SIZE/2, HEIGHT/2 - BALL_SIZE/2);
+        ballVelocity.x = (Math.random() > 0.5 ? 1 : -1) * BALL_SPEED;
+        ballVelocity.y = (Math.random() - 0.5) * BALL_SPEED;
+      }
+
+      function gameLoop() {
+        if (!gameStarted) return;
+
+        const leftY = paddleLeft.y();
+        const rightY = paddleRight.y();
+
+        if ((keys['w'] || keys['W']) && leftY > 0) paddleLeft.y(leftY - PADDLE_SPEED);
+        if ((keys['s'] || keys['S']) && leftY < HEIGHT - PADDLE_HEIGHT) paddleLeft.y(leftY + PADDLE_SPEED);
+        if (keys['ArrowUp'] && rightY > 0) paddleRight.y(rightY - PADDLE_SPEED);
+        if (keys['ArrowDown'] && rightY < HEIGHT - PADDLE_HEIGHT) paddleRight.y(rightY + PADDLE_SPEED);
+
+        const ballX = ball.x();
+        const ballY = ball.y();
+        ball.move(ballX + ballVelocity.x, ballY + ballVelocity.y);
+
+        if (ballY <= 0 || ballY >= HEIGHT - BALL_SIZE) ballVelocity.y *= -1;
+
+        if (ballX <= 30 && ballY + BALL_SIZE >= leftY && ballY <= leftY + PADDLE_HEIGHT) {
+          ballVelocity.x = Math.abs(ballVelocity.x);
+          ballVelocity.y += (Math.random() - 0.5) * 2;
+        }
+        if (ballX >= WIDTH - 40 && ballY + BALL_SIZE >= rightY && ballY <= rightY + PADDLE_HEIGHT) {
+          ballVelocity.x = -Math.abs(ballVelocity.x);
+          ballVelocity.y += (Math.random() - 0.5) * 2;
+        }
+
+        if (ballX < 0) {
+          scores.right++;
+          scoreRight.text(scores.right.toString());
+          resetBall();
+        }
+        if (ballX > WIDTH) {
+          scores.left++;
+          scoreLeft.text(scores.left.toString());
+          resetBall();
+        }
+
+        animationId = requestAnimationFrame(gameLoop);
+      }
+
+      return () => {
+        if (animationId) cancelAnimationFrame(animationId);
+        document.removeEventListener('keydown', handleKeyDown);
+        document.removeEventListener('keyup', handleKeyUp);
+      };
+    }
+
+    const cleanup = initPong();
+    return cleanup;
+  });
+</script>
 
 ## Join Optimization
 

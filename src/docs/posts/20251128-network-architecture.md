@@ -6,98 +6,124 @@ date: 2025-11-28
 
 ## Performance Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Our system has shown remarkable improvements across all key metrics over the past year.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Our system has shown remarkable improvements across all key metrics over the past year.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
 
-<div class="media-blocked">
-<svg width="100%" height="400" viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    @keyframes barGrowth1 {
-      0%, 20% { height: 60px; y: 290px; }
-      30%, 45% { height: 120px; y: 230px; }
-      55%, 70% { height: 180px; y: 170px; }
-      80%, 100% { height: 240px; y: 110px; }
-    }
-    @keyframes barGrowth2 {
-      0%, 20% { height: 80px; y: 270px; }
-      30%, 45% { height: 140px; y: 210px; }
-      55%, 70% { height: 200px; y: 150px; }
-      80%, 100% { height: 280px; y: 70px; }
-    }
-    @keyframes barGrowth3 {
-      0%, 20% { height: 50px; y: 300px; }
-      30%, 45% { height: 100px; y: 250px; }
-      55%, 70% { height: 160px; y: 190px; }
-      80%, 100% { height: 220px; y: 130px; }
-    }
-    @keyframes barGrowth4 {
-      0%, 20% { height: 70px; y: 280px; }
-      30%, 45% { height: 130px; y: 220px; }
-      55%, 70% { height: 190px; y: 160px; }
-      80%, 100% { height: 260px; y: 90px; }
-    }
-    @keyframes labelUpdate {
-      0%, 20% { opacity: 1; }
-      22%, 28% { opacity: 0; }
-      30%, 45% { opacity: 1; }
-      47%, 53% { opacity: 0; }
-      55%, 70% { opacity: 1; }
-      72%, 78% { opacity: 0; }
-      80%, 100% { opacity: 1; }
-    }
-    .bar1 { animation: barGrowth1 8s ease-in-out infinite; }
-    .bar2 { animation: barGrowth2 8s ease-in-out infinite; }
-    .bar3 { animation: barGrowth3 8s ease-in-out infinite; }
-    .bar4 { animation: barGrowth4 8s ease-in-out infinite; }
-    .value-label { animation: labelUpdate 8s ease-in-out infinite; font-weight: bold; }
-  </style>
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
 
-  <text x="350" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#111">
-    Quarterly Growth Metrics (Q1 2024 - Q4 2024)
-  </text>
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
-  <!-- Grid lines -->
-  <line x1="80" y1="350" x2="620" y2="350" stroke="#e5e5e5" stroke-width="2"/>
-  <line x1="80" y1="290" x2="620" y2="290" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-  <line x1="80" y1="230" x2="620" y2="230" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-  <line x1="80" y1="170" x2="620" y2="170" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-  <line x1="80" y1="110" x2="620" y2="110" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-  <line x1="80" y1="50" x2="620" y2="50" stroke="#e5e5e5" stroke-width="1" stroke-dasharray="5,5" opacity="0.5"/>
-
-  <!-- Y-axis -->
-  <line x1="80" y1="50" x2="80" y2="350" stroke="#333" stroke-width="2"/>
-  <text x="70" y="355" text-anchor="end" font-size="12">0</text>
-  <text x="70" y="295" text-anchor="end" font-size="12">50</text>
-  <text x="70" y="235" text-anchor="end" font-size="12">100</text>
-  <text x="70" y="175" text-anchor="end" font-size="12">150</text>
-  <text x="70" y="115" text-anchor="end" font-size="12">200</text>
-  <text x="70" y="55" text-anchor="end" font-size="12">250</text>
-
-  <!-- Bars -->
-  <rect class="bar1" x="120" width="80" fill="#4a90e2" rx="4"/>
-  <rect class="bar2" x="240" width="80" fill="#e74c3c" rx="4"/>
-  <rect class="bar3" x="360" width="80" fill="#2ecc71" rx="4"/>
-  <rect class="bar4" x="480" width="80" fill="#f39c12" rx="4"/>
-
-  <!-- X-axis labels -->
-  <text x="160" y="375" text-anchor="middle" font-size="13" font-weight="600">Q1 2024</text>
-  <text x="280" y="375" text-anchor="middle" font-size="13" font-weight="600">Q2 2024</text>
-  <text x="400" y="375" text-anchor="middle" font-size="13" font-weight="600">Q3 2024</text>
-  <text x="520" y="375" text-anchor="middle" font-size="13" font-weight="600">Q4 2024</text>
-
-  <!-- Legend -->
-  <text x="90" y="395" font-size="11" fill="#666">Throughput (thousands/sec)</text>
-</svg>
+<div class="media-center">
+  <div id="quarterly-growth" style="max-width: 700px; margin: 0 auto;"></div>
 </div>
+
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    function initQuarterlyGrowth() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initQuarterlyGrowth, 50);
+        return;
+      }
+
+      const WIDTH = 700;
+      const HEIGHT = 420;
+      const barData = [
+        { label: 'Q1 2024', values: [60, 120, 180, 240], color: '#4a90e2' },
+        { label: 'Q2 2024', values: [80, 140, 200, 280], color: '#e74c3c' },
+        { label: 'Q3 2024', values: [50, 100, 160, 220], color: '#2ecc71' },
+        { label: 'Q4 2024', values: [70, 130, 190, 260], color: '#f39c12' }
+      ];
+
+      const draw = SVG().addTo('#quarterly-growth').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#f8f9fa');
+
+      draw.text('Quarterly Growth Metrics (Q1 2024 - Q4 2024)')
+        .font({ size: 18, family: 'sans-serif', weight: 'bold' })
+        .fill('#111')
+        .center(350, 20);
+
+      // Grid lines
+      [350, 290, 230, 170, 110, 50].forEach((y, i) => {
+        draw.line(80, y, 620, y)
+          .stroke({ color: '#e5e5e5', width: i === 0 ? 2 : 1, dasharray: i === 0 ? '0' : '5,5' })
+          .opacity(i === 0 ? 1 : 0.5);
+      });
+
+      // Y-axis
+      draw.line(80, 50, 80, 350).stroke({ color: '#333', width: 2 });
+      [0, 50, 100, 150, 200, 250].forEach((val, i) => {
+        draw.text(val.toString())
+          .font({ size: 12 })
+          .fill('#333')
+          .move(45, 345 - i * 60);
+      });
+
+      // Create bars
+      const bars = [];
+      barData.forEach((data, i) => {
+        const x = 120 + i * 120;
+        const bar = draw.rect(80, 0).fill(data.color).radius(4).move(x, 350);
+        bars.push({ bar, values: data.values, x });
+
+        // X-axis label
+        draw.text(data.label)
+          .font({ size: 13, weight: '600' })
+          .fill('#333')
+          .center(x + 40, 375);
+      });
+
+      // Legend
+      draw.text('Throughput (thousands/sec)')
+        .font({ size: 11 })
+        .fill('#666')
+        .move(90, 395);
+
+      let currentStage = 0;
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          const targetHeight = item.values[currentStage];
+          const targetY = 350 - targetHeight;
+
+          item.bar.animate(1000).ease('<>').attr({ height: targetHeight, y: targetY });
+        });
+
+        currentStage = (currentStage + 1) % 4;
+        setTimeout(animateBars, 2000);
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanup = initQuarterlyGrowth();
+    return cleanup;
+  });
+</script>
 
 ## Metric Analysis
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. The animated chart above demonstrates our consistent quarter-over-quarter growth in system throughput.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!  
+
+The animated chart above demonstrates our consistent quarter-over-quarter growth in system throughput.
 
 ### Key Highlights
 
 <div class="clearfix">
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 **Q1 to Q2**: System optimizations resulted in a 100% improvement in throughput capacity, allowing us to handle significantly more concurrent requests.
 
@@ -111,4 +137,8 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
 
-Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!

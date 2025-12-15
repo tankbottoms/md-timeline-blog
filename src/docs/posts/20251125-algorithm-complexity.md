@@ -11,50 +11,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 ### Quarterly Budget Allocation
 
 <div class="media-center">
-<svg width="600" height="450" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
-  <text x="300" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">
-    Budget Distribution by Department (Q4)
-  </text>
-
-  <!-- Pie slices: Engineering 30%, Product 28%, Operations 25%, Marketing 17% -->
-  <!-- Engineering (30%) - starts at top, goes 108 degrees clockwise -->
-  <path d="M 300 200 L 300 80 A 120 120 0 0 1 410 155 Z" fill="#4a90e2"/>
-
-  <!-- Product (28%) - 100.8 degrees -->
-  <path d="M 300 200 L 410 155 A 120 120 0 0 1 400 320 Z" fill="#e74c3c"/>
-
-  <!-- Operations (25%) - 90 degrees -->
-  <path d="M 300 200 L 400 320 A 120 120 0 0 1 200 320 Z" fill="#2ecc71"/>
-
-  <!-- Marketing (17%) - remaining 61.2 degrees -->
-  <path d="M 300 200 L 200 320 A 120 120 0 0 1 300 80 Z" fill="#f39c12"/>
-
-  <!-- Center circle -->
-  <circle cx="300" cy="200" r="50" fill="white" stroke="#ddd" stroke-width="2"/>
-  <text x="300" y="195" text-anchor="middle" font-size="14" font-weight="bold" fill="#333">Total</text>
-  <text x="300" y="215" text-anchor="middle" font-size="16" font-weight="bold" fill="#111">$10M</text>
-
-  <!-- Labels on slices -->
-  <text x="340" y="140" font-size="13" font-weight="600" fill="white">30%</text>
-  <text x="400" y="230" font-size="13" font-weight="600" fill="white">28%</text>
-  <text x="300" y="300" font-size="13" font-weight="600" fill="white">25%</text>
-  <text x="240" y="180" font-size="13" font-weight="600" fill="white">17%</text>
-
-  <!-- Legend -->
-  <rect x="50" y="360" width="500" height="70" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="5"/>
-
-  <rect x="70" y="375" width="18" height="18" fill="#4a90e2"/>
-  <text x="95" y="388" font-size="12" font-weight="600">Engineering (30%)</text>
-
-  <rect x="230" y="375" width="18" height="18" fill="#e74c3c"/>
-  <text x="255" y="388" font-size="12" font-weight="600">Product (28%)</text>
-
-  <rect x="390" y="375" width="18" height="18" fill="#2ecc71"/>
-  <text x="415" y="388" font-size="12" font-weight="600">Operations (25%)</text>
-
-  <rect x="70" y="400" width="18" height="18" fill="#f39c12"/>
-  <text x="95" y="413" font-size="12" font-weight="600">Marketing (17%)</text>
-</svg>
+  <div id="budget-pie" style="max-width: 600px; margin: 0 auto;"></div>
 </div>
 
 ## Allocation Strategy
@@ -78,40 +35,190 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 ## Department Breakdown
 
 <div class="media-center">
-<svg width="600" height="250" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    @keyframes barPulse {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 1; }
-    }
-    .dept-bar { animation: barPulse 2s ease-in-out infinite; }
-  </style>
-
-  <text x="300" y="25" text-anchor="middle" font-size="16" font-weight="bold">
-    Average Team Sizes by Department
-  </text>
-
-  <!-- Bars -->
-  <rect class="dept-bar" x="50" y="80" width="100" height="140" fill="#4a90e2" rx="4"/>
-  <text x="100" y="230" text-anchor="middle" font-size="12" font-weight="600">Engineering</text>
-  <text x="100" y="110" text-anchor="middle" font-size="20" font-weight="bold" fill="white">45</text>
-
-  <rect class="dept-bar" x="180" y="110" width="100" height="110" fill="#e74c3c" rx="4" style="animation-delay: 0.5s"/>
-  <text x="230" y="230" text-anchor="middle" font-size="12" font-weight="600">Product</text>
-  <text x="230" y="140" text-anchor="middle" font-size="20" font-weight="bold" fill="white">32</text>
-
-  <rect class="dept-bar" x="310" y="130" width="100" height="90" fill="#2ecc71" rx="4" style="animation-delay: 1s"/>
-  <text x="360" y="230" text-anchor="middle" font-size="12" font-weight="600">Operations</text>
-  <text x="360" y="160" text-anchor="middle" font-size="20" font-weight="bold" fill="white">25</text>
-
-  <rect class="dept-bar" x="440" y="150" width="100" height="70" fill="#f39c12" rx="4" style="animation-delay: 1.5s"/>
-  <text x="490" y="230" text-anchor="middle" font-size="12" font-weight="600">Marketing</text>
-  <text x="490" y="180" text-anchor="middle" font-size="20" font-weight="bold" fill="white">18</text>
-
-  <!-- Baseline -->
-  <line x1="40" y1="220" x2="550" y2="220" stroke="#ddd" stroke-width="2"/>
-</svg>
+  <div id="dept-bars" style="max-width: 600px; margin: 0 auto;"></div>
 </div>
+
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    // Initialize Pie Chart
+    function initBudgetPie() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(() => {
+          initBudgetPie();
+          initDeptBars();
+        }, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 450;
+      const centerX = 300;
+      const centerY = 200;
+      const radius = 120;
+
+      const segments = [
+        { percent: 30, color: '#4a90e2', label: 'Engineering (30%)' },
+        { percent: 28, color: '#e74c3c', label: 'Product (28%)' },
+        { percent: 25, color: '#2ecc71', label: 'Operations (25%)' },
+        { percent: 17, color: '#f39c12', label: 'Marketing (17%)' }
+      ];
+
+      const draw = SVG().addTo('#budget-pie').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#fafafa');
+
+      draw.text('Budget Distribution by Department (Q4)')
+        .font({ size: 18, family: 'sans-serif', weight: 'bold' })
+        .fill('#333')
+        .center(centerX, 20);
+
+      let currentAngle = -90; // Start from top
+      const slices = [];
+
+      segments.forEach((seg) => {
+        const angle = (seg.percent / 100) * 360;
+        const endAngle = currentAngle + angle;
+
+        const slice = draw.path()
+          .fill(seg.color)
+          .attr({ opacity: 0 });
+
+        slices.push({ slice, startAngle: currentAngle, endAngle, percent: seg.percent, color: seg.color });
+        currentAngle = endAngle;
+      });
+
+      // Center circle
+      draw.circle(100).fill('white').stroke({ color: '#ddd', width: 2 }).center(centerX, centerY);
+      draw.text('Total').font({ size: 14, weight: 'bold' }).fill('#333').center(centerX, centerY - 10);
+      draw.text('$10M').font({ size: 16, weight: 'bold' }).fill('#111').center(centerX, centerY + 10);
+
+      // Legend
+      draw.rect(500, 70).fill('#f8f8f8').stroke({ color: '#ddd', width: 1 }).radius(5).move(50, 360);
+      segments.forEach((seg, i) => {
+        const x = i % 2 === 0 ? 70 : 310;
+        const y = 375 + Math.floor(i / 2) * 25;
+        draw.rect(18, 18).fill(seg.color).move(x, y);
+        draw.text(seg.label).font({ size: 12, weight: '600' }).fill('#333').move(x + 25, y + 4);
+      });
+
+      function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        const angleInRadians = (angleInDegrees * Math.PI) / 180.0;
+        return {
+          x: centerX + (radius * Math.cos(angleInRadians)),
+          y: centerY + (radius * Math.sin(angleInRadians))
+        };
+      }
+
+      function describeArc(x, y, radius, startAngle, endAngle) {
+        const start = polarToCartesian(x, y, radius, endAngle);
+        const end = polarToCartesian(x, y, radius, startAngle);
+        const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+        return [
+          "M", x, y,
+          "L", start.x, start.y,
+          "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y,
+          "Z"
+        ].join(" ");
+      }
+
+      function animateSlices() {
+        slices.forEach((item, i) => {
+          setTimeout(() => {
+            const path = describeArc(centerX, centerY, radius, item.startAngle, item.endAngle);
+            item.slice.animate(800).ease('<>').attr({ opacity: 1 }).plot(path);
+          }, i * 300);
+        });
+
+        setTimeout(() => {
+          slices.forEach((item) => {
+            item.slice.animate(500).attr({ opacity: 0 });
+          });
+          setTimeout(animateSlices, 800);
+        }, 3000);
+      }
+
+      animateSlices();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    // Initialize Department Bars
+    function initDeptBars() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initDeptBars, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 250;
+      const depts = [
+        { name: 'Engineering', value: 45, color: '#4a90e2', x: 50 },
+        { name: 'Product', value: 32, color: '#e74c3c', x: 180 },
+        { name: 'Operations', value: 25, color: '#2ecc71', x: 310 },
+        { name: 'Marketing', value: 18, color: '#f39c12', x: 440 }
+      ];
+
+      const draw = SVG().addTo('#dept-bars').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#fafafa');
+
+      draw.text('Average Team Sizes by Department')
+        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .fill('#333')
+        .center(300, 20);
+
+      // Baseline
+      draw.line(40, 220, 550, 220).stroke({ color: '#ddd', width: 2 });
+
+      const bars = [];
+      depts.forEach((dept) => {
+        const maxHeight = 140;
+        const barHeight = (dept.value / 45) * maxHeight;
+        const y = 220 - barHeight;
+
+        const bar = draw.rect(100, 0).fill(dept.color).radius(4).move(dept.x, 220);
+        bars.push({ bar, targetHeight: barHeight, targetY: y });
+
+        draw.text(dept.name).font({ size: 12, weight: '600' }).fill('#333').center(dept.x + 50, 235);
+        draw.text(dept.value.toString())
+          .font({ size: 20, weight: 'bold' })
+          .fill('white')
+          .center(dept.x + 50, y + barHeight / 2);
+      });
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          item.bar.animate(1000, i * 200).ease('<>').attr({ height: item.targetHeight, y: item.targetY }).after(() => {
+            if (i === bars.length - 1) {
+              setTimeout(() => {
+                bars.forEach((b) => {
+                  b.bar.animate(500).attr({ height: 0, y: 220 });
+                });
+                setTimeout(animateBars, 1000);
+              }, 2000);
+            }
+          });
+        });
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanupPie = initBudgetPie();
+    const cleanupBars = initDeptBars();
+
+    return () => {
+      if (cleanupPie) cleanupPie();
+      if (cleanupBars) cleanupBars();
+    };
+  });
+</script>
 
 ## Future Planning
 

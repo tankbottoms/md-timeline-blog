@@ -235,20 +235,78 @@ Your text content wraps around the image...
 
 ## 📊 SVG Visualizations
 
-The template includes numerous SVG examples:
+The template includes numerous animated SVG examples powered by **SVG.js v3.2**:
 
-1. **Data Visualization** - Bar charts, pie charts
-2. **Network Diagrams** - Architecture flows
-3. **Algorithm Complexity** - Complexity graphs
-4. **Geographic Maps** - Data distributions
-5. **ML Pipelines** - Process flows
-6. **UX Journeys** - User flows
-7. **API Architecture** - System diagrams
-8. **Performance Metrics** - KPI dashboards
-9. **Security Flows** - Authentication diagrams
-10. **CI/CD Pipelines** - Deployment flows
+1. **Data Visualization** - Animated bar charts, pie charts, progress circles
+2. **Network Diagrams** - Quarterly growth metrics with multi-stage animations
+3. **Algorithm Complexity** - Budget allocation pie charts with sequential slice reveals
+4. **Geographic Maps** - Interactive US map with random state zoom tours
+5. **API Architecture** - HTTP method and response code animations
+6. **CI/CD Pipelines** - Pipeline stages and deployment frequency charts
+7. **Interactive Games** - Pong game with SVG.js physics
+8. **Path Animations** - Shapes following curved paths with easing
 
-All SVGs are responsive and support dark mode automatically.
+### Creating Animated SVG Graphics
+
+All animations use the [SVG.js library](https://svgjs.dev/) (v3.2) which is loaded globally in the layout. To create your own animations:
+
+1. **Add a container div** in your markdown:
+```html
+<div class="media-center">
+  <div id="my-animation" style="max-width: 600px; margin: 0 auto;"></div>
+</div>
+```
+
+2. **Add a script block** with SVG.js animation code:
+```html
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    function initAnimation() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initAnimation, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 400;
+
+      // Create SVG canvas
+      const draw = SVG().addTo('#my-animation').size(WIDTH, HEIGHT);
+
+      // Add animated elements
+      const rect = draw.rect(100, 100).fill('#4a90e2');
+      rect.animate(1000).move(200, 150).loop();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanup = initAnimation();
+    return cleanup;
+  });
+</script>
+```
+
+3. **Learn more** about SVG.js animations:
+   - [SVG.js Documentation](https://svgjs.dev/docs/3.2/)
+   - [Animation Guide](https://svgjs.dev/docs/3.2/animating/)
+   - [Tutorial Examples](https://svgjs.dev/docs/3.2/tutorials/)
+   - [API Reference](https://svgjs.dev/docs/3.2/shape-elements/)
+
+### Animation Techniques Used
+
+- **Sequential animations** - Using delays and `.after()` callbacks
+- **Looping animations** - With `.loop()` for continuous effects
+- **Easing functions** - Like `.ease('<>')` for smooth transitions
+- **ViewBox manipulation** - For zoom effects on geographic maps
+- **Path following** - Using `.during()` with `.pointAt()` for shapes on paths
+- **Color transitions** - Animating fill and stroke properties
+- **Timeline control** - Using `.timeline().stop()` for restart functionality
+
+All SVG graphics are responsive, support dark mode, and use transparent backgrounds for seamless integration.
 
 ## 👥 Team Page
 
@@ -321,6 +379,7 @@ Plus 3 research documents with PDF viewers.
 - **Tailwind CSS** - Utility-first CSS
 - **TypeScript** - Type safety
 - **Vite** - Build tool
+- **SVG.js v3.2** - Animated SVG graphics library
 
 ## 📖 Documentation
 

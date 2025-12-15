@@ -6,6 +6,10 @@
 	let { children, data } = $props();
 </script>
 
+<svelte:head>
+	<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2/dist/svg.min.js"></script>
+</svelte:head>
+
 <div class="container">
 	<header class="header-wrapper">
 		<div class="header">

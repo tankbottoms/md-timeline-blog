@@ -17,33 +17,7 @@ Eos quisquam repellendus qui sapiente nihil ea voluptatibus recusandae ad dolori
 ## HTTP Methods
 
 <div class="media-left">
-<svg width="240" height="280" viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
-  <text x="120" y="20" text-anchor="middle" font-size="14" font-weight="bold">HTTP Method Usage</text>
-
-  <!-- GET -->
-  <rect x="20" y="40" width="120" height="45" fill="#4a90e2" opacity="0.9" rx="3"/>
-  <text x="30" y="58" font-size="13" fill="white" font-weight="bold">GET</text>
-  <text x="30" y="75" font-size="10" fill="white">Read resources</text>
-  <text x="200" y="67" text-anchor="end" font-size="12" font-weight="bold">45%</text>
-
-  <!-- POST -->
-  <rect x="20" y="95" width="100" height="45" fill="#2ecc71" opacity="0.9" rx="3"/>
-  <text x="30" y="113" font-size="13" fill="white" font-weight="bold">POST</text>
-  <text x="30" y="130" font-size="10" fill="white">Create resources</text>
-  <text x="200" y="122" text-anchor="end" font-size="12" font-weight="bold">30%</text>
-
-  <!-- PUT -->
-  <rect x="20" y="150" width="70" height="45" fill="#f39c12" opacity="0.9" rx="3"/>
-  <text x="30" y="168" font-size="13" fill="white" font-weight="bold">PUT</text>
-  <text x="30" y="185" font-size="10" fill="white">Update resources</text>
-  <text x="200" y="177" text-anchor="end" font-size="12" font-weight="bold">15%</text>
-
-  <!-- DELETE -->
-  <rect x="20" y="205" width="50" height="45" fill="#e74c3c" opacity="0.9" rx="3"/>
-  <text x="30" y="223" font-size="13" fill="white" font-weight="bold">DEL</text>
-  <text x="30" y="240" font-size="10" fill="white">Remove</text>
-  <text x="200" y="232" text-anchor="end" font-size="12" font-weight="bold">10%</text>
-</svg>
+  <div id="http-methods" style="max-width: 240px;"></div>
 </div>
 
 <div class="clearfix">
@@ -52,50 +26,174 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 The distribution of HTTP methods reflects typical API usage patterns. GET requests dominate as most operations involve reading data. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 </div>
 
 ## Response Status Codes
 
-Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 <div class="media-center">
-<svg width="500" height="250" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
-  <text x="250" y="25" text-anchor="middle" font-size="16" font-weight="bold">Response Code Distribution</text>
-
-  <!-- 2xx Success - Green -->
-  <rect x="50" y="180" width="80" height="40" fill="#2ecc71"/>
-  <text x="90" y="205" text-anchor="middle" fill="white" font-weight="bold">2xx</text>
-  <text x="90" y="235" text-anchor="middle" font-size="11">70%</text>
-
-  <!-- 3xx Redirect - Blue -->
-  <rect x="150" y="200" width="80" height="20" fill="#3498db"/>
-  <text x="190" y="213" text-anchor="middle" fill="white" font-weight="bold">3xx</text>
-  <text x="190" y="235" text-anchor="middle" font-size="11">5%</text>
-
-  <!-- 4xx Client Error - Orange -->
-  <rect x="250" y="160" width="80" height="60" fill="#f39c12"/>
-  <text x="290" y="195" text-anchor="middle" fill="white" font-weight="bold">4xx</text>
-  <text x="290" y="235" text-anchor="middle" font-size="11">20%</text>
-
-  <!-- 5xx Server Error - Red -->
-  <rect x="350" y="210" width="80" height="10" fill="#e74c3c"/>
-  <text x="390" y="218" text-anchor="middle" fill="white" font-size="10" font-weight="bold">5xx</text>
-  <text x="390" y="235" text-anchor="middle" font-size="11">5%</text>
-
-  <!-- Baseline -->
-  <line x1="40" y1="220" x2="440" y2="220" stroke="#999" stroke-width="1"/>
-</svg>
+  <div id="response-codes" style="max-width: 500px; margin: 0 auto;"></div>
 </div>
+
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    // Initialize HTTP Methods Chart
+    function initHttpMethods() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(() => {
+          initHttpMethods();
+          initResponseCodes();
+        }, 50);
+        return;
+      }
+
+      const WIDTH = 240;
+      const HEIGHT = 280;
+      const methods = [
+        { name: 'GET', desc: 'Read resources', percent: 45, color: '#4a90e2', width: 120 },
+        { name: 'POST', desc: 'Create resources', percent: 30, color: '#2ecc71', width: 100 },
+        { name: 'PUT', desc: 'Update resources', percent: 15, color: '#f39c12', width: 70 },
+        { name: 'DEL', desc: 'Remove', percent: 10, color: '#e74c3c', width: 50 }
+      ];
+
+      const draw = SVG().addTo('#http-methods').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#fafafa');
+
+      draw.text('HTTP Method Usage')
+        .font({ size: 14, family: 'sans-serif', weight: 'bold' })
+        .fill('#333')
+        .center(120, 15);
+
+      const bars = [];
+      methods.forEach((method, i) => {
+        const y = 40 + i * 55;
+        const bar = draw.rect(0, 45).fill(method.color).radius(3).move(20, y).opacity(0.9);
+        bars.push({ bar, targetWidth: method.width });
+
+        draw.text(method.name).font({ size: 13, weight: 'bold' }).fill('white').move(30, y + 13);
+        draw.text(method.desc).font({ size: 10 }).fill('white').move(30, y + 30);
+        draw.text(method.percent + '%').font({ size: 12, weight: 'bold' }).fill('#333').move(180, y + 22);
+      });
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          item.bar.animate(1000, i * 150).ease('<>').attr({ width: item.targetWidth }).after(() => {
+            if (i === bars.length - 1) {
+              setTimeout(() => {
+                bars.forEach((b) => b.bar.animate(500).attr({ width: 0 }));
+                setTimeout(animateBars, 1000);
+              }, 2000);
+            }
+          });
+        });
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    // Initialize Response Codes Chart
+    function initResponseCodes() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initResponseCodes, 50);
+        return;
+      }
+
+      const WIDTH = 500;
+      const HEIGHT = 250;
+      const codes = [
+        { code: '2xx', percent: 70, height: 40, color: '#2ecc71' },
+        { code: '3xx', percent: 5, height: 20, color: '#3498db' },
+        { code: '4xx', percent: 20, height: 60, color: '#f39c12' },
+        { code: '5xx', percent: 5, height: 10, color: '#e74c3c' }
+      ];
+
+      const draw = SVG().addTo('#response-codes').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#fafafa');
+
+      draw.text('Response Code Distribution')
+        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .fill('#333')
+        .center(250, 20);
+
+      // Baseline
+      draw.line(40, 220, 440, 220).stroke({ color: '#999', width: 1 });
+
+      const bars = [];
+      codes.forEach((code, i) => {
+        const x = 50 + i * 100;
+        const y = 220 - code.height;
+        const bar = draw.rect(80, 0).fill(code.color).move(x, 220);
+        bars.push({ bar, targetHeight: code.height, targetY: y });
+
+        draw.text(code.code)
+          .font({ size: code.code === '5xx' ? 10 : 13, weight: 'bold' })
+          .fill('white')
+          .center(x + 40, y + code.height / 2);
+        draw.text(code.percent + '%').font({ size: 11 }).fill('#333').center(x + 40, 235);
+      });
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          item.bar.animate(1000, i * 150).ease('<>').attr({ height: item.targetHeight, y: item.targetY }).after(() => {
+            if (i === bars.length - 1) {
+              setTimeout(() => {
+                bars.forEach((b) => b.bar.animate(500).attr({ height: 0, y: 220 }));
+                setTimeout(animateBars, 1000);
+              }, 2000);
+            }
+          });
+        });
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanupMethods = initHttpMethods();
+    const cleanupCodes = initResponseCodes();
+
+    return () => {
+      if (cleanupMethods) cleanupMethods();
+      if (cleanupCodes) cleanupCodes();
+    };
+  });
+</script>
 
 ## Rate Limiting
 
-Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ## Versioning Strategies
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ## Best Practices
 
