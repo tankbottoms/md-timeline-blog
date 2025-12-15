@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import mdPreprocess from './remark.config.js';
 
@@ -6,7 +6,9 @@ import mdPreprocess from './remark.config.js';
 const config = {
 	preprocess: [vitePreprocess(), mdPreprocess()],
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			runtime: 'nodejs20.x'
+		})
 	},
 	extensions: ['.svelte', '.md']
 };
