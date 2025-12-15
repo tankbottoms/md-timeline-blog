@@ -6,106 +6,59 @@ date: 2025-10-20
 
 ## CI/CD Pipeline Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ## Pipeline Stages
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 <div class="media-center">
-<svg width="258" height="280" viewBox="0 0 250 280" xmlns="http://www.w3.org/2000/svg">
-  <text x="125" y="20" text-anchor="middle" font-size="14" font-weight="bold">Stage Success Rates</text>
-
-  <!-- Success rate visualization -->
-  <rect x="20" y="50" width="210" height="30" fill="#e0e0e0" rx="3"/>
-  <rect x="20" y="50" width="207" height="30" fill="#4caf50" rx="3"/>
-  <text x="30" y="70" font-size="12" fill="white">Build: 98.5%</text>
-
-  <rect x="20" y="90" width="210" height="30" fill="#e0e0e0" rx="3"/>
-  <rect x="20" y="90" width="199" height="30" fill="#4caf50" rx="3"/>
-  <text x="30" y="110" font-size="12" fill="white">Unit Tests: 94.8%</text>
-
-  <rect x="20" y="130" width="210" height="30" fill="#e0e0e0" rx="3"/>
-  <rect x="20" y="130" width="185" height="30" fill="#2ecc71" rx="3"/>
-  <text x="30" y="150" font-size="12" fill="white">Integration: 88.2%</text>
-
-  <rect x="20" y="170" width="210" height="30" fill="#e0e0e0" rx="3"/>
-  <rect x="20" y="170" width="176" height="30" fill="#f39c12" rx="3"/>
-  <text x="30" y="190" font-size="12" fill="white">Security: 84.0%</text>
-
-  <rect x="20" y="210" width="210" height="30" fill="#e0e0e0" rx="3"/>
-  <rect x="20" y="210" width="157" height="30" fill="#e67e22" rx="3"/>
-  <text x="30" y="230" font-size="12" fill="white">E2E Tests: 75.0%</text>
-
-  <text x="125" y="265" text-anchor="middle" font-size="10" fill="#666">Overall Pipeline Success: 82%</text>
-</svg>
+  <div id="pipeline-stages" style="max-width: 258px; margin: 0 auto;"></div>
 </div>
 
 <div class="clearfix">
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
 
-Each stage of the pipeline has its own success rate, with earlier stages generally having higher success rates. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
+
+Each stage of the pipeline has its own success rate, with earlier stages generally having higher success rates. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 </div>
 
 ## Deployment Frequency
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
 
-<div class="media-blocked">
-<svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
-  <text x="300" y="25" text-anchor="middle" font-size="16" font-weight="bold">Deployment Frequency Trend</text>
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
 
-  <!-- Axes -->
-  <line x1="50" y1="250" x2="550" y2="250" stroke="#333" stroke-width="2"/>
-  <line x1="50" y1="70" x2="50" y2="250" stroke="#333" stroke-width="2"/>
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
-  <!-- Grid lines -->
-  <line x1="50" y1="200" x2="550" y2="200" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-  <line x1="50" y1="150" x2="550" y2="150" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-  <line x1="50" y1="100" x2="550" y2="100" stroke="#ddd" stroke-width="1" stroke-dasharray="5,5"/>
-
-  <!-- Bar chart -->
-  <rect x="70" y="180" width="50" height="70" fill="#3498db" opacity="0.8"/>
-  <text x="95" y="270" text-anchor="middle" font-size="11">Q1</text>
-  <text x="95" y="175" text-anchor="middle" font-size="11" font-weight="bold">24</text>
-
-  <rect x="150" y="150" width="50" height="100" fill="#3498db" opacity="0.8"/>
-  <text x="175" y="270" text-anchor="middle" font-size="11">Q2</text>
-  <text x="175" y="145" text-anchor="middle" font-size="11" font-weight="bold">42</text>
-
-  <rect x="230" y="110" width="50" height="140" fill="#3498db" opacity="0.8"/>
-  <text x="255" y="270" text-anchor="middle" font-size="11">Q3</text>
-  <text x="255" y="105" text-anchor="middle" font-size="11" font-weight="bold">78</text>
-
-  <rect x="310" y="90" width="50" height="160" fill="#2ecc71" opacity="0.8"/>
-  <text x="335" y="270" text-anchor="middle" font-size="11">Q4</text>
-  <text x="335" y="85" text-anchor="middle" font-size="11" font-weight="bold">96</text>
-
-  <rect x="390" y="75" width="50" height="175" fill="#2ecc71" opacity="0.8"/>
-  <text x="415" y="270" text-anchor="middle" font-size="11">Q1</text>
-  <text x="415" y="70" text-anchor="middle" font-size="11" font-weight="bold">118</text>
-
-  <rect x="470" y="85" width="50" height="165" fill="#2ecc71" opacity="0.8"/>
-  <text x="495" y="270" text-anchor="middle" font-size="11">Q2</text>
-  <text x="495" y="80" text-anchor="middle" font-size="11" font-weight="bold">105</text>
-
-  <!-- Labels -->
-  <text x="300" y="290" text-anchor="middle" font-size="12">Time Period (Quarters)</text>
-  <text x="25" y="160" text-anchor="middle" font-size="12" transform="rotate(-90, 25, 160)">Deployments</text>
-
-  <!-- Y-axis labels -->
-  <text x="40" y="255" text-anchor="end" font-size="10">0</text>
-  <text x="40" y="205" text-anchor="end" font-size="10">50</text>
-  <text x="40" y="155" text-anchor="end" font-size="10">100</text>
-  <text x="40" y="105" text-anchor="end" font-size="10">150</text>
-</svg>
+<div class="media-center">
+  <div id="deployment-frequency" style="max-width: 600px; margin: 0 auto;"></div>
 </div>
 
 ## Infrastructure as Code
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ### IaC Tools Distribution
 
@@ -147,6 +100,187 @@ and CloudFormation at 25%.
 - Practice infrastructure as code
 - Maintain clear rollback procedures
 
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    // Initialize Pipeline Stages Chart
+    function initPipelineStages() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(() => {
+          initPipelineStages();
+          initDeploymentFrequency();
+        }, 50);
+        return;
+      }
+
+      const WIDTH = 258;
+      const HEIGHT = 280;
+      const stages = [
+        { name: 'Build: 98.5%', percent: 98.5, width: 207, color: '#4caf50', y: 50 },
+        { name: 'Unit Tests: 94.8%', percent: 94.8, width: 199, color: '#4caf50', y: 90 },
+        { name: 'Integration: 88.2%', percent: 88.2, width: 185, color: '#2ecc71', y: 130 },
+        { name: 'Security: 84.0%', percent: 84.0, width: 176, color: '#f39c12', y: 170 },
+        { name: 'E2E Tests: 75.0%', percent: 75.0, width: 157, color: '#e67e22', y: 210 }
+      ];
+
+      const draw = SVG().addTo('#pipeline-stages').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#fafafa');
+
+      draw.text('Stage Success Rates')
+        .font({ size: 14, family: 'sans-serif', weight: 'bold' })
+        .fill('#333')
+        .center(125, 20);
+
+      // Background bars and create animated bars
+      const bars = [];
+      stages.forEach((stage) => {
+        // Background bar
+        draw.rect(210, 30).fill('#e0e0e0').radius(3).move(20, stage.y);
+
+        // Animated bar starting at width 0
+        const bar = draw.rect(0, 30).fill(stage.color).radius(3).move(20, stage.y);
+        bars.push({ bar, targetWidth: stage.width });
+
+        // Text label
+        draw.text(stage.name)
+          .font({ size: 12 })
+          .fill('white')
+          .move(30, stage.y + 10);
+      });
+
+      // Overall success text
+      draw.text('Overall Pipeline Success: 82%')
+        .font({ size: 10 })
+        .fill('#666')
+        .center(125, 265);
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          item.bar.animate(1000, i * 100).ease('<>').attr({ width: item.targetWidth }).after(() => {
+            if (i === bars.length - 1) {
+              setTimeout(() => {
+                bars.forEach((b) => b.bar.animate(500).attr({ width: 0 }));
+                setTimeout(animateBars, 1000);
+              }, 2000);
+            }
+          });
+        });
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    // Initialize Deployment Frequency Chart
+    function initDeploymentFrequency() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initDeploymentFrequency, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 310;
+      const deployments = [
+        { label: 'Q1', value: 24, height: 70, y: 180, color: '#3498db', x: 70 },
+        { label: 'Q2', value: 42, height: 100, y: 150, color: '#3498db', x: 150 },
+        { label: 'Q3', value: 78, height: 140, y: 110, color: '#3498db', x: 230 },
+        { label: 'Q4', value: 96, height: 160, y: 90, color: '#2ecc71', x: 310 },
+        { label: 'Q1', value: 118, height: 175, y: 75, color: '#2ecc71', x: 390 },
+        { label: 'Q2', value: 105, height: 165, y: 85, color: '#2ecc71', x: 470 }
+      ];
+
+      const draw = SVG().addTo('#deployment-frequency').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#f8f9fa');
+
+      draw.text('Deployment Frequency Trend')
+        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .fill('#111')
+        .center(300, 25);
+
+      // Axes
+      draw.line(50, 250, 550, 250).stroke({ color: '#333', width: 2 });
+      draw.line(50, 70, 50, 250).stroke({ color: '#333', width: 2 });
+
+      // Grid lines
+      [200, 150, 100].forEach((y) => {
+        draw.line(50, y, 550, y).stroke({ color: '#ddd', width: 1, dasharray: '5,5' });
+      });
+
+      // Y-axis labels
+      draw.text('0').font({ size: 10 }).fill('#333').move(30, 245);
+      draw.text('50').font({ size: 10 }).fill('#333').move(30, 195);
+      draw.text('100').font({ size: 10 }).fill('#333').move(24, 145);
+      draw.text('150').font({ size: 10 }).fill('#333').move(24, 95);
+
+      // Axis labels
+      draw.text('Time Period (Quarters)')
+        .font({ size: 12 })
+        .fill('#333')
+        .center(300, 290);
+
+      draw.text('Deployments')
+        .font({ size: 12 })
+        .fill('#333')
+        .move(25, 160)
+        .rotate(-90, 25, 160);
+
+      // Create bars and labels
+      const bars = [];
+      deployments.forEach((dep) => {
+        const bar = draw.rect(50, 0).fill(dep.color).opacity(0.8).move(dep.x, 250);
+        bars.push({ bar, targetHeight: dep.height, targetY: dep.y });
+
+        // X-axis labels
+        draw.text(dep.label)
+          .font({ size: 11 })
+          .fill('#333')
+          .center(dep.x + 25, 270);
+
+        // Value labels
+        draw.text(dep.value.toString())
+          .font({ size: 11, weight: 'bold' })
+          .fill('#333')
+          .center(dep.x + 25, dep.y - 5);
+      });
+
+      function animateBars() {
+        bars.forEach((item, i) => {
+          item.bar.animate(1000, i * 150).ease('<>').attr({ height: item.targetHeight, y: item.targetY }).after(() => {
+            if (i === bars.length - 1) {
+              setTimeout(() => {
+                bars.forEach((b) => b.bar.animate(500).attr({ height: 0, y: 250 }));
+                setTimeout(animateBars, 1000);
+              }, 2000);
+            }
+          });
+        });
+      }
+
+      animateBars();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanupStages = initPipelineStages();
+    const cleanupFrequency = initDeploymentFrequency();
+
+    return () => {
+      if (cleanupStages) cleanupStages();
+      if (cleanupFrequency) cleanupFrequency();
+    };
+  });
+</script>
+
 ## Conclusion
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!

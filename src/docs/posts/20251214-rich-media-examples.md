@@ -6,7 +6,13 @@ date: 2025-12-14
 
 ## Introduction to Rich Media
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. This post demonstrates all the different types of rich content you can embed in your blog posts.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!  
+
+This post demonstrates all the different types of rich content you can embed in your blog posts.
 
 ## Image Examples
 
@@ -16,7 +22,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 <img src="/images/placeholder.svg" alt="Sample centered image" width="600" />
 </div>
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ### Floated Image with Text Wrap
 
@@ -30,7 +40,11 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
 
-Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The image floats to the left with text wrapping around it naturally.
+Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. The image floats to the left with text wrapping around it naturally.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 </div>
 
@@ -45,7 +59,11 @@ Listen to our sample audio track:
 </audio>
 </div>
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ## Video Player
 
@@ -59,7 +77,11 @@ Watch the demonstration video:
 </video>
 </div>
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 ## Data Tables
 
@@ -74,7 +96,11 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
 <div class="clearfix">
 
-The table above shows our performance improvements over the past three quarters. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+The table above shows our performance improvements over the past three quarters. Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 </div>
 
@@ -88,81 +114,155 @@ The table above shows our performance improvements over the past three quarters.
 | Support | Email | Priority | 24/7 Dedicated |
 | Price | $9/mo | $49/mo | Custom |
 
-## Interactive SVG Chart
+## Interactive SVG Animation
 
 <div class="media-center">
-<svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-  <text x="250" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="var(--color-text, #333)">User Growth Trend</text>
-
-  <!-- Background -->
-  <rect x="40" y="40" width="420" height="220" fill="var(--color-bg, #f8f9fa)" stroke="var(--color-border, #ddd)" stroke-width="1"/>
-
-  <!-- Grid lines -->
-  <line x1="50" y1="250" x2="450" y2="250" stroke="var(--color-border, #ddd)" stroke-width="1"/>
-  <line x1="50" y1="200" x2="450" y2="200" stroke="var(--color-border, #ddd)" stroke-width="1" stroke-dasharray="5,5"/>
-  <line x1="50" y1="150" x2="450" y2="150" stroke="var(--color-border, #ddd)" stroke-width="1" stroke-dasharray="5,5"/>
-  <line x1="50" y1="100" x2="450" y2="100" stroke="var(--color-border, #ddd)" stroke-width="1" stroke-dasharray="5,5"/>
-
-  <!-- Axes -->
-  <line x1="50" y1="50" x2="50" y2="250" stroke="var(--color-text, #333)" stroke-width="2"/>
-  <line x1="50" y1="250" x2="450" y2="250" stroke="var(--color-text, #333)" stroke-width="2"/>
-
-  <!-- Data line -->
-  <polyline points="50,220 100,200 150,180 200,150 250,130 300,110 350,90 400,80 450,70"
-            fill="none" stroke="#4a90e2" stroke-width="3"/>
-
-  <!-- Area under line -->
-  <polygon points="50,220 100,200 150,180 200,150 250,130 300,110 350,90 400,80 450,70 450,250 50,250"
-           fill="#4a90e2" opacity="0.2"/>
-
-  <!-- Data points -->
-  <circle cx="50" cy="220" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="100" cy="200" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="150" cy="180" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="200" cy="150" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="250" cy="130" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="300" cy="110" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="350" cy="90" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="400" cy="80" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-  <circle cx="450" cy="70" r="5" fill="#4a90e2" stroke="white" stroke-width="2"/>
-
-  <!-- Labels -->
-  <text x="250" y="280" text-anchor="middle" font-size="12" fill="var(--color-text, #333)">Month</text>
-  <text x="20" y="150" text-anchor="middle" font-size="12" fill="var(--color-text, #333)" transform="rotate(-90, 20, 150)">Users (k)</text>
-
-  <!-- X-axis labels -->
-  <text x="50" y="270" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">1</text>
-  <text x="150" y="270" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">3</text>
-  <text x="250" y="270" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">5</text>
-  <text x="350" y="270" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">7</text>
-  <text x="450" y="270" text-anchor="middle" font-size="10" fill="var(--color-text-muted, #666)">9</text>
-
-  <!-- Y-axis labels -->
-  <text x="40" y="255" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">0</text>
-  <text x="40" y="205" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">25</text>
-  <text x="40" y="155" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">50</text>
-  <text x="40" y="105" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">75</text>
-  <text x="40" y="55" text-anchor="end" font-size="10" fill="var(--color-text-muted, #666)">100</text>
-</svg>
+  <div id="animated-shapes" style="max-width: 600px; margin: 0 auto;"></div>
+  <p style="text-align: center; margin-top: 1rem; font-size: 0.875rem; color: var(--color-text-muted);">
+    Animated shapes moving along paths using SVG.js - Click to restart animation
+  </p>
 </div>
+
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    function initAnimation() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initAnimation, 50);
+        return;
+      }
+
+      const WIDTH = 600;
+      const HEIGHT = 300;
+
+      const draw = SVG().addTo('#animated-shapes').size(WIDTH, HEIGHT);
+      draw.rect(WIDTH, HEIGHT).fill('#f8f9fa');
+
+      draw.text('Animated Path Following').font({ size: 18, family: 'sans-serif', weight: 'bold' }).fill('#333').move(WIDTH/2 - 100, 20);
+
+      const path1 = draw.path('M 50,150 Q 200,50 350,150 T 550,150').fill('none').stroke({ color: '#e0e0e0', width: 2, dasharray: '5,5' });
+      const path2 = draw.path('M 50,200 C 150,100 250,250 350,150 S 450,100 550,200').fill('none').stroke({ color: '#e0e0e0', width: 2, dasharray: '5,5' });
+      const path3 = draw.path('M 50,100 Q 150,200 250,100 T 450,100 T 550,100').fill('none').stroke({ color: '#e0e0e0', width: 2, dasharray: '5,5' });
+
+      const circle1 = draw.circle(20).fill('#e74c3c').move(50, 140);
+      const circle2 = draw.circle(25).fill('#3498db').move(50, 187);
+      const circle3 = draw.circle(18).fill('#2ecc71').move(50, 91);
+      const rect1 = draw.rect(20, 20).fill('#f39c12').move(50, 140).radius(3);
+      const polygon1 = draw.polygon('10,0 20,20 0,20').fill('#9b59b6').move(50, 190);
+
+      function animateShapes() {
+        circle1.animate(4000, 0, 'now').ease('<>').during((pos) => {
+          const point = path1.pointAt(pos * path1.length());
+          circle1.center(point.x, point.y);
+        }).loop();
+
+        circle2.animate(5000, 200, 'now').ease('<>').during((pos) => {
+          const point = path2.pointAt(pos * path2.length());
+          circle2.center(point.x, point.y);
+        }).loop();
+
+        circle3.animate(3500, 400, 'now').ease('<>').during((pos) => {
+          const point = path3.pointAt(pos * path3.length());
+          circle3.center(point.x, point.y);
+        }).loop();
+
+        rect1.animate(4500, 600, 'now').ease('<>').during((pos) => {
+          const point = path1.pointAt(pos * path1.length());
+          rect1.center(point.x, point.y);
+        }).animate(4500).rotate(360).loop();
+
+        polygon1.animate(5500, 300, 'now').ease('<>').during((pos) => {
+          const point = path2.pointAt(pos * path2.length());
+          polygon1.center(point.x, point.y);
+        }).animate(5500).fill('#9b59b6').loop();
+      }
+
+      animateShapes();
+
+      draw.click((event) => {
+        // Prevent default behavior and page scrolling
+        if (event && event.preventDefault) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        // Stop all animations and clear queues
+        circle1.timeline().stop();
+        circle2.timeline().stop();
+        circle3.timeline().stop();
+        rect1.timeline().stop();
+        polygon1.timeline().stop();
+
+        // Reset positions
+        circle1.move(50, 140);
+        circle2.move(50, 187);
+        circle3.move(50, 91);
+        rect1.move(50, 140).rotate(0);
+        polygon1.move(50, 190);
+
+        // Restart animations
+        animateShapes();
+      });
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanup = initAnimation();
+    return cleanup;
+  });
+</script>
 
 ## Code Examples
 
-Here's a sample code block with syntax:
+The interactive animation above uses the **SVG.js library** to create smooth animations of shapes moving along SVG paths. Here's how it works:
+
+### Creating the Animation Canvas
 
 ```javascript
-function calculateGrowth(data) {
-  const initial = data[0];
-  const final = data[data.length - 1];
-  const growth = ((final - initial) / initial) * 100;
-
-  return {
-    absolute: final - initial,
-    percentage: growth.toFixed(2),
-    trend: growth > 0 ? 'increasing' : 'decreasing'
-  };
-}
+// Initialize SVG.js drawing canvas
+const draw = SVG().addTo('#animated-shapes').size(600, 300);
+draw.rect(600, 300).fill('#f8f9fa'); // Background
 ```
+
+### Defining Curved Paths
+
+SVG paths are defined using path commands (M=move, Q=quadratic curve, C=cubic curve, T=smooth quadratic):
+
+```javascript
+// Three different curved paths for shapes to follow
+const path1 = draw.path('M 50,150 Q 200,50 350,150 T 550,150')
+  .fill('none').stroke({ color: '#e0e0e0', width: 2, dasharray: '5,5' });
+
+const path2 = draw.path('M 50,200 C 150,100 250,250 350,150 S 450,100 550,200')
+  .fill('none').stroke({ color: '#e0e0e0', width: 2, dasharray: '5,5' });
+```
+
+### Animating Shapes Along Paths
+
+The key technique is using `.during()` callback with `.pointAt()` to position shapes along the path:
+
+```javascript
+circle1.animate(4000, 0, 'now').ease('<>').during((pos) => {
+  // Get point at current position along the path (0.0 to 1.0)
+  const point = path1.pointAt(pos * path1.length());
+  // Center the shape at that point
+  circle1.center(point.x, point.y);
+}).loop(); // Repeat indefinitely
+```
+
+### Key SVG.js Features Used
+
+- **`.animate(duration, delay)`** - Creates timed animations
+- **`.ease('<>')`** - Applies easing functions (ease-in-out)
+- **`.during(callback)`** - Executes function during animation
+- **`.pointAt(length)`** - Gets coordinates at distance along path
+- **`.loop()`** - Repeats animation infinitely
+- **`.after(callback)`** - Executes after animation completes
+
+This technique allows complex motion paths without manual calculation of coordinates, making it ideal for data visualizations, loading animations, and interactive diagrams.
 
 ## Blocked Media with Shadow
 
@@ -219,4 +319,8 @@ We support <div class="media-inline"><svg width="20" height="20" viewBox="0 0 20
 
 This post demonstrates the wide variety of rich media types supported in the blog template. You can combine text, images, audio, video, tables, SVG graphics, code blocks, and interactive players to create engaging and informative content.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!

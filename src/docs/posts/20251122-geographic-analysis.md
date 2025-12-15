@@ -6,134 +6,29 @@ date: 2025-11-22
 
 ## National Presence
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Our expansion strategy focuses on establishing strong presences in major metropolitan areas across the United States.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque! 
+
+Our expansion strategy focuses on establishing strong presences in major metropolitan areas across the United States.
 
 ### Market Penetration Animation
 
-<div class="media-blocked">
-<svg width="100%" height="550" viewBox="0 0 800 550" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    @keyframes zoomTransform {
-      0%, 15% {
-        transform: translate(0, 0) scale(1);
-      }
-      25%, 40% {
-        transform: translate(-150px, -80px) scale(2.5);
-      }
-      50%, 65% {
-        transform: translate(-450px, -120px) scale(3);
-      }
-      75%, 90% {
-        transform: translate(200px, -150px) scale(2.8);
-      }
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-    }
-    @keyframes cityPulse {
-      0%, 100% { r: 6; opacity: 1; }
-      50% { r: 10; opacity: 0.6; }
-    }
-    .map-group {
-      animation: zoomTransform 16s ease-in-out infinite;
-      transform-origin: 400px 275px;
-    }
-    .city-marker { animation: cityPulse 2s ease-in-out infinite; }
-    .city-la { animation-delay: 0s; }
-    .city-vegas { animation-delay: 0.4s; }
-    .city-ny { animation-delay: 0.8s; }
-  </style>
-
-  <defs>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <rect width="800" height="550" fill="#fafafa"/>
-
-  <text x="400" y="35" text-anchor="middle" font-size="22" font-weight="bold" fill="#111">
-    Geographic Expansion: USA → Key Markets
-  </text>
-
-  <g class="map-group">
-    <!-- Simplified USA outline -->
-    <path d="M 150 200 L 200 180 L 250 170 L 300 175 L 350 165 L 400 170 L 450 160 L 500 165 L 550 170 L 600 180 L 650 190
-             L 650 220 L 655 260 L 650 300 L 640 340 L 620 360 L 580 380 L 540 390 L 500 395 L 450 398 L 400 400
-             L 350 398 L 300 395 L 250 390 L 200 380 L 170 360 L 155 330 L 150 290 L 148 250 Z"
-          fill="#e3f2fd" stroke="#1976d2" stroke-width="3" opacity="0.7"/>
-
-    <!-- West Coast -->
-    <path d="M 150 200 L 155 240 L 160 280 L 165 320 L 170 360"
-          stroke="#1976d2" stroke-width="3" fill="none"/>
-
-    <!-- East Coast -->
-    <path d="M 640 200 L 645 240 L 648 280 L 650 320 L 645 360"
-          stroke="#1976d2" stroke-width="3" fill="none"/>
-
-    <!-- Cities with detailed zoom areas -->
-
-    <!-- Los Angeles area (West Coast) -->
-    <g opacity="0.2">
-      <rect x="140" y="280" width="80" height="60" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="5"/>
-      <text x="180" y="300" text-anchor="middle" font-size="11" font-weight="600">LA Metro</text>
-      <text x="180" y="315" text-anchor="middle" font-size="9">Population: 13M</text>
-      <text x="180" y="328" text-anchor="middle" font-size="9">Coverage: 85%</text>
-    </g>
-
-    <!-- Las Vegas area (Southwest) -->
-    <g opacity="0.2">
-      <rect x="240" y="300" width="80" height="60" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="5"/>
-      <text x="280" y="320" text-anchor="middle" font-size="11" font-weight="600">Las Vegas</text>
-      <text x="280" y="335" text-anchor="middle" font-size="9">Population: 2.2M</text>
-      <text x="280" y="348" text-anchor="middle" font-size="9">Coverage: 92%</text>
-    </g>
-
-    <!-- New York area (East Coast) -->
-    <g opacity="0.2">
-      <rect x="580" y="220" width="80" height="60" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="5"/>
-      <text x="620" y="240" text-anchor="middle" font-size="11" font-weight="600">NYC Metro</text>
-      <text x="620" y="255" text-anchor="middle" font-size="9">Population: 20M</text>
-      <text x="620" y="268" text-anchor="middle" font-size="9">Coverage: 78%</text>
-    </g>
-
-    <!-- City markers -->
-    <circle class="city-marker city-la" cx="180" cy="310" r="6" fill="#e74c3c" filter="url(#glow)"/>
-    <circle class="city-marker city-vegas" cx="280" cy="330" r="6" fill="#f39c12" filter="url(#glow)"/>
-    <circle class="city-marker city-ny" cx="620" cy="250" r="6" fill="#2ecc71" filter="url(#glow)"/>
-
-    <!-- Additional marker indicators -->
-    <circle cx="300" cy="240" r="4" fill="#3498db" opacity="0.6"/>
-    <circle cx="400" cy="260" r="4" fill="#3498db" opacity="0.6"/>
-    <circle cx="480" cy="300" r="4" fill="#3498db" opacity="0.6"/>
-    <circle cx="350" cy="350" r="4" fill="#3498db" opacity="0.6"/>
-  </g>
-
-  <!-- Legend -->
-  <rect x="50" y="470" width="700" height="60" fill="#f8f8f8" stroke="#ddd" stroke-width="1" rx="5"/>
-
-  <circle cx="75" cy="490" r="6" fill="#e74c3c"/>
-  <text x="90" y="495" font-size="13">Los Angeles (13M pop, 85% coverage)</text>
-
-  <circle cx="310" cy="490" r="6" fill="#f39c12"/>
-  <text x="325" y="495" font-size="13">Las Vegas (2.2M pop, 92% coverage)</text>
-
-  <circle cx="545" cy="490" r="6" fill="#2ecc71"/>
-  <text x="560" y="495" font-size="13">New York (20M pop, 78% coverage)</text>
-
-  <text x="75" y="520" font-size="11" fill="#666" font-style="italic">
-    Animation cycles through: National View → LA → NYC → Las Vegas → National View
-  </text>
-</svg>
+<div class="media-center">
+  <div id="us-map-zoom" style="max-width: 800px; margin: 0 auto;"></div>
 </div>
 
 ## Market Strategy
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. The animated map above demonstrates our strategic focus on major metropolitan areas with high population density and strong market potential.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!  
+
+The animated map above demonstrates our strategic focus on major metropolitan areas with high population density and strong market potential.
 
 ### Target Markets Analysis
 
@@ -149,7 +44,11 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 ## Expansion Timeline
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
 
 <div class="media-center">
 <svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
@@ -183,6 +82,140 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 </svg>
 </div>
 
+<script>
+  import { onMount } from 'svelte';
+
+  onMount(() => {
+    async function initUSMapZoom() {
+      if (typeof SVG === 'undefined') {
+        setTimeout(initUSMapZoom, 50);
+        return;
+      }
+
+      const WIDTH = 800;
+      const HEIGHT = 600;
+
+      // Fetch the US SVG
+      const response = await fetch('/images/us.svg');
+      const svgText = await response.text();
+
+      // Create SVG container with transparent background
+      const draw = SVG().addTo('#us-map-zoom').size(WIDTH, HEIGHT);
+
+      // Parse and add the US map SVG
+      const parser = new DOMParser();
+      const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+      const svgElement = svgDoc.documentElement;
+
+      // Extract all state paths and add to SVG.js
+      const states = svgElement.querySelectorAll('path[data-id]');
+      const stateElements = {};
+
+      states.forEach((state) => {
+        const stateId = state.getAttribute('data-id');
+        const pathData = state.getAttribute('d');
+        const statePath = draw.path(pathData)
+          .fill('#e3f2fd')
+          .stroke({ color: '#666', width: 0.3 })
+          .attr({ 'data-state': stateId });
+        stateElements[stateId] = statePath;
+      });
+
+      // Define all state tour stops with viewBox coordinates
+      const allStates = [
+        { viewBox: '0 0 1000 589', state: null, color: null },
+        { viewBox: '50 250 200 200', state: 'CA', color: '#e74c3c' },
+        { viewBox: '50 50 150 150', state: 'WA', color: '#3498db' },
+        { viewBox: '150 150 150 150', state: 'OR', color: '#1abc9c' },
+        { viewBox: '100 100 150 150', state: 'ID', color: '#16a085' },
+        { viewBox: '200 150 150 150', state: 'NV', color: '#e67e22' },
+        { viewBox: '250 250 150 150', state: 'AZ', color: '#d35400' },
+        { viewBox: '350 250 150 150', state: 'NM', color: '#e74c3c' },
+        { viewBox: '300 150 150 150', state: 'CO', color: '#c0392b' },
+        { viewBox: '350 200 150 150', state: 'KS', color: '#f39c12' },
+        { viewBox: '450 200 150 150', state: 'OK', color: '#e67e22' },
+        { viewBox: '450 280 150 150', state: 'TX', color: '#d35400' },
+        { viewBox: '400 100 150 150', state: 'NE', color: '#f1c40f' },
+        { viewBox: '500 150 150 150', state: 'MO', color: '#f39c12' },
+        { viewBox: '550 200 150 150', state: 'AR', color: '#e67e22' },
+        { viewBox: '600 250 150 150', state: 'LA', color: '#d35400' },
+        { viewBox: '700 400 150 150', state: 'FL', color: '#e74c3c' },
+        { viewBox: '650 300 150 150', state: 'GA', color: '#c0392b' },
+        { viewBox: '600 250 150 150', state: 'AL', color: '#e74c3c' },
+        { viewBox: '650 200 150 150', state: 'TN', color: '#d35400' },
+        { viewBox: '700 200 150 150', state: 'NC', color: '#e67e22' },
+        { viewBox: '750 180 120 120', state: 'VA', color: '#c0392b' },
+        { viewBox: '750 180 100 100', state: 'DC', color: '#9b59b6' },
+        { viewBox: '780 150 120 120', state: 'MD', color: '#8e44ad' },
+        { viewBox: '750 100 150 150', state: 'NY', color: '#2ecc71' },
+        { viewBox: '800 80 120 120', state: 'MA', color: '#27ae60' },
+        { viewBox: '650 150 150 150', state: 'OH', color: '#16a085' },
+        { viewBox: '600 100 150 150', state: 'MI', color: '#1abc9c' },
+        { viewBox: '550 100 150 150', state: 'WI', color: '#27ae60' },
+        { viewBox: '500 80 150 150', state: 'MN', color: '#2ecc71' }
+      ];
+
+      // Shuffle and pick random states
+      function getRandomTour() {
+        const nationalView = allStates[0];
+        const stateStops = allStates.slice(1);
+        // Shuffle states
+        for (let i = stateStops.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [stateStops[i], stateStops[j]] = [stateStops[j], stateStops[i]];
+        }
+        // Pick first 8 random states
+        return [nationalView, ...stateStops.slice(0, 8)];
+      }
+
+      let tourStops = getRandomTour();
+      let currentStop = 0;
+
+      function animateTour() {
+        const stop = tourStops[currentStop];
+
+        // Reset all states to default color
+        Object.values(stateElements).forEach((path) => {
+          path.animate(300).fill('#e3f2fd');
+        });
+
+        // Highlight current state
+        if (stop.state && stateElements[stop.state]) {
+          stateElements[stop.state].animate(300).fill(stop.color);
+        }
+
+        // Animate viewBox to zoom
+        const viewBoxValues = stop.viewBox.split(' ').map(Number);
+        draw.animate(800).ease('<>').viewbox(viewBoxValues[0], viewBoxValues[1], viewBoxValues[2], viewBoxValues[3]);
+
+        // Move to next stop after delay
+        setTimeout(() => {
+          currentStop = (currentStop + 1) % tourStops.length;
+          if (currentStop === 0) {
+            // Generate new random tour when we complete a cycle
+            tourStops = getRandomTour();
+          }
+          animateTour();
+        }, 1200);
+      }
+
+      // Start the tour
+      animateTour();
+
+      return () => {
+        draw.remove();
+      };
+    }
+
+    const cleanup = initUSMapZoom();
+    return cleanup;
+  });
+</script>
+
 ## Future Outlook
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
+
+Non nostrum perspiciatis qui quia doloribus ea nostrum optio eum possimus itaque et officia quod. Et sint ratione ut odit vitae non omnis unde ut incidunt voluptatem ad doloremque deserunt. Qui quia consectetur non consequuntur impedit ut voluptas voluptatibus est nisi sunt. Et obcaecati ratione eum exercitationem quidem aut nihil necessitatibus et iusto dignissimos ut aliquam necessitatibus?
+
+Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et beatae quae a aspernatur laboriosam ex minima ipsa et similique vero est architecto doloremque ut nobis itaque!
