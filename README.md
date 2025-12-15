@@ -57,18 +57,40 @@ bun install
 
 ### Development
 
+**Local development with Bun (recommended):**
 ```bash
-bun run dev
+bun run dev:bun
+```
+
+**Or with npm/Node.js:**
+```bash
+npm run dev
 ```
 
 Visit `http://localhost:5173`
 
 ### Building for Production
 
+**Local build with Bun:**
 ```bash
-bun run build
-bun run preview
+bun run build:bun
+bun run preview:bun
 ```
+
+**Or with npm/Node.js:**
+```bash
+npm run build
+npm run preview
+```
+
+### Deploying to Vercel
+
+The project is configured to deploy to Vercel with Node.js 20:
+- `.node-version` file specifies Node 20
+- `vercel.json` configures build settings
+- `package.json` includes engine constraints for Node 18-20
+
+The adapter will automatically use `@sveltejs/adapter-vercel` when deployed to Vercel.
 
 ## 📁 Project Structure
 
@@ -455,4 +477,8 @@ This template is free to use for personal and commercial projects.
 
 ---
 
-**Ready to start?** Run `bun install && bun run dev` and visit `localhost:5173`
+**Ready to start?**
+- With Bun: `bun install && bun run dev:bun`
+- With npm: `npm install && npm run dev`
+
+Visit `localhost:5173`

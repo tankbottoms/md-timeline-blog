@@ -3,10 +3,16 @@
 	"version": "1.0.0",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": ">=18.0.0 <21.0.0"
+	},
 	"scripts": {
-		"dev": "bunx --bun vite dev",
-		"build": "bunx --bun vite build",
-		"preview": "bunx --bun vite preview",
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"dev:bun": "bunx --bun vite dev",
+		"build:bun": "bunx --bun vite build",
+		"preview:bun": "bunx --bun vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
 	},
 	"devDependencies": {
