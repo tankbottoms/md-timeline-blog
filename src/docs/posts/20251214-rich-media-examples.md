@@ -19,7 +19,7 @@ This post demonstrates all the different types of rich content you can embed in 
 ### Centered Image
 
 <div class="media-center">
-<img src="/images/placeholder.svg" alt="Sample centered image" width="600" />
+<img src="/images/placeholder.svg" alt="Centered placeholder" width="600" />
 </div>
 
 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  Lorem ipsum dolor sit amet. Ut suscipit accusantium et facilis odit qui exercitationem numquam sed temporibus unde qui optio quod ea ducimus necessitatibus. Et magnam magni et cumque possimus ea veniam temporibus ex galisum molestiae ea alias earum quo officiis architecto.
@@ -31,7 +31,7 @@ Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et 
 ### Floated Image with Text Wrap
 
 <div class="media-left">
-<img src="/images/placeholder.svg" alt="Sample left-floated image" width="300" />
+<img src="/images/placeholder.svg" alt="Left-floated placeholder" width="300" />
 </div>
 
 <div class="clearfix">
