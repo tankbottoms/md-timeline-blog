@@ -1,0 +1,9 @@
+# Allow all robots to crawl the entire site
+User-agent: *
+Allow: /
+
+# Crawl-delay (optional, removed to allow maximum crawling)
+# Crawl-delay: 0
+
+# Sitemap
+Sitemap: https://md-timeline-blog.vercel.app/sitemap.xml
