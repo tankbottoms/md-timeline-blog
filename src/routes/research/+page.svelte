@@ -35,7 +35,12 @@
 						<div class="timeline-date">{doc.metadata.date ? formatDate(doc.metadata.date) : ''}</div>
 					</div>
 					{#if doc.metadata.blurb}
-						<p class="timeline-blurb">{doc.metadata.blurb}</p>
+						<p class="timeline-blurb">
+							{doc.metadata.blurb}
+							{#if doc.metadata.wordCount && doc.metadata.readingTimeText}
+								<span class="reading-stats"> • {doc.metadata.wordCount.toLocaleString()} words • {doc.metadata.readingTimeText}</span>
+							{/if}
+						</p>
 					{/if}
 				</div>
 			</a>
@@ -167,6 +172,12 @@
 		color: var(--color-text-muted);
 		margin: 0.5rem 0 0 0;
 		line-height: 1.5;
+	}
+
+	.reading-stats {
+		color: var(--color-text-muted);
+		opacity: 0.8;
+		font-size: 0.7rem;
 	}
 
 	@media (max-width: 640px) {

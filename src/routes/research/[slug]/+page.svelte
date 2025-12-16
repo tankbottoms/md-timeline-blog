@@ -31,8 +31,14 @@
 		{#if data.metadata.date}
 			<span class="doc-date">Published: {formatDate(data.metadata.date)}</span>
 		{/if}
+		{#if data.metadata.author}
+			<span class="doc-author">By {data.metadata.author}</span>
+		{/if}
 		{#if data.metadata.filename}
 			<span class="doc-filename">Document: {data.metadata.filename}</span>
+		{/if}
+		{#if data.metadata.wordCount && data.metadata.readingTimeText}
+			<span class="doc-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
 		{/if}
 	</div>
 
@@ -76,7 +82,9 @@
 	}
 
 	.doc-date,
-	.doc-filename {
+	.doc-author,
+	.doc-filename,
+	.doc-stats {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
 	}

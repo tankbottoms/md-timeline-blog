@@ -31,6 +31,12 @@
 		{#if data.metadata.date}
 			<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
 		{/if}
+		{#if data.metadata.author}
+			<span class="post-author">By {data.metadata.author}</span>
+		{/if}
+		{#if data.metadata.wordCount && data.metadata.readingTimeText}
+			<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
+		{/if}
 	</div>
 
 	<div class="post-content prose">
@@ -77,7 +83,9 @@
 		border-bottom: 1px solid var(--color-border);
 	}
 
-	.post-date {
+	.post-date,
+	.post-author,
+	.post-stats {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
 	}
