@@ -2,8 +2,13 @@
 	import '../app.css';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import CookieConsent from '$lib/components/CookieConsent.svelte';
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
 
 	let { children, data } = $props();
+
+	// Inject Vercel Analytics
+	inject({ mode: dev ? 'development' : 'production' });
 </script>
 
 <svelte:head>
