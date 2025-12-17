@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import TRexGame from '$lib/components/TRexGame.svelte';
 </script>
 
 <svelte:head>
@@ -7,7 +8,7 @@
 </svelte:head>
 
 <div class="error-page">
-	<div class="error-container">
+	<div class="error-header">
 		<div class="error-code">{$page.status}</div>
 		<div class="error-message">
 			{#if $page.status === 404}
@@ -21,9 +22,22 @@
 				<p>{$page.error?.message || 'An unexpected error occurred.'}</p>
 			{/if}
 		</div>
+	</div>
+
+	<div class="game-section">
+		<TRexGame />
+	</div>
+
+	<div class="error-footer">
 		<div class="error-actions">
-			<a href="/" class="btn-home">← Go Home</a>
-			<a href="/research" class="btn-research">View Research</a>
+			<a href="/" class="btn-home">
+				<i class="fa-solid fa-home"></i>
+				Go Home
+			</a>
+			<a href="/research" class="btn-research">
+				<i class="fa-solid fa-flask"></i>
+				View Research
+			</a>
 		</div>
 	</div>
 </div>
@@ -31,41 +45,60 @@
 <style>
 	.error-page {
 		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		padding: 2rem 1rem;
 		align-items: center;
-		justify-content: center;
-		min-height: 60vh;
-		padding: 2rem;
 	}
 
-	.error-container {
+	.error-header {
 		text-align: center;
-		max-width: 600px;
-		margin: 0 auto;
+		padding-top: 1rem;
+		margin-bottom: 1rem;
+		flex-shrink: 0;
 	}
 
 	.error-code {
 		font-family: var(--font-serif);
-		font-size: 6rem;
+		font-size: 5rem;
 		font-weight: 700;
 		color: var(--color-text-muted);
 		line-height: 1;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 		opacity: 0.3;
+	}
+
+	.error-message {
+		margin-bottom: 1rem;
 	}
 
 	.error-message h1 {
 		font-family: var(--font-serif);
-		font-size: 2rem;
+		font-size: 1.75rem;
 		font-weight: 600;
 		color: var(--color-text);
-		margin: 0 0 1rem 0;
+		margin: 0 0 0.75rem 0;
 	}
 
 	.error-message p {
-		font-size: 1rem;
+		font-size: 0.95rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
-		margin: 0 0 2rem 0;
+		margin: 0;
+	}
+
+	.game-section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 2rem;
+		width: 100%;
+	}
+
+	.error-footer {
+		text-align: center;
+		padding-bottom: 1rem;
+		flex-shrink: 0;
 	}
 
 	.error-actions {
@@ -77,7 +110,9 @@
 
 	.btn-home,
 	.btn-research {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		padding: 0.75rem 1.5rem;
 		background: var(--color-featured-bg);
 		border: 1px solid var(--color-featured-border);
@@ -87,6 +122,11 @@
 		font-family: var(--font-mono);
 		font-size: 0.875rem;
 		transition: all 0.2s;
+	}
+
+	.btn-home i,
+	.btn-research i {
+		font-size: 1rem;
 	}
 
 	.btn-home:hover,
@@ -103,22 +143,37 @@
 	}
 
 	@media (max-width: 640px) {
+		.error-page {
+			padding: 1rem 0.5rem;
+		}
+
 		.error-code {
-			font-size: 4rem;
+			font-size: 3.5rem;
 		}
 
 		.error-message h1 {
 			font-size: 1.5rem;
 		}
 
+		.error-message p {
+			font-size: 0.875rem;
+		}
+
+		.game-section {
+			margin-bottom: 1.5rem;
+		}
+
 		.error-actions {
 			flex-direction: column;
 			gap: 0.75rem;
+			max-width: 300px;
+			margin: 0 auto;
 		}
 
 		.btn-home,
 		.btn-research {
 			width: 100%;
+			justify-content: center;
 		}
 	}
 </style>
