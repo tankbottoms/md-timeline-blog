@@ -1,25 +1,30 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 
-	let canvas: HTMLCanvasElement;
-	let ctx: CanvasRenderingContext2D;
+	let canvas: HTMLCanvasElement | undefined;
+	let ctx: CanvasRenderingContext2D | null = null;
+	let animationId: number | null = null;
+
 	let gameRunning = $state(false);
 	let gameOver = $state(false);
 	let score = $state(0);
 	let highScore = $state(0);
 
 	// Game constants
-	const GRAVITY = 0.6;
-	const JUMP_STRENGTH = -12;
-	const GROUND_HEIGHT = 20;
-	const GAME_SPEED = 6;
+	const CANVAS_WIDTH = 800;
+	const CANVAS_HEIGHT = 300;
+	const GRAVITY = 0.8;
+	const JUMP_STRENGTH = -15;
+	const GROUND_HEIGHT = 30;
+	const GAME_SPEED = 7;
 
 	// T-Rex
 	let trex = {
-		x: 50,
+		x: 80,
 		y: 0,
-		width: 40,
-		height: 43,
+		width: 44,
+		height: 47,
 		velocityY: 0,
 		jumping: false
 	};
@@ -27,20 +32,26 @@
 	// Obstacles
 	let obstacles: Array<{ x: number; width: number; height: number }> = [];
 	let obstacleTimer = 0;
-	const OBSTACLE_INTERVAL = 100;
+	const OBSTACLE_INTERVAL = 90;
 
-	// Load high score from localStorage
 	onMount(() => {
-		if (typeof window !== 'undefined') {
+		if (!browser) return;
+
+		// Load high score
+		try {
 			const saved = localStorage.getItem('trex_high_score');
 			if (saved) highScore = parseInt(saved);
+		} catch (e) {
+			console.error('Failed to load high score:', e);
 		}
 
 		if (canvas) {
-			ctx = canvas.getContext('2d')!;
-			canvas.width = 600;
-			canvas.height = 200;
-			trex.y = canvas.height - GROUND_HEIGHT - trex.height;
+			ctx = canvas.getContext('2d');
+			if (!ctx) return;
+
+			canvas.width = CANVAS_WIDTH;
+			canvas.height = CANVAS_HEIGHT;
+			trex.y = CANVAS_HEIGHT - GROUND_HEIGHT - trex.height;
 
 			// Draw initial state
 			draw();
@@ -61,7 +72,15 @@
 		};
 
 		window.addEventListener('keydown', handleKeyPress);
-		return () => window.removeEventListener('keydown', handleKeyPress);
+
+		return () => {
+			window.removeEventListener('keydown', handleKeyPress);
+			if (animationId) cancelAnimationFrame(animationId);
+		};
+	});
+
+	onDestroy(() => {
+		if (animationId) cancelAnimationFrame(animationId);
 	});
 
 	function startGame() {
@@ -70,8 +89,9 @@
 		score = 0;
 		obstacles = [];
 		obstacleTimer = 0;
-		trex.y = canvas.height - GROUND_HEIGHT - trex.height;
+		trex.y = CANVAS_HEIGHT - GROUND_HEIGHT - trex.height;
 		trex.velocityY = 0;
+		trex.jumping = false;
 		gameLoop();
 	}
 
@@ -102,7 +122,7 @@
 
 		update();
 		draw();
-		requestAnimationFrame(gameLoop);
+		animationId = requestAnimationFrame(gameLoop);
 	}
 
 	function update() {
@@ -111,7 +131,7 @@
 		trex.y += trex.velocityY;
 
 		// Ground collision
-		const groundY = canvas.height - GROUND_HEIGHT - trex.height;
+		const groundY = CANVAS_HEIGHT - GROUND_HEIGHT - trex.height;
 		if (trex.y >= groundY) {
 			trex.y = groundY;
 			trex.velocityY = 0;
@@ -121,10 +141,10 @@
 		// Update obstacles
 		obstacleTimer++;
 		if (obstacleTimer > OBSTACLE_INTERVAL) {
-			const height = 20 + Math.random() * 30;
+			const height = 30 + Math.random() * 40;
 			obstacles.push({
-				x: canvas.width,
-				width: 20,
+				x: CANVAS_WIDTH,
+				width: 25,
 				height: height
 			});
 			obstacleTimer = 0;
@@ -138,7 +158,7 @@
 			if (
 				trex.x < obstacles[i].x + obstacles[i].width &&
 				trex.x + trex.width > obstacles[i].x &&
-				trex.y + trex.height > canvas.height - GROUND_HEIGHT - obstacles[i].height
+				trex.y + trex.height > CANVAS_HEIGHT - GROUND_HEIGHT - obstacles[i].height
 			) {
 				endGame();
 				return;
@@ -153,67 +173,91 @@
 	}
 
 	function draw() {
-		if (!ctx) return;
+		if (!ctx || !canvas) return;
+
+		// Get computed colors from CSS variables
+		const bgColor = getComputedStyle(canvas).getPropertyValue('--color-bg').trim() || '#ffffff';
+		const textColor = getComputedStyle(canvas).getPropertyValue('--color-text').trim() || '#333333';
+		const mutedColor = getComputedStyle(canvas).getPropertyValue('--color-text-muted').trim() || '#666666';
 
 		// Clear canvas
-		ctx.fillStyle = 'var(--color-bg, #ffffff)';
-		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.fillStyle = bgColor;
+		ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-		// Draw ground
-		ctx.strokeStyle = 'var(--color-text, #333333)';
+		// Draw ground line
+		ctx.strokeStyle = textColor;
 		ctx.lineWidth = 2;
 		ctx.beginPath();
-		ctx.moveTo(0, canvas.height - GROUND_HEIGHT);
-		ctx.lineTo(canvas.width, canvas.height - GROUND_HEIGHT);
+		ctx.moveTo(0, CANVAS_HEIGHT - GROUND_HEIGHT);
+		ctx.lineTo(CANVAS_WIDTH, CANVAS_HEIGHT - GROUND_HEIGHT);
 		ctx.stroke();
 
-		// Draw T-Rex (simple rectangle for now, you can enhance this)
-		ctx.fillStyle = 'var(--color-text, #333333)';
-		ctx.fillRect(trex.x, trex.y, trex.width, trex.height);
+		// Draw ground dots for effect
+		ctx.fillStyle = mutedColor;
+		for (let i = 0; i < CANVAS_WIDTH; i += 20) {
+			ctx.fillRect(i, CANVAS_HEIGHT - GROUND_HEIGHT + 5, 2, 2);
+		}
 
-		// Draw T-Rex eye
-		ctx.fillStyle = 'var(--color-bg, #ffffff)';
-		ctx.fillRect(trex.x + 30, trex.y + 5, 5, 5);
+		// Draw T-Rex
+		ctx.fillStyle = textColor;
+		// Body
+		ctx.fillRect(trex.x, trex.y, trex.width, trex.height);
+		// Eye
+		ctx.fillStyle = bgColor;
+		ctx.fillRect(trex.x + 32, trex.y + 8, 6, 6);
+		// Arm
+		ctx.fillStyle = textColor;
+		ctx.fillRect(trex.x + 10, trex.y + 20, 8, 3);
+		// Legs (animate based on position)
+		const legAnimation = Math.floor(Date.now() / 100) % 2;
+		if (!trex.jumping) {
+			ctx.fillRect(trex.x + 10, trex.y + trex.height, 6, 8 + legAnimation * 2);
+			ctx.fillRect(trex.x + 25, trex.y + trex.height, 6, 8 + (1 - legAnimation) * 2);
+		} else {
+			ctx.fillRect(trex.x + 15, trex.y + trex.height, 8, 4);
+		}
 
 		// Draw obstacles (cacti)
-		ctx.fillStyle = 'var(--color-text, #333333)';
+		ctx.fillStyle = textColor;
 		for (const obstacle of obstacles) {
-			ctx.fillRect(
-				obstacle.x,
-				canvas.height - GROUND_HEIGHT - obstacle.height,
-				obstacle.width,
-				obstacle.height
-			);
+			const obstacleY = CANVAS_HEIGHT - GROUND_HEIGHT - obstacle.height;
+			// Main cactus body
+			ctx.fillRect(obstacle.x, obstacleY, obstacle.width, obstacle.height);
+			// Cactus arms
+			if (obstacle.height > 35) {
+				ctx.fillRect(obstacle.x - 6, obstacleY + 10, 6, 15);
+				ctx.fillRect(obstacle.x + obstacle.width, obstacleY + 15, 6, 12);
+			}
 		}
 
 		// Draw score
-		ctx.font = '16px monospace';
-		ctx.fillStyle = 'var(--color-text-muted, #666666)';
+		ctx.font = '20px monospace';
+		ctx.fillStyle = mutedColor;
 		ctx.textAlign = 'right';
-		ctx.fillText(`Score: ${score}`, canvas.width - 10, 25);
+		ctx.fillText(`Score: ${score}`, CANVAS_WIDTH - 20, 35);
 
 		// Draw high score
 		if (highScore > 0) {
-			ctx.fillText(`High: ${highScore}`, canvas.width - 10, 45);
+			ctx.fillText(`High: ${highScore}`, CANVAS_WIDTH - 20, 60);
 		}
 
 		// Draw start message
 		if (!gameRunning && !gameOver) {
-			ctx.font = '14px monospace';
-			ctx.fillStyle = 'var(--color-text-muted, #666666)';
+			ctx.font = '18px monospace';
+			ctx.fillStyle = mutedColor;
 			ctx.textAlign = 'center';
-			ctx.fillText('Press SPACE or CLICK to start', canvas.width / 2, canvas.height / 2);
+			ctx.fillText('Press SPACE or CLICK to start', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
 		}
 
 		// Draw game over message
 		if (gameOver) {
-			ctx.font = '20px monospace';
-			ctx.fillStyle = 'var(--color-text, #333333)';
+			ctx.font = '32px monospace';
+			ctx.fillStyle = textColor;
 			ctx.textAlign = 'center';
-			ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 20);
-			ctx.font = '14px monospace';
-			ctx.fillStyle = 'var(--color-text-muted, #666666)';
-			ctx.fillText('Press SPACE or CLICK to restart', canvas.width / 2, canvas.height / 2 + 10);
+			ctx.fillText('GAME OVER', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 - 30);
+			ctx.font = '18px monospace';
+			ctx.fillStyle = mutedColor;
+			ctx.fillText('Press SPACE or CLICK to restart', CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2 + 10);
 		}
 	}
 
@@ -224,8 +268,12 @@
 		// Update high score
 		if (score > highScore) {
 			highScore = score;
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('trex_high_score', highScore.toString());
+			if (browser) {
+				try {
+					localStorage.setItem('trex_high_score', highScore.toString());
+				} catch (e) {
+					console.error('Failed to save high score:', e);
+				}
 			}
 		}
 
@@ -233,31 +281,32 @@
 	}
 </script>
 
-<div class="trex-game">
-	<canvas bind:this={canvas} onclick={handleClick}></canvas>
+<div class="trex-game-wrapper">
+	<canvas
+		bind:this={canvas}
+		onclick={handleClick}
+		style="width: 100%; max-width: 800px; height: auto;"
+	></canvas>
 </div>
 
 <style>
-	.trex-game {
+	.trex-game-wrapper {
 		display: flex;
 		justify-content: center;
-		margin: 2rem 0;
+		align-items: center;
+		width: 100%;
+		padding: 0;
+		margin: 0;
 	}
 
 	canvas {
-		border: 2px solid var(--color-border);
-		border-radius: 8px;
 		cursor: pointer;
-		max-width: 100%;
-		height: auto;
-		background: var(--color-bg);
+		display: block;
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
 	}
 
-	canvas:hover {
-		border-color: var(--color-text);
-	}
-
-	@media (max-width: 640px) {
+	@media (max-width: 820px) {
 		canvas {
 			width: 100%;
 		}

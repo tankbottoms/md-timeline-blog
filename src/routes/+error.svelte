@@ -8,7 +8,7 @@
 </svelte:head>
 
 <div class="error-page">
-	<div class="error-container">
+	<div class="error-header">
 		<div class="error-code">{$page.status}</div>
 		<div class="error-message">
 			{#if $page.status === 404}
@@ -22,12 +22,13 @@
 				<p>{$page.error?.message || 'An unexpected error occurred.'}</p>
 			{/if}
 		</div>
+	</div>
 
-		<div class="game-container">
-			<p class="game-intro">While you're here, why not play a game?</p>
-			<TRexGame />
-		</div>
+	<div class="game-section">
+		<TRexGame />
+	</div>
 
+	<div class="error-footer">
 		<div class="error-actions">
 			<a href="/" class="btn-home">
 				<i class="fa-solid fa-home"></i>
@@ -44,57 +45,60 @@
 <style>
 	.error-page {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-height: 60vh;
-		padding: 2rem;
+		flex-direction: column;
+		min-height: 100vh;
+		padding: 2rem 1rem;
+		justify-content: space-between;
 	}
 
-	.error-container {
+	.error-header {
 		text-align: center;
-		max-width: 600px;
-		margin: 0 auto;
+		padding-top: 1rem;
+		flex-shrink: 0;
 	}
 
 	.error-code {
 		font-family: var(--font-serif);
-		font-size: 6rem;
+		font-size: 5rem;
 		font-weight: 700;
 		color: var(--color-text-muted);
 		line-height: 1;
-		margin-bottom: 1rem;
+		margin-bottom: 0.5rem;
 		opacity: 0.3;
+	}
+
+	.error-message {
+		margin-bottom: 1rem;
 	}
 
 	.error-message h1 {
 		font-family: var(--font-serif);
-		font-size: 2rem;
+		font-size: 1.75rem;
 		font-weight: 600;
 		color: var(--color-text);
-		margin: 0 0 1rem 0;
+		margin: 0 0 0.75rem 0;
 	}
 
 	.error-message p {
-		font-size: 1rem;
+		font-size: 0.95rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
-		margin: 0 0 1rem 0;
+		margin: 0;
 	}
 
-	.game-container {
-		margin: 2rem 0;
-		padding: 1.5rem;
-		background: var(--color-featured-bg);
-		border: 1px solid var(--color-featured-border);
-		border-radius: 8px;
+	.game-section {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 300px;
+		padding: 2rem 0;
 	}
 
-	.game-intro {
+	.error-footer {
 		text-align: center;
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		margin: 0 0 1rem 0;
-		font-style: italic;
+		padding-bottom: 1rem;
+		flex-shrink: 0;
 	}
 
 	.error-actions {
@@ -102,7 +106,6 @@
 		gap: 1rem;
 		justify-content: center;
 		flex-wrap: wrap;
-		margin-top: 2rem;
 	}
 
 	.btn-home,
@@ -140,22 +143,32 @@
 	}
 
 	@media (max-width: 640px) {
+		.error-page {
+			padding: 1rem 0.5rem;
+		}
+
 		.error-code {
-			font-size: 4rem;
+			font-size: 3.5rem;
 		}
 
 		.error-message h1 {
 			font-size: 1.5rem;
 		}
 
-		.game-container {
-			padding: 1rem;
-			margin: 1.5rem 0;
+		.error-message p {
+			font-size: 0.875rem;
+		}
+
+		.game-section {
+			min-height: 250px;
+			padding: 1.5rem 0;
 		}
 
 		.error-actions {
 			flex-direction: column;
 			gap: 0.75rem;
+			max-width: 300px;
+			margin: 0 auto;
 		}
 
 		.btn-home,
