@@ -12,6 +12,20 @@
 	let containerRef: HTMLDivElement | undefined;
 	let gameInitialized = false;
 	let keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+	let touchstartHandler: ((e: TouchEvent) => void) | null = null;
+
+	// Function to simulate spacebar press for mobile
+	function simulateSpacePress() {
+		const spaceEvent = new KeyboardEvent('keydown', {
+			keyCode: 32,
+			which: 32,
+			key: ' ',
+			code: 'Space',
+			bubbles: true,
+			cancelable: true
+		});
+		document.dispatchEvent(spaceEvent);
+	}
 
 	onMount(() => {
 		if (!browser) return;
@@ -24,6 +38,17 @@
 			}
 		};
 		window.addEventListener('keydown', keydownHandler, false);
+
+		// Add touch support for mobile devices
+		touchstartHandler = (e: TouchEvent) => {
+			e.preventDefault(); // Prevent scrolling and default touch behavior
+			simulateSpacePress();
+		};
+
+		// Add touch listener after game container is available
+		if (containerRef) {
+			containerRef.addEventListener('touchstart', touchstartHandler, { passive: false });
+		}
 
 		// Load the CSS
 		const link = document.createElement('link');
@@ -52,6 +77,10 @@
 			// Cleanup keyboard handler
 			if (keydownHandler) {
 				window.removeEventListener('keydown', keydownHandler, false);
+			}
+			// Cleanup touch handler
+			if (touchstartHandler && containerRef) {
+				containerRef.removeEventListener('touchstart', touchstartHandler);
 			}
 			// Cleanup styles and scripts
 			if (link.parentNode) {
