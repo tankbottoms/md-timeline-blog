@@ -1,0 +1,65 @@
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+build
+.svelte-kit
+.vercel
+dist
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Development files
+.git
+.gitignore
+.github
+.vscode
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+CLAUDE.md
+*.md
+!src/**/*.md
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+
+# Docker files (no need to copy into the image)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Test files
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+coverage
+.nyc_output
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~

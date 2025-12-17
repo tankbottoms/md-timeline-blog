@@ -2,10 +2,17 @@
 	import '../app.css';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import CookieConsent from '$lib/components/CookieConsent.svelte';
+	import { statistics } from '$lib/stores/statistics';
 	import { dev } from '$app/environment';
 	import { inject } from '@vercel/analytics';
 
 	let { children, data } = $props();
+	let stats = $state($statistics);
+
+	// Subscribe to statistics changes
+	statistics.subscribe((value) => {
+		stats = value;
+	});
 
 	// Inject Vercel Analytics
 	inject({ mode: dev ? 'development' : 'production' });
@@ -13,6 +20,7 @@
 
 <svelte:head>
 	<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2/dist/svg.min.js"></script>
+	<link rel="stylesheet" href="/fontawesome/css/all.min.css" />
 </svelte:head>
 
 <div class="container">
@@ -51,12 +59,14 @@
 	<footer class="footer-wrapper">
 		<div class="footer">
 			<div class="footer-content">
-				<div class="footer-left">
-					<p class="footer-title">My Research Blog</p>
-				</div>
-				<div class="footer-right">
-					<p class="footer-text">Built with SvelteKit and MDsveX</p>
-				</div>
+				<span class="footer-title">My Research Blog</span>
+				<span class="footer-separator">•</span>
+				<span class="footer-views">
+					<i class="fa-solid fa-eye"></i>
+					{stats.totalViews.toLocaleString()} views
+				</span>
+				<span class="footer-separator">•</span>
+				<span class="footer-text">Built with SvelteKit and MDsveX</span>
 			</div>
 		</div>
 	</footer>
@@ -149,33 +159,37 @@
 
 	.footer-content {
 		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		gap: 2rem;
-	}
-
-	.footer-left {
-		flex-shrink: 0;
-	}
-
-	.footer-right {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
+		align-items: center;
 		gap: 0.5rem;
+		flex-wrap: wrap;
 	}
 
 	.footer-title {
 		font-family: var(--font-serif);
 		font-size: 1.125rem;
-		margin: 0;
 		color: var(--color-text);
+	}
+
+	.footer-separator {
+		color: var(--color-text-muted);
+		font-size: 0.875rem;
+	}
+
+	.footer-views {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+	}
+
+	.footer-views i {
+		font-size: 0.875rem;
 	}
 
 	.footer-text {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
-		margin: 0;
 	}
 
 	@media (max-width: 768px) {
@@ -189,11 +203,6 @@
 
 		.nav {
 			flex-wrap: wrap;
-		}
-
-		.footer-content {
-			flex-direction: column;
-			gap: 0.5rem;
 		}
 	}
 </style>
