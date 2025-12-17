@@ -13,6 +13,7 @@
 
 <svelte:head>
 	<script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2/dist/svg.min.js"></script>
+	<link rel="stylesheet" href="/fontawesome/css/all.min.css" />
 </svelte:head>
 
 <div class="container">

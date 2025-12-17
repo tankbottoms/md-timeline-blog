@@ -1,5 +1,19 @@
 <script lang="ts">
+	import { statistics } from '$lib/stores/statistics';
+	import { onMount } from 'svelte';
+
 	let { data } = $props();
+	let stats = $state($statistics);
+
+	// Subscribe to statistics changes
+	statistics.subscribe((value) => {
+		stats = value;
+	});
+
+	// Increment view count when page loads
+	onMount(() => {
+		statistics.incrementViews();
+	});
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
@@ -22,6 +36,14 @@
 			Welcome to my research blog. This is a template for creating simple, timeline-based
 			blog posts in markdown with rich media support including SVG charts, diagrams, audio, video, and a handful of layout options.
 		</p>
+	</div>
+
+	<div class="section-header">
+		<h2 class="section-title">Blog</h2>
+		<div class="view-counter">
+			<i class="fa-solid fa-eye"></i>
+			<span class="view-count">{stats.totalViews.toLocaleString()} views</span>
+		</div>
 	</div>
 
 	<div class="timeline-container">
@@ -64,6 +86,39 @@
 		margin: 0;
 		line-height: 1.6;
 		color: var(--color-text);
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 1.5rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.section-title {
+		font-family: var(--font-serif);
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	.view-counter {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+	}
+
+	.view-counter i {
+		font-size: 1rem;
+	}
+
+	.view-count {
+		font-weight: 500;
 	}
 
 	.timeline-container {
