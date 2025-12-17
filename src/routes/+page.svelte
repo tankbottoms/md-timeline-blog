@@ -38,14 +38,6 @@
 		</p>
 	</div>
 
-	<div class="section-header">
-		<h2 class="section-title">Blog</h2>
-		<div class="view-counter">
-			<i class="fa-solid fa-eye"></i>
-			<span class="view-count">{stats.totalViews.toLocaleString()} views</span>
-		</div>
-	</div>
-
 	<div class="timeline-container">
 	<div class="timeline">
 		{#each data.posts as post, i}
@@ -86,39 +78,6 @@
 		margin: 0;
 		line-height: 1.6;
 		color: var(--color-text);
-	}
-
-	.section-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		margin-bottom: 1.5rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid var(--color-border);
-	}
-
-	.section-title {
-		font-family: var(--font-serif);
-		font-size: 1.5rem;
-		font-weight: 600;
-		margin: 0;
-		color: var(--color-text);
-	}
-
-	.view-counter {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-	}
-
-	.view-counter i {
-		font-size: 1rem;
-	}
-
-	.view-count {
-		font-weight: 500;
 	}
 
 	.timeline-container {

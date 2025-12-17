@@ -35,16 +35,44 @@ ENV HOST=0.0.0.0
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S sveltekit -u 1001
 
-# Copy built application and necessary files
-COPY --from=builder --chown=sveltekit:nodejs /app/build ./build
-COPY --from=builder --chown=sveltekit:nodejs /app/.svelte-kit ./.svelte-kit
-COPY --from=builder --chown=sveltekit:nodejs /app/package.json ./
+# Copy built output from SvelteKit
+COPY --from=builder --chown=sveltekit:nodejs /app/.svelte-kit/output ./.svelte-kit/output
 COPY --from=builder --chown=sveltekit:nodejs /app/node_modules ./node_modules
-COPY --from=builder --chown=sveltekit:nodejs /app/static ./static
-COPY --from=builder --chown=sveltekit:nodejs /app/svelte.config.js ./svelte.config.js
-COPY --from=builder --chown=sveltekit:nodejs /app/remark.config.js ./remark.config.js
-COPY --from=builder --chown=sveltekit:nodejs /app/src ./src
-COPY --from=builder --chown=sveltekit:nodejs /app/vite.config.ts ./vite.config.ts
+
+# Create a simple Bun server to serve the SvelteKit app
+RUN cat > server.js <<'EOF'
+import { Server } from './.svelte-kit/output/server/index.js';
+import { manifest } from './.svelte-kit/output/server/manifest.js';
+
+const server = new Server(manifest);
+await server.init({ env: process.env });
+
+const PORT = process.env.PORT || 4173;
+const HOST = process.env.HOST || '0.0.0.0';
+
+Bun.serve({
+  port: PORT,
+  hostname: HOST,
+  async fetch(request) {
+    // Serve static files from client directory
+    const url = new URL(request.url);
+    const staticFile = Bun.file(`.svelte-kit/output/client${url.pathname}`);
+
+    if (await staticFile.exists()) {
+      return new Response(staticFile);
+    }
+
+    // Otherwise use SvelteKit SSR
+    return await server.respond(request, {
+      getClientAddress: () => request.headers.get('x-forwarded-for') || '127.0.0.1'
+    });
+  }
+});
+
+console.log('Server running on http://' + HOST + ':' + PORT);
+EOF
+
+RUN chown sveltekit:nodejs server.js
 
 # Switch to non-root user
 USER sveltekit
@@ -56,5 +84,5 @@ EXPOSE 4173
 HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
   CMD bun --eval "fetch('http://localhost:4173').then(() => process.exit(0)).catch(() => process.exit(1))"
 
-# Start the preview server with --host flag for external access
-CMD ["bun", "run", "preview", "--host"]
+# Start the Bun server
+CMD ["bun", "run", "server.js"]
