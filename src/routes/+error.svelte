@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import TRexGame from '$lib/components/TRexGame.svelte';
 </script>
 
 <svelte:head>
@@ -21,9 +22,21 @@
 				<p>{$page.error?.message || 'An unexpected error occurred.'}</p>
 			{/if}
 		</div>
+
+		<div class="game-container">
+			<p class="game-intro">While you're here, why not play a game?</p>
+			<TRexGame />
+		</div>
+
 		<div class="error-actions">
-			<a href="/" class="btn-home">← Go Home</a>
-			<a href="/research" class="btn-research">View Research</a>
+			<a href="/" class="btn-home">
+				<i class="fa-solid fa-home"></i>
+				Go Home
+			</a>
+			<a href="/research" class="btn-research">
+				<i class="fa-solid fa-flask"></i>
+				View Research
+			</a>
 		</div>
 	</div>
 </div>
@@ -65,7 +78,23 @@
 		font-size: 1rem;
 		color: var(--color-text-muted);
 		line-height: 1.6;
-		margin: 0 0 2rem 0;
+		margin: 0 0 1rem 0;
+	}
+
+	.game-container {
+		margin: 2rem 0;
+		padding: 1.5rem;
+		background: var(--color-featured-bg);
+		border: 1px solid var(--color-featured-border);
+		border-radius: 8px;
+	}
+
+	.game-intro {
+		text-align: center;
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+		margin: 0 0 1rem 0;
+		font-style: italic;
 	}
 
 	.error-actions {
@@ -73,11 +102,14 @@
 		gap: 1rem;
 		justify-content: center;
 		flex-wrap: wrap;
+		margin-top: 2rem;
 	}
 
 	.btn-home,
 	.btn-research {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		padding: 0.75rem 1.5rem;
 		background: var(--color-featured-bg);
 		border: 1px solid var(--color-featured-border);
@@ -87,6 +119,11 @@
 		font-family: var(--font-mono);
 		font-size: 0.875rem;
 		transition: all 0.2s;
+	}
+
+	.btn-home i,
+	.btn-research i {
+		font-size: 1rem;
 	}
 
 	.btn-home:hover,
@@ -111,6 +148,11 @@
 			font-size: 1.5rem;
 		}
 
+		.game-container {
+			padding: 1rem;
+			margin: 1.5rem 0;
+		}
+
 		.error-actions {
 			flex-direction: column;
 			gap: 0.75rem;
@@ -119,6 +161,7 @@
 		.btn-home,
 		.btn-research {
 			width: 100%;
+			justify-content: center;
 		}
 	}
 </style>
