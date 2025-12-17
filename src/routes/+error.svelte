@@ -48,12 +48,13 @@
 		flex-direction: column;
 		min-height: 100vh;
 		padding: 2rem 1rem;
-		justify-content: space-between;
+		align-items: center;
 	}
 
 	.error-header {
 		text-align: center;
 		padding-top: 1rem;
+		margin-bottom: 1rem;
 		flex-shrink: 0;
 	}
 
@@ -87,12 +88,11 @@
 	}
 
 	.game-section {
-		flex: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 300px;
-		padding: 2rem 0;
+		margin-bottom: 2rem;
+		width: 100%;
 	}
 
 	.error-footer {
@@ -160,8 +160,7 @@
 		}
 
 		.game-section {
-			min-height: 250px;
-			padding: 1.5rem 0;
+			margin-bottom: 1.5rem;
 		}
 
 		.error-actions {
