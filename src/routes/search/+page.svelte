@@ -33,7 +33,7 @@
 		});
 	});
 
-	// Handle search term change
+	// Handle search term change - only on Enter key press
 	function handleSearch() {
 		const term = searchTerm.trim();
 		if (term && filteredContent().length > 0) {
@@ -41,12 +41,12 @@
 		}
 	}
 
-	// Update search on every keystroke
-	$effect(() => {
-		if (searchTerm) {
+	// Handle keyboard events
+	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
 			handleSearch();
 		}
-	});
+	}
 </script>
 
 <svelte:head>
@@ -62,6 +62,7 @@
 			placeholder="Search..."
 			class="search-input"
 			autofocus
+			onkeydown={handleKeydown}
 		/>
 	</div>
 
