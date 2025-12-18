@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { writeFile, appendFile, mkdir } from 'fs/promises';
+import { appendFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 
