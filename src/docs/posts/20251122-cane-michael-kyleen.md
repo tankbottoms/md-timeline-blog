@@ -8,6 +8,9 @@ geometry: 'left=3cm,right=3cm,top=2cm,bottom=2cm'
 output: pdf_document
 ---
 
+> [!IMPORTANT]
+> This analysis was processed and analyzed using Large Language Model (LLM) technology to review tens of thousands of SEC filings. While all efforts were made to provide comprehensive citations to source information and ensure accuracy, there may be unintentional transcription errors. Please submit any factual errors to: kyleenecane@gmail.com
+
 ## Corporate Entity Relationships and Transactions (1998–2014)
 
 This analysis examines corporate entity relationships, ownership structures, and securities transactions documented in SEC filings from 1998 through 2014. The document presents a comprehensive mapping of corporate lineage, identifies a critical name change event affecting key person identification, and provides detailed share distribution records across multiple entities. The analysis draws exclusively from publicly available SEC EDGAR filings and presents factual data without interpretation or conclusions beyond those directly supported by the documentary record.

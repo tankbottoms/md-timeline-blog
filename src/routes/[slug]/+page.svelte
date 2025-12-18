@@ -131,6 +131,13 @@
 	@media (max-width: 768px) {
 		.post {
 			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.post {
+			padding: 1rem 0;
 		}
 	}
 
