@@ -24,10 +24,13 @@
 {#if showModal}
 	<div class="modal-backdrop">
 		<div class="modal">
-			<h2>Cookie Notice</h2>
+			<h2>Privacy & Analytics Notice</h2>
 			<p>
-				This website uses cookies to enhance your browsing experience and remember your
-				preferences. By continuing to use this site, you consent to our use of cookies.
+				This website uses cookies and collects analytics data to enhance your browsing experience.
+				We store your theme preferences locally in your browser. Additionally, we collect access logs
+				including timestamps, IP addresses, user agents, referrer information, and page requests for
+				analytics purposes. This data helps us understand site usage and improve the experience.
+				No personal data is shared with third parties.
 			</p>
 			<button onclick={acceptCookies} class="accept-button">Accept & Continue</button>
 		</div>

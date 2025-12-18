@@ -179,13 +179,29 @@ Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et 
           path.animate(300).fill('#e3f2fd');
         });
 
-        // Highlight current state
+        // Highlight current state and calculate centered viewBox
+        let viewBoxValues;
         if (stop.state && stateElements[stop.state]) {
-          stateElements[stop.state].animate(300).fill(stop.color);
+          const statePath = stateElements[stop.state];
+          statePath.animate(300).fill(stop.color);
+
+          // Get the bounding box of the highlighted state
+          const bbox = statePath.bbox();
+
+          // Add padding around the state (20% of dimensions)
+          const padding = Math.max(bbox.width, bbox.height) * 0.3;
+          const centeredX = bbox.x - padding;
+          const centeredY = bbox.y - padding;
+          const centeredWidth = bbox.width + (padding * 2);
+          const centeredHeight = bbox.height + (padding * 2);
+
+          viewBoxValues = [centeredX, centeredY, centeredWidth, centeredHeight];
+        } else {
+          // Use the predefined viewBox for national view
+          viewBoxValues = stop.viewBox.split(' ').map(Number);
         }
 
-        // Animate viewBox to zoom
-        const viewBoxValues = stop.viewBox.split(' ').map(Number);
+        // Animate viewBox to zoom with proper centering
         draw.animate(800).ease('<>').viewbox(viewBoxValues[0], viewBoxValues[1], viewBoxValues[2], viewBoxValues[3]);
 
         // Move to next stop after delay

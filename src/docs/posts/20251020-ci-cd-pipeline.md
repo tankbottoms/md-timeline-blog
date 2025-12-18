@@ -114,14 +114,22 @@ and CloudFormation at 25%.
         return;
       }
 
-      const WIDTH = 258;
+      // Responsive sizing for mobile
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? Math.min(window.innerWidth - 32, 258) : 258;
       const HEIGHT = 280;
+
+      // Calculate responsive widths based on container size
+      const maxBarWidth = WIDTH - 48; // Leave margins
+      const barHeight = 30;
+      const margin = 20;
+
       const stages = [
-        { name: 'Build: 98.5%', percent: 98.5, width: 207, color: '#4caf50', y: 50 },
-        { name: 'Unit Tests: 94.8%', percent: 94.8, width: 199, color: '#4caf50', y: 90 },
-        { name: 'Integration: 88.2%', percent: 88.2, width: 185, color: '#2ecc71', y: 130 },
-        { name: 'Security: 84.0%', percent: 84.0, width: 176, color: '#f39c12', y: 170 },
-        { name: 'E2E Tests: 75.0%', percent: 75.0, width: 157, color: '#e67e22', y: 210 }
+        { name: 'Build: 98.5%', percent: 98.5, color: '#4caf50', y: 50 },
+        { name: 'Unit Tests: 94.8%', percent: 94.8, color: '#4caf50', y: 90 },
+        { name: 'Integration: 88.2%', percent: 88.2, color: '#2ecc71', y: 130 },
+        { name: 'Security: 84.0%', percent: 84.0, color: '#f39c12', y: 170 },
+        { name: 'E2E Tests: 75.0%', percent: 75.0, color: '#e67e22', y: 210 }
       ];
 
       const draw = SVG().addTo('#pipeline-stages').size(WIDTH, HEIGHT);
@@ -130,17 +138,20 @@ and CloudFormation at 25%.
       draw.text('Stage Success Rates')
         .font({ size: 14, family: 'sans-serif', weight: 'bold' })
         .fill('#333')
-        .center(125, 20);
+        .center(WIDTH / 2, 20);
 
       // Background bars and create animated bars
       const bars = [];
       stages.forEach((stage) => {
         // Background bar
-        draw.rect(210, 30).fill('#e0e0e0').radius(3).move(20, stage.y);
+        draw.rect(maxBarWidth, barHeight).fill('#e0e0e0').radius(3).move(margin, stage.y);
+
+        // Calculate target width based on percentage
+        const targetWidth = (stage.percent / 100) * maxBarWidth;
 
         // Animated bar starting at width 0
-        const bar = draw.rect(0, 30).fill(stage.color).radius(3).move(20, stage.y);
-        bars.push({ bar, targetWidth: stage.width });
+        const bar = draw.rect(0, barHeight).fill(stage.color).radius(3).move(margin, stage.y);
+        bars.push({ bar, targetWidth });
 
         // Text label
         draw.text(stage.name)
@@ -153,7 +164,7 @@ and CloudFormation at 25%.
       draw.text('Overall Pipeline Success: 82%')
         .font({ size: 10 })
         .fill('#666')
-        .center(125, 265);
+        .center(WIDTH / 2, 265);
 
       function animateBars() {
         bars.forEach((item, i) => {
@@ -182,69 +193,87 @@ and CloudFormation at 25%.
         return;
       }
 
-      const WIDTH = 600;
+      // Responsive sizing for mobile
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? window.innerWidth - 32 : 600;
       const HEIGHT = 310;
+
+      // Calculate responsive positions
+      const leftMargin = 50;
+      const rightMargin = 50;
+      const chartWidth = WIDTH - leftMargin - rightMargin;
+      const barWidth = isMobile ? Math.min(chartWidth / 8, 50) : 50;
+      const spacing = chartWidth / 7; // 6 bars = 7 spaces
+
+      // Calculate bar positions dynamically
       const deployments = [
-        { label: 'Q1', value: 24, height: 70, y: 180, color: '#3498db', x: 70 },
-        { label: 'Q2', value: 42, height: 100, y: 150, color: '#3498db', x: 150 },
-        { label: 'Q3', value: 78, height: 140, y: 110, color: '#3498db', x: 230 },
-        { label: 'Q4', value: 96, height: 160, y: 90, color: '#2ecc71', x: 310 },
-        { label: 'Q1', value: 118, height: 175, y: 75, color: '#2ecc71', x: 390 },
-        { label: 'Q2', value: 105, height: 165, y: 85, color: '#2ecc71', x: 470 }
-      ];
+        { label: 'Q1', value: 24, height: 70, color: '#3498db' },
+        { label: 'Q2', value: 42, height: 100, color: '#3498db' },
+        { label: 'Q3', value: 78, height: 140, color: '#3498db' },
+        { label: 'Q4', value: 96, height: 160, color: '#2ecc71' },
+        { label: 'Q1', value: 118, height: 175, color: '#2ecc71' },
+        { label: 'Q2', value: 105, height: 165, color: '#2ecc71' }
+      ].map((dep, i) => ({
+        ...dep,
+        x: leftMargin + (spacing * (i + 0.5)) - (barWidth / 2),
+        y: 250 - dep.height
+      }));
 
       const draw = SVG().addTo('#deployment-frequency').size(WIDTH, HEIGHT);
       draw.rect(WIDTH, HEIGHT).fill('#f8f9fa');
 
       draw.text('Deployment Frequency Trend')
-        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 16, family: 'sans-serif', weight: 'bold' })
         .fill('#111')
-        .center(300, 25);
+        .center(WIDTH / 2, 25);
 
       // Axes
-      draw.line(50, 250, 550, 250).stroke({ color: '#333', width: 2 });
-      draw.line(50, 70, 50, 250).stroke({ color: '#333', width: 2 });
+      const axisRight = WIDTH - rightMargin;
+      draw.line(leftMargin, 250, axisRight, 250).stroke({ color: '#333', width: 2 });
+      draw.line(leftMargin, 70, leftMargin, 250).stroke({ color: '#333', width: 2 });
 
       // Grid lines
       [200, 150, 100].forEach((y) => {
-        draw.line(50, y, 550, y).stroke({ color: '#ddd', width: 1, dasharray: '5,5' });
+        draw.line(leftMargin, y, axisRight, y).stroke({ color: '#ddd', width: 1, dasharray: '5,5' });
       });
 
-      // Y-axis labels
-      draw.text('0').font({ size: 10 }).fill('#333').move(30, 245);
-      draw.text('50').font({ size: 10 }).fill('#333').move(30, 195);
-      draw.text('100').font({ size: 10 }).fill('#333').move(24, 145);
-      draw.text('150').font({ size: 10 }).fill('#333').move(24, 95);
+      // Y-axis labels (right-aligned to axis)
+      const yLabelOffset = isMobile ? 8 : 10;
+      draw.text('0').font({ size: 10 }).fill('#333').move(leftMargin - 15, 245);
+      draw.text('50').font({ size: 10 }).fill('#333').move(leftMargin - 18, 195);
+      draw.text('100').font({ size: 10 }).fill('#333').move(leftMargin - 24, 145);
+      draw.text('150').font({ size: 10 }).fill('#333').move(leftMargin - 24, 95);
 
       // Axis labels
       draw.text('Time Period (Quarters)')
-        .font({ size: 12 })
+        .font({ size: isMobile ? 10 : 12 })
         .fill('#333')
-        .center(300, 290);
+        .center(WIDTH / 2, 290);
 
+      // Y-axis label - positioned further left to match X-axis distance (40px from axis)
       draw.text('Deployments')
-        .font({ size: 12 })
+        .font({ size: isMobile ? 10 : 12 })
         .fill('#333')
-        .move(25, 160)
-        .rotate(-90, 25, 160);
+        .move(10, 160)
+        .rotate(-90, 10, 160);
 
       // Create bars and labels
       const bars = [];
       deployments.forEach((dep) => {
-        const bar = draw.rect(50, 0).fill(dep.color).opacity(0.8).move(dep.x, 250);
+        const bar = draw.rect(barWidth, 0).fill(dep.color).opacity(0.8).move(dep.x, 250);
         bars.push({ bar, targetHeight: dep.height, targetY: dep.y });
 
         // X-axis labels
         draw.text(dep.label)
-          .font({ size: 11 })
+          .font({ size: isMobile ? 9 : 11 })
           .fill('#333')
-          .center(dep.x + 25, 270);
+          .center(dep.x + barWidth / 2, 270);
 
         // Value labels
         draw.text(dep.value.toString())
-          .font({ size: 11, weight: 'bold' })
+          .font({ size: isMobile ? 9 : 11, weight: 'bold' })
           .fill('#333')
-          .center(dep.x + 25, dep.y - 5);
+          .center(dep.x + barWidth / 2, dep.y - 5);
       });
 
       function animateBars() {
