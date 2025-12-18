@@ -8,8 +8,7 @@ geometry: 'left=3cm,right=3cm,top=2cm,bottom=2cm'
 output: pdf_document
 ---
 
-> [!IMPORTANT]
-> This analysis was processed and analyzed using Large Language Model (LLM) technology to review tens of thousands of SEC filings. While all efforts were made to provide comprehensive citations to source information and ensure accuracy, there may be unintentional transcription errors. Please submit any factual errors to: kyleenecane@gmail.com
+> [!IMPORTANT] This analysis was processed and analyzed using Large Language Model (LLM) technology to review tens of thousands of SEC filings. While all efforts were made to provide comprehensive citations to source information and ensure accuracy, there may be unintentional transcription errors. Please submit any factual errors [here](kyleenecane@gmail.com).
 
 ## Corporate Entity Relationships and Transactions (1998–2014)
 
