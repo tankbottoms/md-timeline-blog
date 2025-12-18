@@ -222,19 +222,7 @@
 
 	@media (max-width: 640px) {
 		.trex-wrapper {
-			padding: 1rem;
-		}
-
-		.trex-game-container {
-			min-height: 100px; /* GAME SIZE: Mobile height */
-		}
-
-		:global(.offline .runner-container) {
-			height: 100px !important; /* GAME SIZE: Mobile height */
-		}
-
-		:global(.offline .runner-canvas) {
-			height: 100px !important; /* GAME SIZE: Mobile height */
+			display: none; /* Hide game on mobile - rendering issues */
 		}
 	}
 </style>

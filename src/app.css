@@ -162,6 +162,31 @@ pre code {
 	color: var(--color-code-text);
 }
 
+/* Fixed code blocks for mobile - centered with horizontal scroll */
+.code-block-fixed {
+	width: 100%;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+}
+
+.code-block-fixed pre {
+	margin: 0;
+	width: fit-content;
+	min-width: 100%;
+}
+
+@media (max-width: 640px) {
+	.code-block-fixed {
+		margin: 1.5rem -1rem; /* Extend to screen edges */
+		padding: 0 1rem;
+	}
+
+	.code-block-fixed pre {
+		margin: 0 auto; /* Center the code block */
+		display: block;
+	}
+}
+
 a {
 	color: var(--color-link);
 	text-decoration: underline;
