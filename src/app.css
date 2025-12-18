@@ -118,6 +118,44 @@ body {
 	clear: both;
 }
 
+/* Mobile responsive fixes for SVGs and media */
+@media (max-width: 640px) {
+	/* Ensure all SVG containers are responsive */
+	svg {
+		max-width: 100% !important;
+		height: auto !important;
+		width: 100% !important;
+	}
+
+	/* Center SVG containers */
+	div[id*='-chart'],
+	div[id*='-bars'],
+	div[id*='Chart'],
+	div[id*='chart'] {
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow-x: auto;
+	}
+
+	/* Audio and video players */
+	audio,
+	video {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	/* Media center elements on mobile */
+	.media-center {
+		padding: 0 !important;
+		margin: 1rem auto !important;
+	}
+
+	.media-center > div {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 600;
