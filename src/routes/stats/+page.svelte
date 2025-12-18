@@ -182,8 +182,7 @@
 					.fill(colors[i % colors.length])
 					.opacity(0.9)
 					.attr({ cursor: 'pointer' })
-					.transform({ origin: [centerX, centerY] });
-
+	
 				// Create tooltip
 				const tooltip = draw
 					.group()
@@ -208,24 +207,17 @@
 					.fill('var(--color-text-muted)')
 					.move(10, 30);
 
-				// Store original state
-				let isHovered = false;
-
 				// Hover effects
 				segment.mouseover(function (event) {
-					if (!isHovered) {
-						isHovered = true;
-						this.animate(200).ease('<>').opacity(1).scale(1.05);
-						tooltip.opacity(1);
-					}
+					this.animate(200).ease('<>').opacity(1);
+					tooltip.opacity(1);
 					const mouseX = event.clientX - container.getBoundingClientRect().left;
 					const mouseY = event.clientY - container.getBoundingClientRect().top;
 					tooltip.move(mouseX + 10, mouseY - 30);
 				});
 
 				segment.mouseout(function () {
-					isHovered = false;
-					this.animate(200).ease('<>').opacity(0.9).scale(1.0);
+					this.animate(200).ease('<>').opacity(0.9);
 					tooltip.opacity(0);
 				});
 

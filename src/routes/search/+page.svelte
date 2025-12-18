@@ -61,7 +61,6 @@
 			bind:value={searchTerm}
 			placeholder="Search..."
 			class="search-input"
-			autofocus
 			onkeydown={handleKeydown}
 		/>
 	</div>
