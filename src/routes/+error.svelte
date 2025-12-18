@@ -56,6 +56,8 @@
 		padding-top: 1rem;
 		margin-bottom: 1rem;
 		flex-shrink: 0;
+		width: 100%;
+		max-width: 600px;
 	}
 
 	.error-code {
@@ -99,6 +101,8 @@
 		text-align: center;
 		padding-bottom: 1rem;
 		flex-shrink: 0;
+		width: 100%;
+		max-width: 600px;
 	}
 
 	.error-actions {

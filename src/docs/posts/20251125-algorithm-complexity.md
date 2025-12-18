@@ -52,11 +52,12 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         return;
       }
 
-      const WIDTH = 600;
-      const HEIGHT = 450;
-      const centerX = 300;
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? Math.min(window.innerWidth - 32, 600) : 600;
+      const HEIGHT = 480; // Increased to prevent legend clipping
+      const centerX = WIDTH / 2;
       const centerY = 200;
-      const radius = 120;
+      const radius = isMobile ? 100 : 120;
 
       const segments = [
         { percent: 30, color: '#4a90e2', label: 'Engineering (30%)' },
@@ -93,13 +94,20 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
       draw.text('Total').font({ size: 14, weight: 'bold' }).fill('#333').center(centerX, centerY - 10);
       draw.text('$10M').font({ size: 16, weight: 'bold' }).fill('#111').center(centerX, centerY + 10);
 
-      // Legend
-      draw.rect(500, 70).fill('#f8f8f8').stroke({ color: '#ddd', width: 1 }).radius(5).move(50, 360);
+      // Legend - responsive layout
+      const legendY = 360;
+      const legendWidth = isMobile ? WIDTH - 40 : Math.min(500, WIDTH - 100);
+      const legendX = (WIDTH - legendWidth) / 2;
+
+      draw.rect(legendWidth, 70).fill('#f8f8f8').stroke({ color: '#ddd', width: 1 }).radius(5).move(legendX, legendY);
+
       segments.forEach((seg, i) => {
-        const x = i % 2 === 0 ? 70 : 310;
-        const y = 375 + Math.floor(i / 2) * 25;
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = legendX + 20 + col * (legendWidth / 2);
+        const y = legendY + 15 + row * 25;
         draw.rect(18, 18).fill(seg.color).move(x, y);
-        draw.text(seg.label).font({ size: 12, weight: '600' }).fill('#333').move(x + 25, y + 4);
+        draw.text(seg.label).font({ size: isMobile ? 10 : 12, weight: '600' }).fill('#333').move(x + 25, y + 4);
       });
 
       function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -152,13 +160,17 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         return;
       }
 
-      const WIDTH = 600;
-      const HEIGHT = 250;
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? window.innerWidth - 32 : 600; // Responsive width
+      const HEIGHT = 280; // Increased to prevent label clipping
+      const barWidth = isMobile ? 60 : 100;
+      const spacing = isMobile ? (WIDTH - 80) / 3 : 130;
+
       const depts = [
-        { name: 'Engineering', value: 45, color: '#4a90e2', x: 50 },
-        { name: 'Product', value: 32, color: '#e74c3c', x: 180 },
-        { name: 'Operations', value: 25, color: '#2ecc71', x: 310 },
-        { name: 'Marketing', value: 18, color: '#f39c12', x: 440 }
+        { name: 'Engineering', value: 45, color: '#4a90e2', x: 40 },
+        { name: 'Product', value: 32, color: '#e74c3c', x: 40 + spacing },
+        { name: 'Operations', value: 25, color: '#2ecc71', x: 40 + spacing * 2 },
+        { name: 'Marketing', value: 18, color: '#f39c12', x: 40 + spacing * 3 }
       ];
 
       const draw = SVG().addTo('#dept-bars').size(WIDTH, HEIGHT);
@@ -170,22 +182,23 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         .center(300, 20);
 
       // Baseline
-      draw.line(40, 220, 550, 220).stroke({ color: '#ddd', width: 2 });
+      const baseline = HEIGHT - 60;
+      draw.line(30, baseline, WIDTH - 30, baseline).stroke({ color: '#ddd', width: 2 });
 
       const bars = [];
       depts.forEach((dept) => {
         const maxHeight = 140;
         const barHeight = (dept.value / 45) * maxHeight;
-        const y = 220 - barHeight;
+        const y = baseline - barHeight;
 
-        const bar = draw.rect(100, 0).fill(dept.color).radius(4).move(dept.x, 220);
-        bars.push({ bar, targetHeight: barHeight, targetY: y });
+        const bar = draw.rect(barWidth, 0).fill(dept.color).radius(4).move(dept.x, baseline);
+        bars.push({ bar, targetHeight: barHeight, targetY: y, baseline });
 
-        draw.text(dept.name).font({ size: 12, weight: '600' }).fill('#333').center(dept.x + 50, 235);
+        draw.text(dept.name).font({ size: isMobile ? 10 : 12, weight: '600' }).fill('#333').center(dept.x + barWidth / 2, HEIGHT - 45);
         draw.text(dept.value.toString())
-          .font({ size: 20, weight: 'bold' })
+          .font({ size: isMobile ? 16 : 20, weight: 'bold' })
           .fill('white')
-          .center(dept.x + 50, y + barHeight / 2);
+          .center(dept.x + barWidth / 2, y + barHeight / 2);
       });
 
       function animateBars() {
@@ -194,7 +207,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
             if (i === bars.length - 1) {
               setTimeout(() => {
                 bars.forEach((b) => {
-                  b.bar.animate(500).attr({ height: 0, y: 220 });
+                  b.bar.animate(500).attr({ height: 0, y: b.baseline });
                 });
                 setTimeout(animateBars, 1000);
               }, 2000);

@@ -12,6 +12,20 @@
 	let containerRef: HTMLDivElement | undefined;
 	let gameInitialized = false;
 	let keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+	let touchstartHandler: ((e: TouchEvent) => void) | null = null;
+
+	// Function to simulate spacebar press for mobile
+	function simulateSpacePress() {
+		const spaceEvent = new KeyboardEvent('keydown', {
+			keyCode: 32,
+			which: 32,
+			key: ' ',
+			code: 'Space',
+			bubbles: true,
+			cancelable: true
+		});
+		document.dispatchEvent(spaceEvent);
+	}
 
 	onMount(() => {
 		if (!browser) return;
@@ -24,6 +38,17 @@
 			}
 		};
 		window.addEventListener('keydown', keydownHandler, false);
+
+		// Add touch support for mobile devices
+		touchstartHandler = (e: TouchEvent) => {
+			e.preventDefault(); // Prevent scrolling and default touch behavior
+			simulateSpacePress();
+		};
+
+		// Add touch listener after game container is available
+		if (containerRef) {
+			containerRef.addEventListener('touchstart', touchstartHandler, { passive: false });
+		}
 
 		// Load the CSS
 		const link = document.createElement('link');
@@ -52,6 +77,10 @@
 			// Cleanup keyboard handler
 			if (keydownHandler) {
 				window.removeEventListener('keydown', keydownHandler, false);
+			}
+			// Cleanup touch handler
+			if (touchstartHandler && containerRef) {
+				containerRef.removeEventListener('touchstart', touchstartHandler);
 			}
 			// Cleanup styles and scripts
 			if (link.parentNode) {
@@ -117,7 +146,7 @@
 <style>
 	.trex-wrapper {
 		width: 100%;
-		max-width: 1200px;
+		max-width: 600px; /* GAME SIZE: Desktop max width */
 		margin: 0 auto;
 		padding: 1.5rem;
 		display: flex;
@@ -135,8 +164,8 @@
 	.trex-game-container {
 		position: relative;
 		width: 100%;
-		max-width: 1200px;
-		min-height: 300px;
+		max-width: 600px; /* GAME SIZE: Desktop max width */
+		min-height: 150px; /* GAME SIZE: Desktop height */
 	}
 
 	/* Override Chrome's default game styles and prevent arcade mode zoom */
@@ -152,7 +181,7 @@
 		left: 0 !important;
 		width: 100% !important;
 		max-width: 100% !important;
-		height: 300px !important;
+		height: 150px !important; /* GAME SIZE: Desktop height */
 		overflow: visible !important;
 		margin: 0 auto !important;
 		transform: none !important;
@@ -161,9 +190,9 @@
 
 	:global(.offline .runner-canvas) {
 		position: relative !important;
-		height: 300px !important;
+		height: 150px !important; /* GAME SIZE: Desktop height */
 		width: 100% !important;
-		max-width: 1200px !important;
+		max-width: 600px !important; /* GAME SIZE: Desktop max width */
 		margin: 0 auto !important;
 		display: block !important;
 	}
@@ -193,19 +222,7 @@
 
 	@media (max-width: 640px) {
 		.trex-wrapper {
-			padding: 1rem;
-		}
-
-		.trex-game-container {
-			min-height: 200px;
-		}
-
-		:global(.offline .runner-container) {
-			height: 200px !important;
-		}
-
-		:global(.offline .runner-canvas) {
-			height: 200px !important;
+			display: none; /* Hide game on mobile - rendering issues */
 		}
 	}
 </style>
