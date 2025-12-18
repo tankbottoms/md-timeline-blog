@@ -52,11 +52,13 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         return;
       }
 
-      const WIDTH = 600;
+      // Responsive sizing
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? Math.min(window.innerWidth - 32, 600) : 600;
       const HEIGHT = 450;
-      const centerX = 300;
+      const centerX = WIDTH / 2;
       const centerY = 200;
-      const radius = 120;
+      const radius = isMobile ? 100 : 120;
 
       const segments = [
         { percent: 30, color: '#4a90e2', label: 'Engineering (30%)' },
@@ -69,7 +71,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
       draw.rect(WIDTH, HEIGHT).fill('#fafafa');
 
       draw.text('Budget Distribution by Department (Q4)')
-        .font({ size: 18, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 18, family: 'sans-serif', weight: 'bold' })
         .fill('#333')
         .center(centerX, 20);
 
@@ -93,13 +95,15 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
       draw.text('Total').font({ size: 14, weight: 'bold' }).fill('#333').center(centerX, centerY - 10);
       draw.text('$10M').font({ size: 16, weight: 'bold' }).fill('#111').center(centerX, centerY + 10);
 
-      // Legend
-      draw.rect(500, 70).fill('#f8f8f8').stroke({ color: '#ddd', width: 1 }).radius(5).move(50, 360);
+      // Legend - responsive layout
+      const legendWidth = isMobile ? WIDTH - 40 : Math.min(500, WIDTH - 100);
+      const legendX = (WIDTH - legendWidth) / 2;
+      draw.rect(legendWidth, 70).fill('#f8f8f8').stroke({ color: '#ddd', width: 1 }).radius(5).move(legendX, 360);
       segments.forEach((seg, i) => {
-        const x = i % 2 === 0 ? 70 : 310;
+        const x = i % 2 === 0 ? legendX + 20 : legendX + legendWidth / 2 + 10;
         const y = 375 + Math.floor(i / 2) * 25;
         draw.rect(18, 18).fill(seg.color).move(x, y);
-        draw.text(seg.label).font({ size: 12, weight: '600' }).fill('#333').move(x + 25, y + 4);
+        draw.text(seg.label).font({ size: isMobile ? 10 : 12, weight: '600' }).fill('#333').move(x + 25, y + 4);
       });
 
       function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
@@ -152,40 +156,52 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
         return;
       }
 
-      const WIDTH = 600;
+      // Responsive sizing
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? window.innerWidth - 32 : 600;
       const HEIGHT = 250;
+
+      // Calculate responsive bar positions
+      const leftMargin = 40;
+      const rightMargin = 40;
+      const chartWidth = WIDTH - leftMargin - rightMargin;
+      const barWidth = isMobile ? Math.min((chartWidth / 5), 80) : 100;
+      const barSpacing = chartWidth / 5;
+
       const depts = [
-        { name: 'Engineering', value: 45, color: '#4a90e2', x: 50 },
-        { name: 'Product', value: 32, color: '#e74c3c', x: 180 },
-        { name: 'Operations', value: 25, color: '#2ecc71', x: 310 },
-        { name: 'Marketing', value: 18, color: '#f39c12', x: 440 }
+        { name: 'Engineering', value: 45, color: '#4a90e2' },
+        { name: 'Product', value: 32, color: '#e74c3c' },
+        { name: 'Operations', value: 25, color: '#2ecc71' },
+        { name: 'Marketing', value: 18, color: '#f39c12' }
       ];
 
       const draw = SVG().addTo('#dept-bars').size(WIDTH, HEIGHT);
       draw.rect(WIDTH, HEIGHT).fill('#fafafa');
 
       draw.text('Average Team Sizes by Department')
-        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 16, family: 'sans-serif', weight: 'bold' })
         .fill('#333')
-        .center(300, 20);
+        .center(WIDTH / 2, 20);
 
       // Baseline
-      draw.line(40, 220, 550, 220).stroke({ color: '#ddd', width: 2 });
+      const baselineRight = WIDTH - rightMargin;
+      draw.line(leftMargin, 220, baselineRight, 220).stroke({ color: '#ddd', width: 2 });
 
       const bars = [];
-      depts.forEach((dept) => {
+      depts.forEach((dept, i) => {
+        const x = leftMargin + (barSpacing * (i + 0.5)) - (barWidth / 2);
         const maxHeight = 140;
         const barHeight = (dept.value / 45) * maxHeight;
         const y = 220 - barHeight;
 
-        const bar = draw.rect(100, 0).fill(dept.color).radius(4).move(dept.x, 220);
+        const bar = draw.rect(barWidth, 0).fill(dept.color).radius(4).move(x, 220);
         bars.push({ bar, targetHeight: barHeight, targetY: y });
 
-        draw.text(dept.name).font({ size: 12, weight: '600' }).fill('#333').center(dept.x + 50, 235);
+        draw.text(dept.name).font({ size: isMobile ? 10 : 12, weight: '600' }).fill('#333').center(x + barWidth / 2, 235);
         draw.text(dept.value.toString())
-          .font({ size: 20, weight: 'bold' })
+          .font({ size: isMobile ? 16 : 20, weight: 'bold' })
           .fill('white')
-          .center(dept.x + 50, y + barHeight / 2);
+          .center(x + barWidth / 2, y + barHeight / 2);
       });
 
       function animateBars() {

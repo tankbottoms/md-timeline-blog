@@ -146,8 +146,27 @@ async function readLogFiles(): Promise<AccessLog[]> {
 
 // Aggregate analytics data
 async function aggregateAnalytics(logs: AccessLog[]): Promise<AnalyticsData> {
-	// Filter out /stats requests to avoid tracking the analytics page itself
-	const filteredLogs = logs.filter((log) => !log.path.startsWith('/stats'));
+	// Filter out /stats requests and asset requests
+	const filteredLogs = logs.filter((log) => {
+		// Exclude analytics page
+		if (log.path.startsWith('/stats')) return false;
+
+		// Exclude common assets
+		const assetPatterns = [
+			'/apple-touch-icon',
+			'/favicon',
+			'/robots.txt',
+			'/sitemap.xml',
+			'/_app/',
+			'/.well-known/',
+			'/images/',
+			'/audio/',
+			'/video/',
+			'/pdfs/'
+		];
+
+		return !assetPatterns.some(pattern => log.path.startsWith(pattern));
+	});
 
 	// Total views
 	const totalViews = filteredLogs.length;
