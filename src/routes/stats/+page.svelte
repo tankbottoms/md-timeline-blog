@@ -41,13 +41,6 @@
 			const draw = SVG().addTo('#timeseries-chart').size(WIDTH, HEIGHT);
 			draw.rect(WIDTH, HEIGHT).fill('var(--color-bg-secondary)');
 
-			// Title
-			draw
-				.text('Page Views Over Time')
-				.font({ size: 16, family: 'var(--font-mono)', weight: 'bold' })
-				.fill('var(--color-text)')
-				.move(MARGIN.left, 15);
-
 			// Calculate scales
 			const maxViews = Math.max(...analytics.timeSeries.map((d) => d.views));
 			const xStep = chartWidth / (analytics.timeSeries.length - 1 || 1);
@@ -117,7 +110,7 @@
 			});
 		}
 
-		// Initialize top pages bar chart
+		// Initialize top pages donut chart
 		function initTopPagesChart() {
 			if (typeof SVG === 'undefined') {
 				setTimeout(initTopPagesChart, 50);
@@ -128,49 +121,126 @@
 			if (!container || analytics.topPages.length === 0) return;
 
 			const isMobile = window.innerWidth < 640;
-			const WIDTH = isMobile ? window.innerWidth - 32 : 600;
-			const HEIGHT = 50 + analytics.topPages.slice(0, 5).length * 50;
+			const SIZE = isMobile ? Math.min(window.innerWidth - 32, 400) : 400;
+			const centerX = SIZE / 2;
+			const centerY = SIZE / 2;
+			const radius = SIZE / 3;
+			const innerRadius = radius * 0.5;
 
-			const draw = SVG().addTo('#toppages-chart').size(WIDTH, HEIGHT);
-			draw.rect(WIDTH, HEIGHT).fill('var(--color-bg-secondary)');
+			const draw = SVG().addTo('#toppages-chart').size(SIZE, SIZE);
 
-			const maxViews = Math.max(...analytics.topPages.map((p) => p.views));
-			const barMaxWidth = WIDTH - 180;
+			// Calculate total views and angles
+			const topPages = analytics.topPages.slice(0, 8);
+			const totalViews = topPages.reduce((sum, page) => sum + page.views, 0);
 
-			analytics.topPages.slice(0, 5).forEach((page, i) => {
-				const y = 30 + i * 50;
-				const barWidth = (page.views / maxViews) * barMaxWidth;
+			// Color palette
+			const colors = [
+				'#3498db',
+				'#2ecc71',
+				'#e74c3c',
+				'#f39c12',
+				'#9b59b6',
+				'#1abc9c',
+				'#e67e22',
+				'#34495e'
+			];
 
-				// Background bar
-				draw
-					.rect(barMaxWidth, 30)
-					.fill('var(--color-hover-bg)')
-					.radius(3)
-					.move(150, y);
+			let currentAngle = -90;
 
-				// Actual bar
-				draw
-					.rect(barWidth, 30)
-					.fill('var(--color-link)')
-					.opacity(0.8)
-					.radius(3)
-					.move(150, y);
+			// Draw donut segments
+			topPages.forEach((page, i) => {
+				const percentage = (page.views / totalViews) * 100;
+				const angle = (page.views / totalViews) * 360;
+				const endAngle = currentAngle + angle;
 
-				// Path label
-				const pathText = page.path === '/' ? 'Home' : page.path;
-				draw
-					.text(pathText.substring(0, 20))
-					.font({ size: 12, family: 'var(--font-mono)' })
-					.fill('var(--color-text)')
-					.move(10, y + 9);
+				// Create donut segment path
+				const startRad = (currentAngle * Math.PI) / 180;
+				const endRad = (endAngle * Math.PI) / 180;
 
-				// Views count
-				draw
-					.text(formatNumber(page.views))
+				const x1 = centerX + radius * Math.cos(startRad);
+				const y1 = centerY + radius * Math.sin(startRad);
+				const x2 = centerX + radius * Math.cos(endRad);
+				const y2 = centerY + radius * Math.sin(endRad);
+
+				const x3 = centerX + innerRadius * Math.cos(endRad);
+				const y3 = centerY + innerRadius * Math.sin(endRad);
+				const x4 = centerX + innerRadius * Math.cos(startRad);
+				const y4 = centerY + innerRadius * Math.sin(startRad);
+
+				const largeArc = angle > 180 ? 1 : 0;
+
+				const pathData = [
+					`M ${x1} ${y1}`,
+					`A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2}`,
+					`L ${x3} ${y3}`,
+					`A ${innerRadius} ${innerRadius} 0 ${largeArc} 0 ${x4} ${y4}`,
+					'Z'
+				].join(' ');
+
+				const segment = draw
+					.path(pathData)
+					.fill(colors[i % colors.length])
+					.opacity(0.9)
+					.attr({ cursor: 'pointer' });
+
+				// Create tooltip
+				const tooltip = draw
+					.group()
+					.opacity(0)
+					.attr({ 'pointer-events': 'none' });
+
+				const tooltipBg = tooltip
+					.rect(200, 60)
+					.fill('var(--color-bg)')
+					.stroke({ color: 'var(--color-border)', width: 2 })
+					.radius(4);
+
+				const tooltipTitle = tooltip
+					.text(page.title)
 					.font({ size: 12, family: 'var(--font-mono)', weight: 'bold' })
 					.fill('var(--color-text)')
-					.move(WIDTH - 60, y + 9);
+					.move(10, 10);
+
+				const tooltipViews = tooltip
+					.text(`${formatNumber(page.views)} views (${percentage.toFixed(1)}%)`)
+					.font({ size: 11, family: 'var(--font-mono)' })
+					.fill('var(--color-text-muted)')
+					.move(10, 30);
+
+				// Hover effects
+				segment.mouseover(function (event) {
+					this.animate(200).opacity(1).scale(1.05, centerX, centerY);
+					tooltip.opacity(1);
+					const mouseX = event.clientX - container.getBoundingClientRect().left;
+					const mouseY = event.clientY - container.getBoundingClientRect().top;
+					tooltip.move(mouseX + 10, mouseY - 30);
+				});
+
+				segment.mouseout(function () {
+					this.animate(200).opacity(0.9).scale(1, centerX, centerY);
+					tooltip.opacity(0);
+				});
+
+				// Click to navigate
+				segment.click(function () {
+					window.location.href = page.path;
+				});
+
+				currentAngle = endAngle;
 			});
+
+			// Center text showing total
+			draw
+				.text(formatNumber(totalViews))
+				.font({ size: isMobile ? 24 : 32, family: 'var(--font-mono)', weight: 'bold' })
+				.fill('var(--color-text)')
+				.center(centerX, centerY - 10);
+
+			draw
+				.text('Total Views')
+				.font({ size: isMobile ? 10 : 12, family: 'var(--font-mono)' })
+				.fill('var(--color-text-muted)')
+				.center(centerX, centerY + 20);
 		}
 
 		initTimeSeriesChart();
@@ -193,7 +263,7 @@
 <div class="stats-page">
 	<div class="page-header">
 		<h1>Site Analytics</h1>
-		<p class="subtitle">Privacy-focused analytics dashboard</p>
+		<p class="subtitle">Public transparent analytics dashboard</p>
 	</div>
 
 	<!-- Key Metrics -->
@@ -220,16 +290,17 @@
 	</div>
 
 	<!-- Time Series Chart -->
-	<div class="chart-section">
-		<div id="timeseries-chart" class="chart-container"></div>
+	<div class="section">
+		<h2>Page Views Over Time</h2>
+		<div id="timeseries-chart" class="chart-container-inner"></div>
 	</div>
 
 	<!-- Two Column Layout -->
 	<div class="two-column">
 		<!-- Top Pages -->
-		<div class="section">
+		<div class="section donut-section">
 			<h2>Top Pages</h2>
-			<div id="toppages-chart" class="chart-container"></div>
+			<div id="toppages-chart" class="chart-container-donut"></div>
 		</div>
 
 		<!-- Top Referrers -->
@@ -333,19 +404,29 @@
 		font-size: 2rem;
 		font-weight: 700;
 		color: var(--color-text);
+		text-align: center;
 	}
 
-	/* Chart Section */
-	.chart-section {
-		margin-bottom: 2rem;
-	}
-
-	.chart-container {
-		background: var(--color-bg-secondary);
-		border: 1px solid var(--color-border);
-		border-radius: 8px;
-		padding: 1rem;
+	/* Chart Containers */
+	.chart-container-inner {
 		overflow-x: auto;
+		padding: 1rem 0;
+		display: flex;
+		justify-content: center;
+	}
+
+	.chart-container-donut {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 1rem;
+		min-height: 400px;
+	}
+
+	.donut-section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	/* Two Column Layout */
@@ -454,6 +535,20 @@
 
 		.two-column {
 			grid-template-columns: 1fr;
+		}
+
+		.chart-container-inner,
+		.chart-container-donut {
+			padding: 0.5rem;
+			max-width: 100%;
+		}
+
+		.chart-container-donut {
+			min-height: 300px;
+		}
+
+		.section {
+			padding: 1rem;
 		}
 	}
 </style>
