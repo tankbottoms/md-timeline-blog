@@ -26,8 +26,18 @@ Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et 
         return;
       }
 
-      const WIDTH = 700;
+      // Responsive sizing
+      const isMobile = window.innerWidth < 640;
+      const WIDTH = isMobile ? window.innerWidth - 32 : 700;
       const HEIGHT = 420;
+
+      // Calculate responsive positions
+      const leftMargin = isMobile ? 60 : 80;
+      const rightMargin = isMobile ? 20 : 80;
+      const chartWidth = WIDTH - leftMargin - rightMargin;
+      const barWidth = isMobile ? Math.min((chartWidth / 5), 60) : 80;
+      const barSpacing = chartWidth / 5;
+
       const barData = [
         { label: 'Q1 2024', values: [60, 120, 180, 240], color: '#4a90e2' },
         { label: 'Q2 2024', values: [80, 140, 200, 280], color: '#e74c3c' },
@@ -39,45 +49,46 @@ Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et 
       draw.rect(WIDTH, HEIGHT).fill('#f8f9fa');
 
       draw.text('Quarterly Growth Metrics (Q1 2024 - Q4 2024)')
-        .font({ size: 18, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 18, family: 'sans-serif', weight: 'bold' })
         .fill('#111')
-        .center(350, 20);
+        .center(WIDTH / 2, 20);
 
       // Grid lines
+      const gridRight = WIDTH - rightMargin;
       [350, 290, 230, 170, 110, 50].forEach((y, i) => {
-        draw.line(80, y, 620, y)
+        draw.line(leftMargin, y, gridRight, y)
           .stroke({ color: '#e5e5e5', width: i === 0 ? 2 : 1, dasharray: i === 0 ? '0' : '5,5' })
           .opacity(i === 0 ? 1 : 0.5);
       });
 
       // Y-axis
-      draw.line(80, 50, 80, 350).stroke({ color: '#333', width: 2 });
+      draw.line(leftMargin, 50, leftMargin, 350).stroke({ color: '#333', width: 2 });
       [0, 50, 100, 150, 200, 250].forEach((val, i) => {
         draw.text(val.toString())
-          .font({ size: 12 })
+          .font({ size: isMobile ? 10 : 12 })
           .fill('#333')
-          .move(45, 345 - i * 60);
+          .move(leftMargin - (isMobile ? 30 : 35), 345 - i * 60);
       });
 
       // Create bars
       const bars = [];
       barData.forEach((data, i) => {
-        const x = 120 + i * 120;
-        const bar = draw.rect(80, 0).fill(data.color).radius(4).move(x, 350);
+        const x = leftMargin + (barSpacing * (i + 0.5)) - (barWidth / 2);
+        const bar = draw.rect(barWidth, 0).fill(data.color).radius(4).move(x, 350);
         bars.push({ bar, values: data.values, x });
 
         // X-axis label
         draw.text(data.label)
-          .font({ size: 13, weight: '600' })
+          .font({ size: isMobile ? 11 : 13, weight: '600' })
           .fill('#333')
-          .center(x + 40, 375);
+          .center(x + barWidth / 2, 375);
       });
 
       // Legend
       draw.text('Throughput (thousands/sec)')
-        .font({ size: 11 })
+        .font({ size: isMobile ? 10 : 11 })
         .fill('#666')
-        .move(90, 395);
+        .move(leftMargin + 10, 395);
 
       let currentStage = 0;
 

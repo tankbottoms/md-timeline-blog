@@ -97,15 +97,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		statusCode: response.status
 	};
 
-	// Log to console for immediate visibility
-	console.log(
-		`[${log.timestamp}]`,
-		`${log.method} ${log.path}${log.query}`,
-		`- ${log.statusCode}`,
-		`- ${log.responseTime}ms`,
-		`- IP: ${log.ip}`,
-		`- UA: ${log.userAgent.substring(0, 50)}...`
-	);
+	// Log to console for immediate visibility (commented out since logging to file)
+	// console.log(
+	// 	`[${log.timestamp}]`,
+	// 	`${log.method} ${log.path}${log.query}`,
+	// 	`- ${log.statusCode}`,
+	// 	`- ${log.responseTime}ms`,
+	// 	`- IP: ${log.ip}`,
+	// 	`- UA: ${log.userAgent.substring(0, 50)}...`
+	// );
 
 	// Store to file for analytics (non-blocking)
 	storeLog(log).catch((err) => console.error('Log storage error:', err));

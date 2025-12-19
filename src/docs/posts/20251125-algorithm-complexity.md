@@ -70,7 +70,7 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
       draw.rect(WIDTH, HEIGHT).fill('#fafafa');
 
       draw.text('Budget Distribution by Department (Q4)')
-        .font({ size: 18, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 18, family: 'sans-serif', weight: 'bold' })
         .fill('#333')
         .center(centerX, 20);
 
@@ -177,16 +177,17 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
       draw.rect(WIDTH, HEIGHT).fill('#fafafa');
 
       draw.text('Average Team Sizes by Department')
-        .font({ size: 16, family: 'sans-serif', weight: 'bold' })
+        .font({ size: isMobile ? 14 : 16, family: 'sans-serif', weight: 'bold' })
         .fill('#333')
-        .center(300, 20);
+        .center(WIDTH / 2, 20);
 
       // Baseline
       const baseline = HEIGHT - 60;
       draw.line(30, baseline, WIDTH - 30, baseline).stroke({ color: '#ddd', width: 2 });
 
       const bars = [];
-      depts.forEach((dept) => {
+      depts.forEach((dept, i) => {
+        const x = leftMargin + (barSpacing * (i + 0.5)) - (barWidth / 2);
         const maxHeight = 140;
         const barHeight = (dept.value / 45) * maxHeight;
         const y = baseline - barHeight;
