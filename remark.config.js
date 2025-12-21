@@ -52,55 +52,6 @@ function headingsPlugin() {
 	};
 }
 
-// Plugin to process GitHub Alerts
-function remarkGitHubAlerts() {
-	return (tree) => {
-		visit(tree, 'blockquote', (node, index, parent) => {
-			const firstChild = node.children[0];
-			if (!firstChild || firstChild.type !== 'paragraph') return;
-
-			const firstText = firstChild.children[0];
-			if (!firstText || firstText.type !== 'text') return;
-
-			const match = firstText.value.match(/^<!\[(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
-			if (match) {
-				const type = match[1].toLowerCase();
-				// Remove the marker
-				const cleanValue = firstText.value.replace(/^<!\[(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, '');
-				
-				// Update the text node
-				if (cleanValue.trim() === '') {
-					firstChild.children.shift();
-					if (firstChild.children.length === 0) {
-						node.children.shift();
-					}
-				} else {
-					firstText.value = cleanValue;
-				}
-
-				// Transform to div with classes
-				node.data = node.data || {};
-				node.data.hName = 'div';
-				node.data.hProperties = {
-					className: ['notice-box', `notice-${type}`]
-				};
-
-				// Insert title paragraph
-				const titleNode = {
-					type: 'paragraph',
-					data: {
-						hName: 'div',
-						hProperties: { className: ['notice-title'] }
-					},
-					children: [{ type: 'text', value: type.toUpperCase() }]
-				};
-				
-				node.children.unshift(titleNode);
-			}
-		});
-	};
-}
-
 const mdPreprocess = () => ({
 	markup: async ({ content, filename }) => {
 		if (!filename.endsWith('.md')) {
@@ -116,7 +67,6 @@ const mdPreprocess = () => ({
 			.use(headingsPlugin)
 			.use(remarkParse)
 			.use(remarkGfm)
-			.use(remarkGitHubAlerts)
 			.use(remarkFrontmatter)
 			.use(remarkRehype, { allowDangerousHtml: true })
 			.use(rehypeRaw)

@@ -7,6 +7,10 @@
 
 	let contentRef: HTMLDivElement;
 	let copied = $state(false);
+	
+	// Mock voting state
+	let voteCount = $state(124);
+	let userVote = $state(0); // -1: down, 0: none, 1: up
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
@@ -40,6 +44,28 @@
 			copied = false;
 		}, 2000);
 	}
+
+	function handleVote(type: 'up' | 'down') {
+		if (type === 'up') {
+			if (userVote === 1) {
+				userVote = 0;
+				voteCount--;
+			} else {
+				if (userVote === -1) voteCount++;
+				userVote = 1;
+				voteCount++;
+			}
+		} else {
+			if (userVote === -1) {
+				userVote = 0;
+				voteCount++;
+			} else {
+				if (userVote === 1) voteCount--;
+				userVote = -1;
+				voteCount--;
+			}
+		}
+	}
 </script>
 
 <svelte:head>
@@ -70,24 +96,35 @@
 				<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
 			{/if}
 		</div>
-		<div class="export-share-buttons">
-			<button onclick={handleShare} aria-label="Share URL" title={copied ? "Copied!" : "Share URL"}>
-				<Icon name="share" class={copied ? "text-green-600" : ""} />
+		
+		<div class="vote-controls">
+			<span class="vote-count">{voteCount}</span>
+			<button onclick={() => handleVote('up')} aria-label="Upvote" class:active={userVote === 1} title="Upvote">
+				<Icon name="thumbs-up" />
 			</button>
-			<button onclick={handlePdf} aria-label="Download PDF" title="Download PDF">
-				<Icon name="file-pdf-thin" />
-			</button>
-			<button onclick={handleWord} aria-label="Download Word" title="Download Word">
-				<Icon name="file-word-light" />
-			</button>
-			<button onclick={handleMarkdown} aria-label="Download Markdown" title="Download Markdown">
-				<Icon name="markdown" />
+			<button onclick={() => handleVote('down')} aria-label="Downvote" class:active={userVote === -1} title="Downvote">
+				<Icon name="thumbs-down" />
 			</button>
 		</div>
 	</div>
 
 	<div class="post-content prose" bind:this={contentRef}>
 		{@render data.component()}
+	</div>
+
+	<div class="post-actions-bottom">
+		<button onclick={handleShare} aria-label="Share URL" title={copied ? "Copied!" : "Share URL"}>
+			<Icon name="share" class={copied ? "text-green-600" : ""} />
+		</button>
+		<button onclick={handlePdf} aria-label="Download PDF" title="Download PDF">
+			<Icon name="file-pdf-thin" />
+		</button>
+		<button onclick={handleWord} aria-label="Download Word" title="Download Word">
+			<Icon name="file-word-light" />
+		</button>
+		<button onclick={handleMarkdown} aria-label="Download Markdown" title="Download Markdown">
+			<Icon name="markdown" />
+		</button>
 	</div>
 
 	<nav class="post-nav">
@@ -139,13 +176,61 @@
 		gap: 1rem;
 	}
 
-	.export-share-buttons {
+	.vote-controls {
 		display: flex;
-		gap: 1rem;
 		align-items: center;
+		gap: 0.5rem;
 	}
 
-	.export-share-buttons button {
+	.vote-count {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--color-text);
+		min-width: 1.5rem;
+		text-align: center;
+		margin-right: 0.5rem;
+	}
+
+	.vote-controls button {
+		background: none;
+		border: 1px solid transparent; /* Reserve space for border if needed, or transparent */
+		cursor: pointer;
+		padding: 0.4rem;
+		color: var(--color-text-muted);
+		font-size: 1.25rem;
+		transition: all 0.2s;
+		display: flex;
+		align-items: center;
+		border-radius: 4px;
+	}
+
+	.vote-controls button:hover {
+		color: var(--color-text);
+		background-color: var(--color-hover-bg);
+	}
+
+	.vote-controls button.active {
+		color: var(--color-text);
+		background-color: #d1d5db; /* Grey fill on selection */
+	}
+	
+	/* Dark mode adjustment for active state */
+	:global([data-theme='dark']) .vote-controls button.active {
+		background-color: #4b5563;
+	}
+
+	.post-actions-bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1rem;
+		align-items: center;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.post-actions-bottom button {
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -157,7 +242,7 @@
 		align-items: center;
 	}
 
-	.export-share-buttons button:hover {
+	.post-actions-bottom button:hover {
 		color: var(--color-link);
 	}
 
@@ -197,7 +282,8 @@
 
 	.post-nav {
 		padding-top: 2rem;
-		/* Removed the bottom border here as one of the two horizontal lines */
+		/* No border top here, effectively removing one line if previously it had one, or keeping just the one from actions-bottom */
+		border-top: none; 
 	}
 
 	.back-link {
