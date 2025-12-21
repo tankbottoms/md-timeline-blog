@@ -1,5 +1,12 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
+	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
+	import { page } from '$app/stores';
+
 	let { data } = $props();
+
+	let contentRef: HTMLDivElement;
+	let copied = $state(false);
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
@@ -8,6 +15,30 @@
 			month: 'long',
 			day: 'numeric'
 		});
+	}
+
+	async function handlePdf() {
+		if (contentRef) {
+			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
+		}
+	}
+
+	async function handleWord() {
+		const slug = $page.params.slug;
+		await downloadWord(`posts/${slug}.md`);
+	}
+
+	async function handleMarkdown() {
+		const slug = $page.params.slug;
+		await downloadMd(`posts/${slug}.md`);
+	}
+
+	function handleShare() {
+		navigator.clipboard.writeText(window.location.href);
+		copied = true;
+		setTimeout(() => {
+			copied = false;
+		}, 2000);
 	}
 </script>
 
@@ -28,18 +59,34 @@
 	{/if}
 
 	<div class="post-meta">
-		{#if data.metadata.date}
-			<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
-		{/if}
-		{#if data.metadata.author}
-			<span class="post-author">By {data.metadata.author}</span>
-		{/if}
-		{#if data.metadata.wordCount && data.metadata.readingTimeText}
-			<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
-		{/if}
+		<div class="meta-info">
+			{#if data.metadata.date}
+				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
+			{/if}
+			{#if data.metadata.author}
+				<span class="post-author">By {data.metadata.author}</span>
+			{/if}
+			{#if data.metadata.wordCount && data.metadata.readingTimeText}
+				<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
+			{/if}
+		</div>
+		<div class="export-icons">
+			<button onclick={handleShare} aria-label="Share URL" title={copied ? "Copied!" : "Share URL"}>
+				<Icon name="share" class={copied ? "text-green-600" : ""} />
+			</button>
+			<button onclick={handlePdf} aria-label="Download PDF" title="Download PDF">
+				<Icon name="file-pdf-thin" />
+			</button>
+			<button onclick={handleWord} aria-label="Download Word" title="Download Word">
+				<Icon name="file-word-light" />
+			</button>
+			<button onclick={handleMarkdown} aria-label="Download Markdown" title="Download Markdown">
+				<Icon name="markdown" />
+			</button>
+		</div>
 	</div>
 
-	<div class="post-content prose">
+	<div class="post-content prose" bind:this={contentRef}>
 		{@render data.component()}
 	</div>
 
@@ -77,10 +124,41 @@
 
 	.post-meta {
 		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
 		gap: 1rem;
 		margin-bottom: 2rem;
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--color-border);
+	}
+
+	.meta-info {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.export-icons {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.export-icons button {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: var(--color-text-muted);
+		font-size: 1.25rem;
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+	}
+
+	.export-icons button:hover {
+		color: var(--color-link);
 	}
 
 	.post-date,
