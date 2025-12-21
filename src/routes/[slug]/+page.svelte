@@ -7,10 +7,6 @@
 
 	let contentRef: HTMLDivElement;
 	let copied = $state(false);
-	
-	// Mock voting state
-	let voteCount = $state(124);
-	let userVote = $state(0); // -1: down, 0: none, 1: up
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
@@ -44,28 +40,6 @@
 			copied = false;
 		}, 2000);
 	}
-
-	function handleVote(type: 'up' | 'down') {
-		if (type === 'up') {
-			if (userVote === 1) {
-				userVote = 0;
-				voteCount--;
-			} else {
-				if (userVote === -1) voteCount++;
-				userVote = 1;
-				voteCount++;
-			}
-		} else {
-			if (userVote === -1) {
-				userVote = 0;
-				voteCount++;
-			} else {
-				if (userVote === 1) voteCount--;
-				userVote = -1;
-				voteCount--;
-			}
-		}
-	}
 </script>
 
 <svelte:head>
@@ -96,17 +70,7 @@
 				<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
 			{/if}
 		</div>
-		<div class="export-icons">
-			<div class="vote-controls">
-				<button onclick={() => handleVote('up')} aria-label="Upvote" class:active={userVote === 1} title="Upvote">
-					<Icon name="thumbs-up" />
-				</button>
-				<span class="vote-count">{voteCount}</span>
-				<button onclick={() => handleVote('down')} aria-label="Downvote" class:active={userVote === -1} title="Downvote">
-					<Icon name="thumbs-down" />
-				</button>
-			</div>
-			<div class="separator"></div>
+		<div class="export-share-buttons">
 			<button onclick={handleShare} aria-label="Share URL" title={copied ? "Copied!" : "Share URL"}>
 				<Icon name="share" class={copied ? "text-green-600" : ""} />
 			</button>
@@ -175,34 +139,13 @@
 		gap: 1rem;
 	}
 
-	.export-icons {
+	.export-share-buttons {
 		display: flex;
 		gap: 1rem;
 		align-items: center;
 	}
 
-	.vote-controls {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.vote-count {
-		font-size: 0.875rem;
-		font-weight: 600;
-		color: var(--color-text);
-		min-width: 1.5rem;
-		text-align: center;
-	}
-
-	.separator {
-		width: 1px;
-		height: 1.5rem;
-		background-color: var(--color-border);
-		margin: 0 0.25rem;
-	}
-
-	.export-icons button {
+	.export-share-buttons button {
 		background: none;
 		border: none;
 		cursor: pointer;
@@ -214,11 +157,7 @@
 		align-items: center;
 	}
 
-	.export-icons button:hover {
-		color: var(--color-link);
-	}
-
-	.export-icons button.active {
+	.export-share-buttons button:hover {
 		color: var(--color-link);
 	}
 
@@ -258,7 +197,7 @@
 
 	.post-nav {
 		padding-top: 2rem;
-		border-top: 1px solid var(--color-border);
+		/* Removed the bottom border here as one of the two horizontal lines */
 	}
 
 	.back-link {

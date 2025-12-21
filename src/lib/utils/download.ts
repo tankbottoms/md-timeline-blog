@@ -14,7 +14,7 @@ import {
 	BorderStyle,
 	ShadingType,
 	// VerticalAlign,
-	PageBreak,
+	// PageBreak,
 	PageNumber,
 	NumberFormat,
 	Footer,
@@ -99,13 +99,18 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 			return;
 		}
 	} catch (e) {
-		console.error(e);
+		console.error('Error loading markdown for Word export:', e);
 		return;
 	}
 
-	if (typeof imported !== 'string') return;
+	if (typeof imported !== 'string') {
+		console.error('Imported content is not a string.', imported);
+		return;
+	}
+	console.log('Markdown content loaded for Word export.', imported.substring(0, 500) + '...'); // Log first 500 chars
 
 	// Strip out all animated SVG code and other potential problematic HTML
+	const originalImported = imported; // Keep original for comparison
 	imported = imported
 		.replace(/<animate[\s\S]*?>.*?<\/animate>/gi, '') // Remove animate blocks with content
 		.replace(/<animate[^>]*>/gi, '') // Remove self-closing animate tags
@@ -113,6 +118,12 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		.replace(/<animateMotion[^>]*>/gi, '')
 		.replace(/<set[^>]*>/gi, '') // SVG set tag
 		.replace(/<mpath[^>]*>/gi, '');
+
+	if (originalImported !== imported) {
+		console.log('SVG animation tags stripped for Word export.');
+	} else {
+		console.log('No SVG animation tags found or stripped.');
+	}
 
 	if (variables && variables.length > 0) {
 		variables.forEach((variable: VariableType) => {
@@ -335,11 +346,19 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 	});
 
 	try {
+		console.log('Attempting to generate Word document blob.');
 		const blob = await Packer.toBlob(doc);
 		saveAs(blob, fileName);
 		console.log('Document created successfully');
 	} catch(e) {
-		console.error("Error creating docx", e);
+		console.error("Error creating docx blob or saving file:", e);
+		// Log more details if 'e' is an object with a message or stack
+		if (e instanceof Error) {
+			console.error('Error message:', e.message);
+			console.error('Error stack:', e.stack);
+		} else if (typeof e === 'object' && e !== null && 'message' in e) {
+			console.error('Error object:', e);
+		}
 	}
 };
 
