@@ -193,7 +193,7 @@
 
 	.vote-controls button {
 		background: none;
-		border: 1px solid transparent; /* Reserve space for border if needed, or transparent */
+		border: 1px solid transparent;
 		cursor: pointer;
 		padding: 0.4rem;
 		color: var(--color-text-muted);
