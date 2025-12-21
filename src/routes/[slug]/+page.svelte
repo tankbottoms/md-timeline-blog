@@ -1,16 +1,26 @@
 <script lang="ts">
+	import { statistics } from '$lib/stores/statistics';
+	import { onMount } from 'svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
 	import { page } from '$app/stores';
 
 	let { data } = $props();
-
+	let stats = $state($statistics);
+	let postSlug = $state('');
 	let contentRef: HTMLDivElement;
 	let copied = $state(false);
-	
-	// Mock voting state
-	let voteCount = $state(124);
-	let userVote = $state(0); // -1: down, 0: none, 1: up
+
+	// Subscribe to statistics changes
+	statistics.subscribe((value) => {
+		stats = value;
+	});
+
+	// Extract slug from URL
+	onMount(() => {
+		const path = window.location.pathname;
+		postSlug = path.split('/').filter(Boolean).pop() || '';
+	});
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);
@@ -21,6 +31,23 @@
 		});
 	}
 
+	function handleThumbsUp() {
+		if (postSlug) {
+			statistics.thumbsUp(postSlug);
+		}
+	}
+
+	function handleThumbsDown() {
+		if (postSlug) {
+			statistics.thumbsDown(postSlug);
+		}
+	}
+
+	// Get current post stats
+	let postStats = $derived(() => {
+		return stats.posts[postSlug] || { thumbsUp: 0, thumbsDown: 0 };
+	});
+
 	async function handlePdf() {
 		if (contentRef) {
 			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
@@ -28,12 +55,13 @@
 	}
 
 	async function handleWord() {
-		const slug = $page.params.slug;
+		// Use the stored postSlug or derive from page params if onMount hasn't run yet (though button click implies it has)
+		const slug = postSlug || $page.params.slug; 
 		await downloadWord(`posts/${slug}.md`);
 	}
 
 	async function handleMarkdown() {
-		const slug = $page.params.slug;
+		const slug = postSlug || $page.params.slug;
 		await downloadMd(`posts/${slug}.md`);
 	}
 
@@ -43,28 +71,6 @@
 		setTimeout(() => {
 			copied = false;
 		}, 2000);
-	}
-
-	function handleVote(type: 'up' | 'down') {
-		if (type === 'up') {
-			if (userVote === 1) {
-				userVote = 0;
-				voteCount--;
-			} else {
-				if (userVote === -1) voteCount++;
-				userVote = 1;
-				voteCount++;
-			}
-		} else {
-			if (userVote === -1) {
-				userVote = 0;
-				voteCount++;
-			} else {
-				if (userVote === 1) voteCount--;
-				userVote = -1;
-				voteCount--;
-			}
-		}
 	}
 </script>
 
@@ -85,7 +91,7 @@
 	{/if}
 
 	<div class="post-meta">
-		<div class="meta-info">
+		<div class="post-meta-left">
 			{#if data.metadata.date}
 				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
 			{/if}
@@ -93,16 +99,30 @@
 				<span class="post-author">By {data.metadata.author}</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
-				<span class="post-stats">{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span>
+				<span class="post-stats"
+					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata
+						.readingTimeText}</span
+				>
 			{/if}
 		</div>
-		
-		<div class="vote-controls">
-			<span class="vote-count">{voteCount}</span>
-			<button onclick={() => handleVote('up')} aria-label="Upvote" class:active={userVote === 1} title="Upvote">
+		<div class="post-reactions">
+			<span class="thumbs-count">{postStats().thumbsUp}</span>
+			<button
+				type="button"
+				class="reaction-btn"
+				class:active={postStats().hasVoted === 'up'}
+				onclick={handleThumbsUp}
+				aria-label="Thumbs up"
+			>
 				<Icon name="thumbs-up" />
 			</button>
-			<button onclick={() => handleVote('down')} aria-label="Downvote" class:active={userVote === -1} title="Downvote">
+			<button
+				type="button"
+				class="reaction-btn"
+				class:active={postStats().hasVoted === 'down'}
+				onclick={handleThumbsDown}
+				aria-label="Thumbs down"
+			>
 				<Icon name="thumbs-down" />
 			</button>
 		</div>
@@ -156,6 +176,13 @@
 	@media (max-width: 768px) {
 		.post {
 			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.post {
+			padding: 1rem 0;
 		}
 	}
 
@@ -163,60 +190,78 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		flex-wrap: wrap;
 		gap: 1rem;
 		margin-bottom: 2rem;
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--color-border);
-	}
-
-	.meta-info {
-		display: flex;
 		flex-wrap: wrap;
-		gap: 1rem;
 	}
 
-	.vote-controls {
+	.post-meta-left {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.post-date,
+	.post-author,
+	.post-stats {
+		font-size: 0.875rem;
+		color: var(--color-text-muted);
+	}
+
+	.post-reactions {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
 	}
 
-	.vote-count {
+	.thumbs-count {
 		font-size: 0.875rem;
+		color: var(--color-text-muted);
 		font-weight: 600;
-		color: var(--color-text);
-		min-width: 1.5rem;
-		text-align: center;
-		margin-right: 0.5rem;
+		min-width: 2rem;
+		text-align: right;
 	}
 
-	.vote-controls button {
-		background: none;
-		border: 1px solid transparent;
-		cursor: pointer;
-		padding: 0.4rem;
+	.reaction-btn {
+		background: transparent;
+		border: 1px solid var(--color-border);
 		color: var(--color-text-muted);
-		font-size: 1.25rem;
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 4px;
 		transition: all 0.2s;
+		font-size: 1rem;
 		display: flex;
 		align-items: center;
-		border-radius: 4px;
+		justify-content: center;
+		min-width: 2.5rem;
 	}
 
-	.vote-controls button:hover {
+	.reaction-btn:hover {
+		background: var(--color-hover-bg);
+		border-color: var(--color-text);
 		color: var(--color-text);
-		background-color: var(--color-hover-bg);
+		transform: translateY(-2px);
 	}
 
-	.vote-controls button.active {
+	.reaction-btn.active {
+		background: var(--color-featured-bg); /* Fills grey on active */
+		border-color: var(--color-featured-border);
 		color: var(--color-text);
-		background-color: #d1d5db; /* Grey fill on selection */
 	}
 	
-	/* Dark mode adjustment for active state */
-	:global([data-theme='dark']) .vote-controls button.active {
-		background-color: #4b5563;
+	/* Ensure active background is grey-ish */
+	:global([data-theme='light']) .reaction-btn.active {
+		background-color: #e5e5e5;
+	}
+	:global([data-theme='dark']) .reaction-btn.active {
+		background-color: #333;
+	}
+
+	.reaction-btn:active {
+		transform: translateY(0);
 	}
 
 	.post-actions-bottom {
@@ -244,13 +289,6 @@
 
 	.post-actions-bottom button:hover {
 		color: var(--color-link);
-	}
-
-	.post-date,
-	.post-author,
-	.post-stats {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
 	}
 
 	.post-content {
@@ -282,8 +320,7 @@
 
 	.post-nav {
 		padding-top: 2rem;
-		/* No border top here, effectively removing one line if previously it had one, or keeping just the one from actions-bottom */
-		border-top: none; 
+		border-top: none;
 	}
 
 	.back-link {
