@@ -20,7 +20,8 @@ import {
 	Footer,
 	// WidthType
 } from 'docx';
-import { saveAs } from 'file-saver';
+import FileSaver from 'file-saver';
+const saveAs = FileSaver.saveAs || FileSaver;
 import { Buffer } from 'buffer';
 
 const DISCLAIMER = "Disclaimer: This document is auto-generated.";
@@ -50,9 +51,19 @@ const getBase64FromUrl = async (url: string) => {
 	}
 };
 
+const getMetadataString = () => {
+	const url = window.location.href;
+	const timestamp = new Date().toLocaleString();
+	return `Downloaded from: ${url}\nTime: ${timestamp}`;
+};
+
 export const downloadPdf = async (title: string, content: string) => {
 	const printWindow = window.open('', '', 'height=600,width=800');
 	if (!printWindow) return;
+
+	const metadata = getMetadataString().replace(/\n/g, '<br>');
+	const metadataHtml = `<div style="font-size: 0.8em; color: #666; margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">${metadata}</div>`;
+	const metadataFooterHtml = `<div style="font-size: 0.8em; color: #666; margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">${metadata}</div>`;
 
 	printWindow.document.write(`<html><head><title>${title}</title>`);
 	printWindow.document.write(`
@@ -68,10 +79,16 @@ export const downloadPdf = async (title: string, content: string) => {
 			table { width: 100%; border-collapse: collapse; margin: 1em 0; }
 			th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
 			th { background-color: #f2f2f2; }
+			@media print {
+				@page { margin: 2cm; }
+				body { padding: 0; }
+			}
 		</style>
 	`);
 	printWindow.document.write('</head><body>');
+	printWindow.document.write(metadataHtml);
 	printWindow.document.write(content);
+	printWindow.document.write(metadataFooterHtml);
 	printWindow.document.write('</body></html>');
 	printWindow.document.close();
 	// Wait for images to load before printing
@@ -133,7 +150,7 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		});
 	}
 
-	const fileName = path.split('/').pop()?.replace(/\.md$/, '') || 'document';
+	const fileName = (path.split('/').pop()?.replace(/\.md$/, '') || 'document') + '.docx';
 	console.log('Saving ' + fileName + ' as docx');
 	
 	const lines = imported.split('\n');
@@ -199,6 +216,26 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		});
 		return runs;
 	};
+
+	// Add Metadata at the start
+	const url = window.location.href;
+	const timestamp = new Date().toLocaleString();
+	children.push(
+		new Paragraph({
+			children: [
+				new TextRun({ text: `Downloaded from: ${url}`, size: 16, color: '666666' }),
+			]
+		}),
+		new Paragraph({
+			children: [
+				new TextRun({ text: `Time: ${timestamp}`, size: 16, color: '666666' })
+			],
+			border: {
+				bottom: { color: 'EEEEEE', space: 1, style: BorderStyle.SINGLE, size: 6 }
+			},
+			spacing: { after: 240 }
+		})
+	);
 
 	children.push(
 		new Paragraph({
@@ -312,6 +349,24 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		}
 	}
 
+	// Add Metadata at the end
+	children.push(
+		new Paragraph({
+			children: [
+				new TextRun({ text: `Downloaded from: ${url}`, size: 16, color: '666666' }),
+			],
+			spacing: { before: 480 }
+		}),
+		new Paragraph({
+			children: [
+				new TextRun({ text: `Time: ${timestamp}`, size: 16, color: '666666' })
+			],
+			border: {
+				top: { color: 'EEEEEE', space: 1, style: BorderStyle.SINGLE, size: 6 }
+			}
+		})
+	);
+
 	const doc = new Document({
 		creator: CREATOR,
 		title: title,
@@ -382,7 +437,10 @@ export const downloadMd = async (path: string) => {
 
 	if (!imported) return;
 
+	const metadata = getMetadataString();
+	const contentWithMetadata = `${metadata}\n\n${imported}\n\n${metadata}`;
+
 	const fileName = path.split('/').pop();
-	const blob = new Blob([imported], { type: 'text/markdown;charset=utf-8' });
+	const blob = new Blob([contentWithMetadata], { type: 'text/markdown;charset=utf-8' });
 	saveAs(blob, fileName);
 };

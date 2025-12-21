@@ -1,9 +1,14 @@
 export const prerender = false;
 
 import { calculateReadingTime } from '$lib/utils/readingTime';
+import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
 	const { slug } = params;
+
+	if (slug === 'favicon.ico') {
+		error(404, 'Not found');
+	}
 
 	try {
 		const post = await import(`../../docs/posts/${slug}.md`);

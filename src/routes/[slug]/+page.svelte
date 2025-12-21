@@ -31,23 +31,6 @@
 		});
 	}
 
-	function handleThumbsUp() {
-		if (postSlug) {
-			statistics.thumbsUp(postSlug);
-		}
-	}
-
-	function handleThumbsDown() {
-		if (postSlug) {
-			statistics.thumbsDown(postSlug);
-		}
-	}
-
-	// Get current post stats
-	let postStats = $derived(() => {
-		return stats.posts[postSlug] || { thumbsUp: 0, thumbsDown: 0 };
-	});
-
 	async function handlePdf() {
 		if (contentRef) {
 			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
@@ -94,37 +77,19 @@
 		<div class="post-meta-left">
 			{#if data.metadata.date}
 				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
+				<span class="separator">•</span>
 			{/if}
 			{#if data.metadata.author}
 				<span class="post-author">By {data.metadata.author}</span>
+				<span class="separator">•</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="post-stats"
-					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata
-						.readingTimeText}</span
+					>{data.metadata.wordCount.toLocaleString()} words</span
 				>
+				<span class="separator">•</span>
+				<span class="post-stats">{data.metadata.readingTimeText}</span>
 			{/if}
-		</div>
-		<div class="post-reactions">
-			<span class="thumbs-count">{postStats().thumbsUp}</span>
-			<button
-				type="button"
-				class="reaction-btn"
-				class:active={postStats().hasVoted === 'up'}
-				onclick={handleThumbsUp}
-				aria-label="Thumbs up"
-			>
-				<Icon name="thumbs-up" />
-			</button>
-			<button
-				type="button"
-				class="reaction-btn"
-				class:active={postStats().hasVoted === 'down'}
-				onclick={handleThumbsDown}
-				aria-label="Thumbs down"
-			>
-				<Icon name="thumbs-down" />
-			</button>
 		</div>
 	</div>
 
@@ -199,8 +164,14 @@
 
 	.post-meta-left {
 		display: flex;
-		gap: 1rem;
+		gap: 0.5rem;
 		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.separator {
+		color: var(--color-text-muted);
+		font-size: 0.875rem;
 	}
 
 	.post-date,
@@ -208,60 +179,6 @@
 	.post-stats {
 		font-size: 0.875rem;
 		color: var(--color-text-muted);
-	}
-
-	.post-reactions {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.thumbs-count {
-		font-size: 0.875rem;
-		color: var(--color-text-muted);
-		font-weight: 600;
-		min-width: 2rem;
-		text-align: right;
-	}
-
-	.reaction-btn {
-		background: transparent;
-		border: 1px solid var(--color-border);
-		color: var(--color-text-muted);
-		cursor: pointer;
-		padding: 0.5rem;
-		border-radius: 4px;
-		transition: all 0.2s;
-		font-size: 1rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 2.5rem;
-	}
-
-	.reaction-btn:hover {
-		background: var(--color-hover-bg);
-		border-color: var(--color-text);
-		color: var(--color-text);
-		transform: translateY(-2px);
-	}
-
-	.reaction-btn.active {
-		background: var(--color-featured-bg); /* Fills grey on active */
-		border-color: var(--color-featured-border);
-		color: var(--color-text);
-	}
-	
-	/* Ensure active background is grey-ish */
-	:global([data-theme='light']) .reaction-btn.active {
-		background-color: #e5e5e5;
-	}
-	:global([data-theme='dark']) .reaction-btn.active {
-		background-color: #333;
-	}
-
-	.reaction-btn:active {
-		transform: translateY(0);
 	}
 
 	.post-actions-bottom {

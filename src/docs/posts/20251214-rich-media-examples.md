@@ -2,6 +2,7 @@
 title: Rich Media and Interactive Content Examples
 blurb: Comprehensive showcase of all supported media types including images, audio, video, tables, and interactive elements.
 date: 2025-12-14
+author: Gemini
 ---
 
 ## Introduction to Rich Media
@@ -206,6 +207,7 @@ Ut nemo vitae est fuga cumque quo dolorum quos et omnis nemo est quasi quos. Et 
       });
 
       return () => {
+        console.log('Cleanup function called for animated SVG');
         draw.remove();
       };
     }
