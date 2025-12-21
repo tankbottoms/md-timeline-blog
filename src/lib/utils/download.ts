@@ -1,24 +1,24 @@
 import {
 	AlignmentType,
-	convertInchesToTwip,
+	// convertInchesToTwip,
 	Document,
 	Packer,
 	Paragraph,
 	TextRun,
-	UnderlineType,
-	Table,
-	TableCell,
-	TableRow,
-	ExternalHyperlink,
+	// UnderlineType,
+	// Table,
+	// TableCell,
+	// TableRow,
+	// ExternalHyperlink,
 	ImageRun,
 	BorderStyle,
 	ShadingType,
-	VerticalAlign,
+	// VerticalAlign,
 	PageBreak,
 	PageNumber,
 	NumberFormat,
 	Footer,
-	WidthType
+	// WidthType
 } from 'docx';
 import { saveAs } from 'file-saver';
 import { Buffer } from 'buffer';
@@ -105,6 +105,15 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 
 	if (typeof imported !== 'string') return;
 
+	// Strip out all animated SVG code and other potential problematic HTML
+	imported = imported
+		.replace(/<animate[\s\S]*?>.*?<\/animate>/gi, '') // Remove animate blocks with content
+		.replace(/<animate[^>]*>/gi, '') // Remove self-closing animate tags
+		.replace(/<animateTransform[^>]*>/gi, '')
+		.replace(/<animateMotion[^>]*>/gi, '')
+		.replace(/<set[^>]*>/gi, '') // SVG set tag
+		.replace(/<mpath[^>]*>/gi, '');
+
 	if (variables && variables.length > 0) {
 		variables.forEach((variable: VariableType) => {
 			if (variable.default) {
@@ -167,7 +176,7 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 				// Simple link parser: [text](url)
 				// This is a naive parser and only handles one link per segment effectively if not recursing properly
 				// For robustness, we just strip the link syntax and show text
-				const linkMatch = part.match(/[\[\]\(]([^\\\]\)\[]+)[\(]([^\)]+)[\)]/);
+				const linkMatch = part.match(/[\\[\\]\(]([^\\\\]\[\)]+)[\(]([^)]+)[\)]/);
 				if (linkMatch) {
 					runs.push(new TextRun({ text: linkMatch[1], style: 'Hyperlink' }));
 				} else {
@@ -257,10 +266,10 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 										width: width * scale,
 										height: height * scale
 									},
-									type: imgType
+								type: imgType
 								})
 							],
-							alignment: AlignmentType.CENTER
+						alignment: AlignmentType.CENTER
 						}));
 					}
 				} catch (e) {
