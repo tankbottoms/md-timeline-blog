@@ -270,3 +270,38 @@ img {
 	color: var(--color-text-muted);
 	font-size: 0.875rem;
 }
+
+/* Notice Box Styles */
+.notice-box {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border: 1px solid var(--color-featured-border);
+	background: var(--color-featured-bg);
+	box-shadow: 3px 3px 0px var(--color-shadow);
+	/* No rounded edges per requirement */
+}
+
+.notice-box p {
+	margin: 0.5rem 0;
+}
+
+.notice-box p:first-child {
+	margin-top: 0;
+}
+
+.notice-box p:last-child {
+	margin-bottom: 0;
+}
+
+.notice-title {
+	font-weight: 600;
+	display: block;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+	font-size: 0.9em;
+}
+
+/* Optional: Different colors for different notice types if desired, 
+   but keeping it simple black/white for now to match timeline style */
+.notice-important .notice-title { color: var(--color-text); }
+.notice-warning .notice-title { color: var(--color-text); }
