@@ -86,14 +86,14 @@ const mdPreprocess = () => ({
 		}
 
 		const stringified =
-			metadata && JSON.stringify(metadata).replace(/<(\/?script|\/?style)/g, '<"+"$1');
+			metadata && JSON.stringify(metadata).replace(/<(\/\?script|\/?style)/g, '<"+"$1');
 
 		const fm =
 			metadata &&
 			`export const metadata = ${stringified};${newline}` +
-			`\tconst { ${Object.keys(metadata).join(', ')} } = metadata;`;
+			`	const { ${Object.keys(metadata).join(', ')} } = metadata;`;
 
-		const insertModule = `<script context="module">${newline}\t${fm}${newline}</script>`;
+		const insertModule = `<script context="module">${newline}	${fm}${newline}</script>`;
 
 		const resultCode = `${insertModule}${newline}${vFile.value}`;
 

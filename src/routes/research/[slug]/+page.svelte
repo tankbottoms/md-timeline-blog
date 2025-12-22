@@ -100,8 +100,23 @@
 		</div>
 	</div>
 
-	<div class="doc-content prose">
+	<div class="doc-content prose" bind:this={contentRef}>
 		{@render data.component()}
+	</div>
+
+	<div class="doc-actions-bottom">
+		<button onclick={handleShare} aria-label="Share URL" title={copied ? "Copied!" : "Share URL"}>
+			<Icon name="share" class={copied ? "text-green-600" : ""} />
+		</button>
+		<button onclick={handlePdf} aria-label="Download PDF" title="Download PDF">
+			<Icon name="file-pdf-thin" />
+		</button>
+		<button onclick={handleWord} aria-label="Download Word" title="Download Word">
+			<Icon name="file-word-light" />
+		</button>
+		<button onclick={handleMarkdown} aria-label="Download Markdown" title="Download Markdown">
+			<Icon name="markdown" />
+		</button>
 	</div>
 
 	<nav class="doc-nav">
@@ -135,7 +150,8 @@
 		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 1rem;
+		gap: 0.5rem;
+		align-items: center;
 		margin-bottom: 2rem;
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--color-border);
@@ -213,7 +229,7 @@
 
 	.doc-nav {
 		padding-top: 2rem;
-		border-top: 1px solid var(--color-border);
+		border-top: none;
 	}
 
 	.back-link {

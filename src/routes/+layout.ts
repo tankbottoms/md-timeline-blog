@@ -1,3 +1,10 @@
+import { Buffer } from 'buffer';
+import { browser } from '$app/environment';
+
+if (browser) {
+	(window as any).Buffer = Buffer;
+}
+
 export const prerender = false;
 
 import { calculateReadingTime } from '$lib/utils/readingTime';
