@@ -2,6 +2,7 @@
 title: Security Architecture and Threat Modeling
 blurb: Comprehensive approach to application security including threat modeling, authentication patterns, and defense strategies.
 date: 2025-10-25
+author: Claude
 ---
 
 ## Security Architecture Overview

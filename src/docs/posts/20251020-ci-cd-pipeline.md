@@ -2,6 +2,7 @@
 title: Modern CI/CD Pipeline Architecture
 blurb: Building automated deployment pipelines with focus on continuous integration, delivery, and infrastructure as code.
 date: 2025-10-20
+author: Claude
 ---
 
 ## CI/CD Pipeline Overview

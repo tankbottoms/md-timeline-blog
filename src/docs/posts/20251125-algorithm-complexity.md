@@ -2,6 +2,7 @@
 title: Resource Allocation and Budget Distribution
 blurb: Dynamic visualization of how our team resources and budget allocation evolve across different departments and projects throughout the fiscal year.
 date: 2025-11-25
+author: Claude
 ---
 
 ## Resource Overview
