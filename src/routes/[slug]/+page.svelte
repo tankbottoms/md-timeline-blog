@@ -1,10 +1,15 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
+	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
+	import { page } from '$app/stores';
 	import { statistics } from '$lib/stores/statistics';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
 	let stats = $state($statistics);
 	let postSlug = $state('');
+	let contentRef: HTMLDivElement;
+	let copied = $state(false);
 
 	// Subscribe to statistics changes
 	statistics.subscribe((value) => {
@@ -36,6 +41,30 @@
 		if (postSlug) {
 			statistics.thumbsDown(postSlug);
 		}
+	}
+
+	async function handlePdf() {
+		if (contentRef) {
+			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
+		}
+	}
+
+	async function handleWord() {
+		const slug = $page.params.slug;
+		await downloadWord(`posts/${slug}.md`);
+	}
+
+	async function handleMarkdown() {
+		const slug = $page.params.slug;
+		await downloadMd(`posts/${slug}.md`);
+	}
+
+	function handleShare() {
+		navigator.clipboard.writeText(window.location.href);
+		copied = true;
+		setTimeout(() => {
+			copied = false;
+		}, 2000);
 	}
 
 	// Get current post stats

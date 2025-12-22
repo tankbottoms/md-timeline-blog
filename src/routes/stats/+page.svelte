@@ -23,6 +23,7 @@
 	onMount(() => {
 		// Initialize time series chart
 		function initTimeSeriesChart() {
+			const SVG = (window as any).SVG;
 			if (typeof SVG === 'undefined') {
 				setTimeout(initTimeSeriesChart, 50);
 				return;
@@ -112,6 +113,7 @@
 
 		// Initialize top pages donut chart
 		function initTopPagesChart() {
+			const SVG = (window as any).SVG;
 			if (typeof SVG === 'undefined') {
 				setTimeout(initTopPagesChart, 50);
 				return;
@@ -208,7 +210,7 @@
 					.move(10, 30);
 
 				// Hover effects
-				segment.mouseover(function (event) {
+				segment.mouseover(function (this: any, event: any) {
 					this.animate(200).ease('<>').opacity(1);
 					tooltip.opacity(1);
 					const mouseX = event.clientX - container.getBoundingClientRect().left;
@@ -216,7 +218,7 @@
 					tooltip.move(mouseX + 10, mouseY - 30);
 				});
 
-				segment.mouseout(function () {
+				segment.mouseout(function (this: any) {
 					this.animate(200).ease('<>').opacity(0.9);
 					tooltip.opacity(0);
 				});
