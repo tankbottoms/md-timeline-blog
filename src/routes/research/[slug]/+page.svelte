@@ -270,7 +270,7 @@
 		cursor: pointer;
 		padding: 0;
 		color: var(--color-text-muted);
-		font-size: 2rem;
+		font-size: 1.5rem;
 		transition: color 0.2s;
 		display: flex;
 		align-items: center;

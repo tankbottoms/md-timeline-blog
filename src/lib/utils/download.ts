@@ -69,7 +69,8 @@ export const downloadPdf = async (title: string, content: string) => {
 	printWindow.document.write(`
 		<style>
 			body { font-family: serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 2rem; }
-			img { max-width: 100%; height: auto; }
+			img, svg { max-width: 100%; height: auto; }
+			svg { display: block; }
 			h1, h2, h3, h4, h5, h6 { font-family: sans-serif; margin-top: 1.5em; margin-bottom: 0.5em; }
 			h1 { font-size: 2.5em; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
 			p { margin-bottom: 1em; }
@@ -79,9 +80,19 @@ export const downloadPdf = async (title: string, content: string) => {
 			table { width: 100%; border-collapse: collapse; margin: 1em 0; }
 			th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
 			th { background-color: #f2f2f2; }
+			.media-blocked {
+				margin: 2rem 0;
+				padding: 1.5rem;
+				background: #fff;
+				border: 2px solid #e5e7eb;
+				border-radius: 8px;
+				box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+				display: block;
+			}
 			@media print {
 				@page { margin: 2cm; }
 				body { padding: 0; }
+				svg { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 			}
 		</style>
 	`);
@@ -99,6 +110,18 @@ export const downloadPdf = async (title: string, content: string) => {
 
 export const downloadWord = async (path: string, variables: VariableType[] | undefined = undefined) => {
 	// Assumes path is relative to docs/ e.g. "posts/slug.md"
+
+	// Ensure docx library and Buffer are available
+	try {
+		if (!Buffer || !Document || !Packer) {
+			throw new Error('Required libraries not loaded');
+		}
+	} catch (error) {
+		console.error('Word export dependencies not ready:', error);
+		alert('Word export is initializing. Please try again in a moment.');
+		return;
+	}
+
 	const images = document.getElementsByTagName('img');
 	let imageIndex = 0;
 	const ratio = 0.7;
@@ -117,6 +140,7 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		}
 	} catch (e) {
 		console.error('Error loading markdown for Word export:', e);
+		alert('Error loading content. Please try again.');
 		return;
 	}
 
@@ -253,8 +277,43 @@ export const downloadWord = async (path: string, variables: VariableType[] | und
 		spacing: { after: 400 }
 	}));
 
+	let inSvgBlock = false;
+	let svgBlockDetected = false;
+
 	for (const [index, line] of lines.entries()) {
 		if (index <= sectionStartIndex) continue;
+
+		// Detect SVG block start
+		if (line.includes('<svg')) {
+			inSvgBlock = true;
+			svgBlockDetected = true;
+			// Add a placeholder for SVG content
+			children.push(new Paragraph({
+				children: [new TextRun({
+					text: '[SVG Chart/Graphic - View in web browser or PDF export]',
+					italics: true,
+					color: '666666',
+					size: 20
+				})],
+				spacing: { before: 120, after: 120 },
+				indent: { left: 360 }
+			}));
+			continue;
+		}
+
+		// Skip lines while in SVG block
+		if (inSvgBlock) {
+			if (line.includes('</svg>')) {
+				inSvgBlock = false;
+			}
+			continue;
+		}
+
+		// Skip HTML div tags (used for media containers)
+		if (line.trim().startsWith('<div') || line.trim().startsWith('</div>')) {
+			continue;
+		}
+
 		if (line.trim() === '') {
 			children.push(new Paragraph(''));
 			continue;
