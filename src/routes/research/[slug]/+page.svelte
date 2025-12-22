@@ -95,14 +95,14 @@
 				<span class="doc-date">Published: {formatDate(data.metadata.date)}</span>
 			{/if}
 			{#if data.metadata.author}
-				<span class="doc-author">By {data.metadata.author}</span>
+				<span class="doc-author">• By {data.metadata.author}</span>
 			{/if}
 			{#if data.metadata.filename}
-				<span class="doc-filename">Document: {data.metadata.filename}</span>
+				<span class="doc-filename">• Document: {data.metadata.filename}</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="doc-stats"
-					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span
+					>• {data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span
 				>
 			{/if}
 		</div>
@@ -254,6 +254,30 @@
 
 	.doc-content :global(p) {
 		font-size: 14px;
+	}
+
+	.doc-actions-bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		padding-top: 2rem;
+	}
+
+	.doc-actions-bottom button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: var(--color-text-muted);
+		font-size: 2rem;
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+	}
+
+	.doc-actions-bottom button:hover {
+		color: #3b82f6;
 	}
 
 	.doc-nav {

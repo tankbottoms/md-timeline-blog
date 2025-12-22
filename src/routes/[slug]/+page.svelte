@@ -95,11 +95,11 @@
 				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
 			{/if}
 			{#if data.metadata.author}
-				<span class="post-author">By {data.metadata.author}</span>
+				<span class="post-author">• By {data.metadata.author}</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="post-stats"
-					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata
+					>• {data.metadata.wordCount.toLocaleString()} words • {data.metadata
 						.readingTimeText}</span
 				>
 			{/if}
@@ -280,6 +280,30 @@
 	.post-content :global(h3) {
 		margin-top: 2rem;
 		margin-bottom: 0.75rem;
+	}
+
+	.post-actions-bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		padding-top: 2rem;
+	}
+
+	.post-actions-bottom button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: var(--color-text-muted);
+		font-size: 2rem;
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+	}
+
+	.post-actions-bottom button:hover {
+		color: #3b82f6;
 	}
 
 	.post-nav {
