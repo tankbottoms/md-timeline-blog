@@ -8,10 +8,10 @@
 	},
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build": "svelte-kit sync && vite build",
 		"preview": "vite preview",
 		"dev:bun": "bunx --bun vite dev",
-		"build:bun": "bunx --bun vite build",
+		"build:bun": "svelte-kit sync && bunx --bun vite build",
 		"preview:bun": "bunx --bun vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
 	},
