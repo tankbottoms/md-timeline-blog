@@ -1,5 +1,19 @@
 <script lang="ts">
+	import { statistics } from '$lib/stores/statistics';
+	import { onMount } from 'svelte';
+
 	let { data } = $props();
+	let stats = $state($statistics);
+
+	// Subscribe to statistics changes
+	statistics.subscribe((value) => {
+		stats = value;
+	});
+
+	// Increment view count when page loads
+	onMount(() => {
+		statistics.incrementViews();
+	});
 
 	function formatDate(dateString: string) {
 		const date = new Date(dateString);

@@ -118,6 +118,44 @@ body {
 	clear: both;
 }
 
+/* Mobile responsive fixes for SVGs and media */
+@media (max-width: 640px) {
+	/* Ensure all SVG containers are responsive */
+	svg {
+		max-width: 100% !important;
+		height: auto !important;
+		width: 100% !important;
+	}
+
+	/* Center SVG containers */
+	div[id*='-chart'],
+	div[id*='-bars'],
+	div[id*='Chart'],
+	div[id*='chart'] {
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow-x: auto;
+	}
+
+	/* Audio and video players */
+	audio,
+	video {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	/* Media center elements on mobile */
+	.media-center {
+		padding: 0 !important;
+		margin: 1rem auto !important;
+	}
+
+	.media-center > div {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
 	font-weight: 600;
@@ -160,6 +198,31 @@ pre code {
 	background: none;
 	padding: 0;
 	color: var(--color-code-text);
+}
+
+/* Fixed code blocks for mobile - centered with horizontal scroll */
+.code-block-fixed {
+	width: 100%;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+}
+
+.code-block-fixed pre {
+	margin: 0;
+	width: fit-content;
+	min-width: 100%;
+}
+
+@media (max-width: 640px) {
+	.code-block-fixed {
+		margin: 1.5rem -1rem; /* Extend to screen edges */
+		padding: 0 1rem;
+	}
+
+	.code-block-fixed pre {
+		margin: 0 auto; /* Center the code block */
+		display: block;
+	}
 }
 
 a {

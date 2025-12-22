@@ -1,15 +1,10 @@
 <script lang="ts">
 	import { statistics } from '$lib/stores/statistics';
 	import { onMount } from 'svelte';
-	import Icon from '$lib/components/Icon.svelte';
-	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
-	import { page } from '$app/stores';
 
 	let { data } = $props();
 	let stats = $state($statistics);
 	let postSlug = $state('');
-	let contentRef: HTMLDivElement;
-	let copied = $state(false);
 
 	// Subscribe to statistics changes
 	statistics.subscribe((value) => {
@@ -31,30 +26,22 @@
 		});
 	}
 
-	async function handlePdf() {
-		if (contentRef) {
-			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
+	function handleThumbsUp() {
+		if (postSlug) {
+			statistics.thumbsUp(postSlug);
 		}
 	}
 
-	async function handleWord() {
-		// Use the stored postSlug or derive from page params if onMount hasn't run yet (though button click implies it has)
-		const slug = postSlug || $page.params.slug; 
-		await downloadWord(`posts/${slug}.md`);
+	function handleThumbsDown() {
+		if (postSlug) {
+			statistics.thumbsDown(postSlug);
+		}
 	}
 
-	async function handleMarkdown() {
-		const slug = postSlug || $page.params.slug;
-		await downloadMd(`posts/${slug}.md`);
-	}
-
-	function handleShare() {
-		navigator.clipboard.writeText(window.location.href);
-		copied = true;
-		setTimeout(() => {
-			copied = false;
-		}, 2000);
-	}
+	// Get current post stats
+	let postStats = $derived(() => {
+		return stats.posts[postSlug] || { thumbsUp: 0, thumbsDown: 0 };
+	});
 </script>
 
 <svelte:head>
@@ -77,19 +64,37 @@
 		<div class="post-meta-left">
 			{#if data.metadata.date}
 				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
-				<span class="separator">•</span>
 			{/if}
 			{#if data.metadata.author}
 				<span class="post-author">By {data.metadata.author}</span>
-				<span class="separator">•</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="post-stats"
-					>{data.metadata.wordCount.toLocaleString()} words</span
+					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata
+						.readingTimeText}</span
 				>
-				<span class="separator">•</span>
-				<span class="post-stats">{data.metadata.readingTimeText}</span>
 			{/if}
+		</div>
+		<div class="post-reactions">
+			<span class="thumbs-count">{postStats().thumbsUp}</span>
+			<button
+				type="button"
+				class="reaction-btn"
+				class:active={postStats().hasVoted === 'up'}
+				onclick={handleThumbsUp}
+				aria-label="Thumbs up"
+			>
+				<i class="fa-solid fa-thumbs-up"></i>
+			</button>
+			<button
+				type="button"
+				class="reaction-btn"
+				class:active={postStats().hasVoted === 'down'}
+				onclick={handleThumbsDown}
+				aria-label="Thumbs down"
+			>
+				<i class="fa-solid fa-thumbs-down"></i>
+			</button>
 		</div>
 	</div>
 
@@ -164,14 +169,8 @@
 
 	.post-meta-left {
 		display: flex;
-		gap: 0.5rem;
+		gap: 1rem;
 		flex-wrap: wrap;
-		align-items: center;
-	}
-
-	.separator {
-		color: var(--color-text-muted);
-		font-size: 0.875rem;
 	}
 
 	.post-date,
@@ -181,31 +180,50 @@
 		color: var(--color-text-muted);
 	}
 
-	.post-actions-bottom {
+	.post-reactions {
 		display: flex;
-		justify-content: flex-end;
-		gap: 1rem;
 		align-items: center;
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		padding-bottom: 1rem;
-		border-bottom: 1px solid var(--color-border);
+		gap: 0.5rem;
 	}
 
-	.post-actions-bottom button {
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 0;
+	.thumbs-count {
+		font-size: 0.875rem;
 		color: var(--color-text-muted);
-		font-size: 1.25rem;
-		transition: color 0.2s;
-		display: flex;
-		align-items: center;
+		font-weight: 600;
+		min-width: 2rem;
+		text-align: right;
 	}
 
-	.post-actions-bottom button:hover {
-		color: var(--color-link);
+	.reaction-btn {
+		background: transparent;
+		border: 1px solid var(--color-border);
+		color: var(--color-text-muted);
+		cursor: pointer;
+		padding: 0.5rem;
+		border-radius: 4px;
+		transition: all 0.2s;
+		font-size: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 2.5rem;
+	}
+
+	.reaction-btn:hover {
+		background: var(--color-hover-bg);
+		border-color: var(--color-text);
+		color: var(--color-text);
+		transform: translateY(-2px);
+	}
+
+	.reaction-btn.active {
+		background: var(--color-featured-bg);
+		border-color: var(--color-featured-border);
+		color: var(--color-text);
+	}
+
+	.reaction-btn:active {
+		transform: translateY(0);
 	}
 
 	.post-content {

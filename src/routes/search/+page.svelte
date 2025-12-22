@@ -47,6 +47,12 @@
 			handleSearch();
 		}
 	}
+
+	// Handle clicking on a previous search
+	function selectPreviousSearch(term: string) {
+		searchTerm = term;
+		handleSearch();
+	}
 </script>
 
 <svelte:head>
@@ -73,9 +79,14 @@
 			</p>
 		{/if}
 		{#if history.length > 0}
-			<p class="previous-searches">
-				Previous searches: {history.join(', ')}
-			</p>
+			<div class="previous-searches">
+				<span class="previous-label">Previous searches:</span>
+				{#each history as term}
+					<button type="button" class="search-tag" onclick={() => selectPreviousSearch(term)}>
+						{term}
+					</button>
+				{/each}
+			</div>
 		{/if}
 	</div>
 
@@ -166,7 +177,39 @@
 
 	.previous-searches {
 		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		align-items: center;
+	}
+
+	.previous-label {
 		font-style: italic;
+		color: var(--color-text-muted);
+	}
+
+	.search-tag {
+		display: inline-block;
+		padding: 0.25rem 0.75rem;
+		background: var(--color-featured-bg);
+		border: 1px solid var(--color-featured-border);
+		border-radius: 4px;
+		font-size: 0.75rem;
+		color: var(--color-text);
+		cursor: pointer;
+		transition: all 0.2s;
+		font-family: var(--font-mono);
+	}
+
+	.search-tag:hover {
+		background: var(--color-hover-bg);
+		box-shadow: 2px 2px 0px var(--color-shadow);
+		transform: translateY(-1px);
+	}
+
+	.search-tag:active {
+		transform: translateY(0);
+		box-shadow: 1px 1px 0px var(--color-shadow);
 	}
 
 	.no-results {

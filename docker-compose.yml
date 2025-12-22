@@ -1,0 +1,31 @@
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: md-timeline-blog
+    ports:
+      - '4173:4173'
+    environment:
+      - NODE_ENV=production
+      - PORT=4173
+      - HOST=0.0.0.0
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'bun',
+          '--eval',
+          "fetch('http://localhost:4173').then(() => process.exit(0)).catch(() => process.exit(1))"
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    networks:
+      - blog-network
+
+networks:
+  blog-network:
+    driver: bridge
