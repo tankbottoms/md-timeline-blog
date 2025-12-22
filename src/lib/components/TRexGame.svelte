@@ -2,11 +2,12 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
 
-	// Type declaration for the Chrome t-rex runner game
-	declare global {
-		interface Window {
-			Runner: any;
-		}
+	// Type for the Chrome t-rex runner game
+	interface Runner {
+		instance_?: {
+			stop: () => void;
+		};
+		new (selector: string): void;
 	}
 
 	let containerRef: HTMLDivElement | undefined;
@@ -63,9 +64,10 @@
 			gameInitialized = true;
 			// The game auto-initializes on DOMContentLoaded, but since we're loading dynamically,
 			// we need to manually initialize it
-			if (window.Runner && containerRef) {
+			const Runner = (window as any).Runner;
+			if (Runner && containerRef) {
 				try {
-					new window.Runner('.trex-game-container');
+					new Runner('.trex-game-container');
 				} catch (e) {
 					console.error('Error initializing t-rex game:', e);
 				}
@@ -94,9 +96,10 @@
 
 	onDestroy(() => {
 		// Stop any running game
-		if (browser && window.Runner && window.Runner.instance_) {
+		const Runner = (window as any).Runner;
+		if (browser && Runner && Runner.instance_) {
 			try {
-				window.Runner.instance_.stop();
+				Runner.instance_.stop();
 			} catch (e) {
 				// Ignore errors during cleanup
 			}
@@ -114,7 +117,7 @@
 		<div class="trex-game-container interstitial-wrapper" bind:this={containerRef}>
 			<div id="main-frame-error" class="interstitial-wrapper">
 				<div id="main-content">
-					<div class="icon icon-offline" alt=""></div>
+					<div class="icon icon-offline"></div>
 				</div>
 			</div>
 		</div>

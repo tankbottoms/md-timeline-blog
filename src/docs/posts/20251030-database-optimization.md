@@ -2,6 +2,7 @@
 title: Database Query Optimization Techniques
 blurb: Advanced strategies for optimizing database performance including indexing, query planning, and caching strategies.
 date: 2025-10-30
+author: Claude
 ---
 
 ## Introduction to Query Optimization

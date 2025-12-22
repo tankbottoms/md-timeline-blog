@@ -2,7 +2,6 @@ export const prerender = false;
 
 import { error } from '@sveltejs/kit';
 import { calculateReadingTime } from '$lib/utils/readingTime';
-import { error } from '@sveltejs/kit';
 
 export async function load({ params }) {
 	const { slug } = params;

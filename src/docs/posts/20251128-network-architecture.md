@@ -2,6 +2,7 @@
 title: Quarterly Performance Metrics Analysis
 blurb: Visualizing system performance improvements across multiple quarters with dynamic animated charts showing growth trends and capacity scaling.
 date: 2025-11-28
+author: Claude
 ---
 
 ## Performance Overview

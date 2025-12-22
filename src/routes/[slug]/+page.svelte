@@ -1,10 +1,15 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
+	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
+	import { page } from '$app/stores';
 	import { statistics } from '$lib/stores/statistics';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
 	let stats = $state($statistics);
 	let postSlug = $state('');
+	let contentRef: HTMLDivElement;
+	let copied = $state(false);
 
 	// Subscribe to statistics changes
 	statistics.subscribe((value) => {
@@ -38,6 +43,30 @@
 		}
 	}
 
+	async function handlePdf() {
+		if (contentRef) {
+			await downloadPdf(data.metadata.title || 'Blog Post', contentRef.innerHTML);
+		}
+	}
+
+	async function handleWord() {
+		const slug = $page.params.slug;
+		await downloadWord(`posts/${slug}.md`);
+	}
+
+	async function handleMarkdown() {
+		const slug = $page.params.slug;
+		await downloadMd(`posts/${slug}.md`);
+	}
+
+	function handleShare() {
+		navigator.clipboard.writeText(window.location.href);
+		copied = true;
+		setTimeout(() => {
+			copied = false;
+		}, 2000);
+	}
+
 	// Get current post stats
 	let postStats = $derived(() => {
 		return stats.posts[postSlug] || { thumbsUp: 0, thumbsDown: 0 };
@@ -66,11 +95,11 @@
 				<span class="post-date">Published: {formatDate(data.metadata.date)}</span>
 			{/if}
 			{#if data.metadata.author}
-				<span class="post-author">By {data.metadata.author}</span>
+				<span class="post-author">• By {data.metadata.author}</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="post-stats"
-					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata
+					>• {data.metadata.wordCount.toLocaleString()} words • {data.metadata
 						.readingTimeText}</span
 				>
 			{/if}
@@ -251,6 +280,30 @@
 	.post-content :global(h3) {
 		margin-top: 2rem;
 		margin-bottom: 0.75rem;
+	}
+
+	.post-actions-bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		padding-top: 2rem;
+	}
+
+	.post-actions-bottom button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: var(--color-text-muted);
+		font-size: 1.5rem;
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+	}
+
+	.post-actions-bottom button:hover {
+		color: #3b82f6;
 	}
 
 	.post-nav {

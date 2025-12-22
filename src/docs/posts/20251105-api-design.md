@@ -2,6 +2,7 @@
 title: RESTful API Design Best Practices
 blurb: Comprehensive guide to designing scalable and maintainable REST APIs with practical examples and design patterns.
 date: 2025-11-05
+author: Claude
 ---
 
 ## API Architecture Overview

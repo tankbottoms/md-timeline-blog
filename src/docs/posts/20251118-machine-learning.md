@@ -2,6 +2,7 @@
 title: Organizational Restructuring and Team Evolution
 blurb: Visual representation of our company's structural transformation, showing how departments split, merge, and evolve over time through animated diagrams.
 date: 2025-11-18
+author: Claude
 ---
 
 ## Company Transformation

@@ -2,6 +2,7 @@
 title: Advanced Data Visualization Techniques
 blurb: Exploring modern approaches to visualizing complex datasets with interactive SVG charts and responsive design patterns.
 date: 2025-12-01
+author: Claude
 ---
 
 ## Introduction to Data Visualization

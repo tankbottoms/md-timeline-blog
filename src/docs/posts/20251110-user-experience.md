@@ -2,6 +2,7 @@
 title: User Experience Design Patterns
 blurb: Comprehensive analysis of modern UX patterns with focus on user flows, interaction design, and accessibility considerations.
 date: 2025-11-10
+author: Claude
 ---
 
 ## Introduction to UX Design

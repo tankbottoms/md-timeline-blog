@@ -1,10 +1,15 @@
 <script lang="ts">
+	import Icon from '$lib/components/Icon.svelte';
+	import { downloadPdf, downloadWord, downloadMd } from '$lib/utils/download';
+	import { page } from '$app/stores';
 	import { statistics } from '$lib/stores/statistics';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
 	let stats = $state($statistics);
 	let postSlug = $state('');
+	let contentRef: HTMLDivElement;
+	let copied = $state(false);
 
 	// Subscribe to statistics changes
 	statistics.subscribe((value) => {
@@ -38,6 +43,30 @@
 		}
 	}
 
+	async function handlePdf() {
+		if (contentRef) {
+			await downloadPdf(data.metadata.title || 'Research Document', contentRef.innerHTML);
+		}
+	}
+
+	async function handleWord() {
+		const slug = $page.params.slug;
+		await downloadWord(`research/${slug}.md`);
+	}
+
+	async function handleMarkdown() {
+		const slug = $page.params.slug;
+		await downloadMd(`research/${slug}.md`);
+	}
+
+	function handleShare() {
+		navigator.clipboard.writeText(window.location.href);
+		copied = true;
+		setTimeout(() => {
+			copied = false;
+		}, 2000);
+	}
+
 	// Get current post stats
 	let postStats = $derived(() => {
 		return stats.posts[postSlug] || { thumbsUp: 0, thumbsDown: 0 };
@@ -66,14 +95,14 @@
 				<span class="doc-date">Published: {formatDate(data.metadata.date)}</span>
 			{/if}
 			{#if data.metadata.author}
-				<span class="doc-author">By {data.metadata.author}</span>
+				<span class="doc-author">• By {data.metadata.author}</span>
 			{/if}
 			{#if data.metadata.filename}
-				<span class="doc-filename">Document: {data.metadata.filename}</span>
+				<span class="doc-filename">• Document: {data.metadata.filename}</span>
 			{/if}
 			{#if data.metadata.wordCount && data.metadata.readingTimeText}
 				<span class="doc-stats"
-					>{data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span
+					>• {data.metadata.wordCount.toLocaleString()} words • {data.metadata.readingTimeText}</span
 				>
 			{/if}
 		</div>
@@ -225,6 +254,30 @@
 
 	.doc-content :global(p) {
 		font-size: 14px;
+	}
+
+	.doc-actions-bottom {
+		display: flex;
+		justify-content: flex-end;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+		padding-top: 2rem;
+	}
+
+	.doc-actions-bottom button {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		color: var(--color-text-muted);
+		font-size: 1.5rem;
+		transition: color 0.2s;
+		display: flex;
+		align-items: center;
+	}
+
+	.doc-actions-bottom button:hover {
+		color: #3b82f6;
 	}
 
 	.doc-nav {

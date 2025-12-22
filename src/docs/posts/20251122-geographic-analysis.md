@@ -2,6 +2,7 @@
 title: Geographic Expansion and Market Penetration
 blurb: Animated visualization of our nationwide expansion strategy, zooming from coast-to-coast coverage down to key metropolitan markets.
 date: 2025-11-22
+author: Claude
 ---
 
 ## National Presence
